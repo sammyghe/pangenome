@@ -1,0 +1,14 @@
+# The identity. Losing this is losing the organism; leaking it is losing control
+# of what the organism will trust. It never leaves the machine that germinated it.
+genome/root.key
+
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.DS_Store
+*.egg-info/
+
+# NOTE: genome/culture.db is deliberately NOT ignored. The append-only observation
+# series is the organism's memory and the only asset here that cannot be
+# reconstructed after the fact. It is committed on every heartbeat.

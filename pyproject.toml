@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pangenome"
+version = "0.1.0"
+description = "A prokaryotic architecture for LLM agent ecosystems: horizontal capability transfer, adaptive immunity, dormancy, and epidemiological measurement."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [{ name = "Samuel Ghedamu" }]
+keywords = ["agents", "artificial-life", "horizontal-gene-transfer",
+            "epidemiology", "mcp", "agent-skills", "supply-chain-security"]
+
+# Zero dependencies, deliberately. The organism must run on a free scheduled
+# runner for years, and every dependency is an attack surface on the signature
+# check that gates capability integration.
+dependencies = []
+
+[project.scripts]
+pangenome = "pangenome.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/sammyghe/pangenome"
+
+[tool.setuptools.packages.find]
+include = ["pangenome*"]

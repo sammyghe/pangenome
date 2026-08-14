@@ -1,0 +1,10 @@
+{
+  "name": "culture-01",
+  "steward": "Samuel Ghedamu",
+  "root_pubkey": "713bb2c2652e8d22863e6e011bd3a70991cc1d61431bf5dbbd350a9a8e2c4ac2",
+  "trusted": [
+    "713bb2c2652e8d22863e6e011bd3a70991cc1d61431bf5dbbd350a9a8e2c4ac2"
+  ],
+  "constitution_sha256": "7c095025a6f64b10b49487574ce5263ee21714befa00d2d0711859b8a50bebbf",
+  "schema": 1
+}

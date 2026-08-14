@@ -1,8 +1,8 @@
 {
-  "at": 1786716686.7715933,
+  "at": 1786716874.4299343,
   "organism": "culture-01",
   "wake": {
-    "constitution_drift": false,
+    "constitution_drift": true,
     "prophages": 0,
     "control": "RUN"
   },
@@ -12,11 +12,11 @@
   },
   "perceive": {
     "scanned": 314,
-    "remembered": 120,
+    "remembered": 164,
     "opportunities": [
       {
         "subject": "affaan-m/ECC",
-        "score": 0.5319,
+        "score": 0.515,
         "verdict": "investigate",
         "reason": "connects to standing interests",
         "concepts": [
@@ -48,14 +48,14 @@
           "skills",
           "system"
         ],
-        "activation": 0.806,
-        "novelty": 0.5906,
+        "activation": 0.8063,
+        "novelty": 0.4765,
         "surprise": 0.0,
-        "pop": 2.059
+        "pop": 2.079
       },
       {
         "subject": "Q00/ouroboros",
-        "score": 0.514,
+        "score": 0.4971,
         "verdict": "investigate",
         "reason": "connects to standing interests",
         "concepts": [
@@ -111,14 +111,14 @@
           "staged",
           "success"
         ],
-        "activation": 0.7734,
-        "novelty": 0.5906,
+        "activation": 0.7739,
+        "novelty": 0.4765,
         "surprise": 0.0,
-        "pop": 1.895
+        "pop": 1.905
       },
       {
         "subject": "ruvnet/ruflo",
-        "score": 0.5099,
+        "score": 0.4931,
         "verdict": "investigate",
         "reason": "connects to standing interests",
         "concepts": [
@@ -172,14 +172,14 @@
           "typescript",
           "workflows"
         ],
-        "activation": 0.7661,
-        "novelty": 0.5906,
+        "activation": 0.7666,
+        "novelty": 0.4765,
         "surprise": 0.0,
-        "pop": 1.857
+        "pop": 1.866
       },
       {
         "subject": "NVIDIA/SkillSpector",
-        "score": 0.5083,
+        "score": 0.4915,
         "verdict": "investigate",
         "reason": "connects to standing interests",
         "concepts": [
@@ -218,14 +218,14 @@
           "them",
           "vulnerabilities"
         ],
-        "activation": 0.7632,
-        "novelty": 0.5906,
+        "activation": 0.7636,
+        "novelty": 0.4765,
         "surprise": 0.0,
-        "pop": 1.843
+        "pop": 1.851
       },
       {
         "subject": "0xNyk/awesome-hermes-agent",
-        "score": 0.5031,
+        "score": 0.4862,
         "verdict": "investigate",
         "reason": "connects to standing interests",
         "concepts": [
@@ -255,14 +255,14 @@
           "useful",
           "xnyk"
         ],
-        "activation": 0.7537,
-        "novelty": 0.5906,
+        "activation": 0.754,
+        "novelty": 0.4765,
         "surprise": 0.0,
-        "pop": 1.795
+        "pop": 1.799
       },
       {
         "subject": "firerpa/lamda",
-        "score": 0.5018,
+        "score": 0.4849,
         "verdict": "investigate",
         "reason": "connects to standing interests",
         "concepts": [
@@ -313,14 +313,14 @@
           "workflow",
           "xposed"
         ],
-        "activation": 0.7513,
-        "novelty": 0.5906,
+        "activation": 0.7516,
+        "novelty": 0.4765,
         "surprise": 0.0,
-        "pop": 1.783
+        "pop": 1.787
       },
       {
         "subject": "ai.agentplaybooks/agentplaybooks",
-        "score": 0.4992,
+        "score": 0.4822,
         "verdict": "investigate",
         "reason": "connects to standing interests",
         "concepts": [
@@ -336,14 +336,14 @@
           "skills",
           "vendor-neutral"
         ],
-        "activation": 0.7465,
-        "novelty": 0.5906,
+        "activation": 0.7467,
+        "novelty": 0.4765,
         "surprise": 0.0,
-        "pop": 1.759
+        "pop": 1.76
       },
       {
         "subject": "internet-court/internet-court-skill",
-        "score": 0.476,
+        "score": 0.4591,
         "verdict": "investigate",
         "reason": "connects to standing interests",
         "concepts": [
@@ -389,14 +389,14 @@
           "web3",
           "x402"
         ],
-        "activation": 0.7044,
-        "novelty": 0.5906,
+        "activation": 0.7048,
+        "novelty": 0.4765,
         "surprise": 0.0,
-        "pop": 1.546
+        "pop": 1.536
       },
       {
         "subject": "Graphify-Labs/graphify",
-        "score": 0.4757,
+        "score": 0.459,
         "verdict": "investigate",
         "reason": "connects to standing interests",
         "concepts": [
@@ -445,14 +445,14 @@
           "turn",
           "vector"
         ],
-        "activation": 0.7038,
-        "novelty": 0.5906,
+        "activation": 0.7046,
+        "novelty": 0.4765,
         "surprise": 0.0,
-        "pop": 1.544
+        "pop": 1.535
       },
       {
         "subject": "wanshuiyin/Auto-claude-code-research-in-sleep",
-        "score": 0.474,
+        "score": 0.4574,
         "verdict": "investigate",
         "reason": "connects to standing interests",
         "concepts": [
@@ -499,10 +499,10 @@
           "wanshuiyin/auto-claude-code-research-in-sleep",
           "works"
         ],
-        "activation": 0.7008,
-        "novelty": 0.5906,
+        "activation": 0.7016,
+        "novelty": 0.4765,
         "surprise": 0.0,
-        "pop": 1.528
+        "pop": 1.519
       }
     ],
     "interests": 10
@@ -512,15 +512,15 @@
   "outbreaks": [
     {
       "locus": "DietrichGebert/ponytail",
-      "observations": 5,
+      "observations": 6,
       "distinct_days": 1,
       "span_days": 0.0,
       "r_per_day": null,
       "fit_r2": null,
       "R0": null,
       "doubling_days": null,
-      "lifetime_r": 0.18155,
-      "signal": 102574.0,
+      "lifetime_r": 0.18154,
+      "signal": 102577.0,
       "K": null,
       "saturation": null,
       "phase": "no-history",
@@ -528,7 +528,7 @@
     },
     {
       "locus": "internet-court/internet-court-skill",
-      "observations": 5,
+      "observations": 6,
       "distinct_days": 1,
       "span_days": 0.0,
       "r_per_day": null,
@@ -536,7 +536,7 @@
       "R0": null,
       "doubling_days": null,
       "lifetime_r": 0.12719,
-      "signal": 1824.0,
+      "signal": 1825.0,
       "K": null,
       "saturation": null,
       "phase": "no-history",
@@ -544,7 +544,7 @@
     },
     {
       "locus": "alibaba/open-code-review",
-      "observations": 5,
+      "observations": 6,
       "distinct_days": 1,
       "span_days": 0.0,
       "r_per_day": null,
@@ -560,7 +560,7 @@
     },
     {
       "locus": "fivetaku/fablize",
-      "observations": 5,
+      "observations": 6,
       "distinct_days": 1,
       "span_days": 0.0,
       "r_per_day": null,
@@ -576,7 +576,7 @@
     },
     {
       "locus": "nexu-io/open-design",
-      "observations": 5,
+      "observations": 6,
       "distinct_days": 1,
       "span_days": 0.0,
       "r_per_day": null,
@@ -584,7 +584,7 @@
       "R0": null,
       "doubling_days": null,
       "lifetime_r": 0.10482,
-      "signal": 86113.0,
+      "signal": 86117.0,
       "K": null,
       "saturation": null,
       "phase": "no-history",
@@ -592,14 +592,14 @@
     },
     {
       "locus": "microsoft/SkillOpt",
-      "observations": 5,
+      "observations": 6,
       "distinct_days": 1,
       "span_days": 0.0,
       "r_per_day": null,
       "fit_r2": null,
       "R0": null,
       "doubling_days": null,
-      "lifetime_r": 0.09848,
+      "lifetime_r": 0.09847,
       "signal": 16018.0,
       "K": null,
       "saturation": null,
@@ -608,14 +608,14 @@
     },
     {
       "locus": "Dong90/oh-my-taiyiforge",
-      "observations": 5,
+      "observations": 6,
       "distinct_days": 1,
       "span_days": 0.0,
       "r_per_day": null,
       "fit_r2": null,
       "R0": null,
       "doubling_days": null,
-      "lifetime_r": 0.09709,
+      "lifetime_r": 0.09708,
       "signal": 938.0,
       "K": null,
       "saturation": null,
@@ -624,7 +624,7 @@
     },
     {
       "locus": "nexu-io/html-anything",
-      "observations": 5,
+      "observations": 6,
       "distinct_days": 1,
       "span_days": 0.0,
       "r_per_day": null,
@@ -640,7 +640,7 @@
     },
     {
       "locus": "ultraworkers/claw-code",
-      "observations": 5,
+      "observations": 6,
       "distinct_days": 1,
       "span_days": 0.0,
       "r_per_day": null,
@@ -656,7 +656,7 @@
     },
     {
       "locus": "Graphify-Labs/graphify",
-      "observations": 5,
+      "observations": 6,
       "distinct_days": 1,
       "span_days": 0.0,
       "r_per_day": null,
@@ -675,7 +675,8 @@
   "acquire": {
     "admitted": 0,
     "refused": 0,
-    "below_quorum": 32
+    "below_quorum": 32,
+    "read_only": true
   },
   "express": {
     "lytic": 0,
@@ -683,13 +684,13 @@
     "cost_units": 0
   },
   "sleep": {
-    "rehearsed": 120,
+    "rehearsed": 284,
     "patterns": 0,
     "abstractions": 0,
     "skills": 0,
     "hypotheses": 20,
     "forgotten": 0,
-    "live_episodes": 120,
+    "live_episodes": 284,
     "learning_ratio": 0.0
   },
   "identity": {
@@ -699,7 +700,7 @@
     "master": null,
     "diversity_nats": 0.0,
     "error_threshold": 0.3333,
-    "observed_mu": 0.0573,
+    "observed_mu": 0.049,
     "status": "STABLE"
   },
   "attention": {
@@ -707,5 +708,5 @@
     "useful": 0,
     "precision": null
   },
-  "seconds": 21.67
+  "seconds": 16.81
 }

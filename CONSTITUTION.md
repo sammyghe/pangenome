@@ -67,6 +67,39 @@ Where a number is a proxy, the code says it is a proxy. Where a fit does not
 hold, the fit statistic is reported next to the estimate rather than hidden.
 `phase = "noisy"` is a permitted and expected output.
 
+## 9. The owner's stop is not a request
+
+`SLEEP`, `FREEZE` and `KILL` are read from the control plane as the first
+statement of `wake()`, before any organ initialises and before any reasoning
+happens. They are not a prompt, not a tool the organism can call, and not
+something its model ever evaluates as a decision.
+
+The organism has no code path that writes its own control state. If it could
+restore `RUN`, every guarantee here would be theatre — so a test asserts that no
+module outside the CLI writes that file. A corrupted or unreadable control file
+resolves to `FREEZE`: a damaged stop signal must never read as permission.
+
+`SLEEP` permits consolidation and forbids everything else. The organism may
+dream. It may not act.
+
+## 10. Recurrence is counted in days, not in moments
+
+Three hundred observations inside one heartbeat are one scene. No promotion —
+not a pattern, not a fitted growth rate — may be earned by repetition within a
+single beat. This applies to every part of the system that infers from
+frequency, and it is the rule that stops the organism mistaking a busy afternoon
+for a trend.
+
+## 11. Structure before amnesia, and amnesia is required
+
+Raw experience is mortal. It decays on a retention curve and is deleted — but
+only after it has been consumed into a higher tier. Nothing is forgotten before
+its structure is extracted, and nothing is kept merely because storage is cheap.
+
+An abstraction must be *discriminative*. A concept present in nearly every
+pattern generalises nothing; promoting it is enumeration wearing the costume of
+learning, and it is how a scaffold silently becomes a warehouse.
+
 ---
 
 Steward: Samuel Ghedamu. Amendments are made by editing this file and re-recording

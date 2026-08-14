@@ -1,0 +1,20 @@
+{
+  "state": "RUN",
+  "why": "test complete",
+  "at": 1786716710.0535893,
+  "prior": "FREEZE",
+  "history": [
+    {
+      "from": "RUN",
+      "to": "FREEZE",
+      "why": "verify the organism cannot override the owner",
+      "at": 1786716709.0148067
+    },
+    {
+      "from": "FREEZE",
+      "to": "RUN",
+      "why": "test complete",
+      "at": 1786716710.0541325
+    }
+  ]
+}

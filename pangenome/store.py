@@ -68,6 +68,67 @@ CREATE TABLE IF NOT EXISTS autoinducers (     -- the quorum medium
     amount     REAL NOT NULL
 );
 CREATE INDEX IF NOT EXISTS ai_species ON autoinducers(species, at);
+
+-- ---- the brain -----------------------------------------------------------
+
+CREATE TABLE IF NOT EXISTS concepts (
+    name       TEXT PRIMARY KEY,
+    first_seen REAL NOT NULL,
+    last_seen  REAL NOT NULL,
+    count      INTEGER NOT NULL DEFAULT 1,
+    base       REAL NOT NULL DEFAULT 0.0   -- learned salience weight; this is
+);                                          -- the perceptual filter itself, and
+                                            -- it changes with experience
+CREATE TABLE IF NOT EXISTS edges (          -- associative memory
+    a          TEXT NOT NULL,
+    b          TEXT NOT NULL,
+    weight     REAL NOT NULL DEFAULT 0.0,
+    count      INTEGER NOT NULL DEFAULT 0,
+    last_seen  REAL NOT NULL,
+    PRIMARY KEY (a, b)
+);
+CREATE INDEX IF NOT EXISTS edge_a ON edges(a);
+
+CREATE TABLE IF NOT EXISTS interests (      -- the owner model: standing priming
+    concept    TEXT PRIMARY KEY,
+    weight     REAL NOT NULL,
+    why        TEXT NOT NULL,
+    set_at     REAL NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS episodes (       -- raw experience. mortal by design
+    id         INTEGER PRIMARY KEY AUTOINCREMENT,
+    at         REAL NOT NULL,
+    signature  TEXT NOT NULL,               -- what kind of thing happened
+    concepts   TEXT NOT NULL,               -- json list
+    detail     TEXT NOT NULL,               -- json
+    strength   REAL NOT NULL DEFAULT 1.0,   -- Ebbinghaus S
+    rehearsals INTEGER NOT NULL DEFAULT 0,
+    consumed   INTEGER NOT NULL DEFAULT 0   -- promoted into a higher tier
+);
+CREATE INDEX IF NOT EXISTS ep_sig ON episodes(signature, consumed);
+
+CREATE TABLE IF NOT EXISTS scaffold (       -- what survives the episodes
+    id         INTEGER PRIMARY KEY AUTOINCREMENT,
+    at         REAL NOT NULL,
+    tier       TEXT NOT NULL,               -- pattern|abstraction|skill
+    signature  TEXT NOT NULL,
+    statement  TEXT NOT NULL,
+    support    INTEGER NOT NULL,            -- episodes it was distilled from
+    concepts   TEXT NOT NULL,
+    parent     INTEGER                      -- the scaffold row it was built on
+);
+CREATE INDEX IF NOT EXISTS sc_tier ON scaffold(tier, signature);
+
+CREATE TABLE IF NOT EXISTS attention_log (  -- for measuring opportunity precision
+    id         INTEGER PRIMARY KEY AUTOINCREMENT,
+    at         REAL NOT NULL,
+    subject    TEXT NOT NULL,
+    score      REAL NOT NULL,
+    verdict    TEXT NOT NULL,
+    reason     TEXT NOT NULL,
+    useful     INTEGER                      -- NULL until the owner judges it
+);
 """
 
 

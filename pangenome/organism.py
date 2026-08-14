@@ -27,13 +27,16 @@ import json
 import time
 from pathlib import Path
 
-from . import epidemiology
+from . import control, epidemiology
 from .chromosome import Chromosome, GENOME_DIR
 from .crispr import Crispr
 from .lysogeny import LYTIC, LYSOGENIC, Prophage
 from .plasmid import Plasmid
 from .quasispecies import Swarm
 from .quorum import Medium
+from .salience import (AttentionField, concepts_of as salience_concepts,
+                       INVESTIGATE, INTERRUPT, REMEMBER)
+from .scaffold import Scaffold
 from .store import Store
 
 # how many outbreak loci the organism may try to acquire per heartbeat
@@ -51,12 +54,18 @@ class Organism:
         self.crispr = Crispr(self.store)
         self.medium = Medium(self.store)
         self.name = self.chromosome.name
+        self.field = AttentionField(self.store)
+        self.scaffold = Scaffold(self.store, self.field)
         from .pilus import Pilus
         self.pilus = Pilus(self)
         self.prophages: dict[str, Prophage] = {}
 
     # ---- beat 1 ----------------------------------------------------------
     def wake(self) -> dict:
+        # Before anything else, and before any reasoning: the owner's control
+        # plane. Raises on FREEZE/KILL and nothing downstream catches it.
+        self.control_state = control.assert_permitted()
+
         c = Path(__file__).resolve().parent.parent / "CONSTITUTION.md"
         current = hashlib.sha256(c.read_bytes()).hexdigest() if c.exists() else ""
         recorded = self.chromosome.data.get("constitution_sha256", "")
@@ -69,12 +78,18 @@ class Organism:
                              detail={"was": recorded[:16], "now": current[:16]})
         for row in self.store.plasmids():
             self.prophages[row["pid"]] = Prophage(row["pid"], state=row["state"])
-        return {"constitution_drift": drift, "prophages": len(self.prophages)}
+        return {"constitution_drift": drift, "prophages": len(self.prophages),
+                "control": self.control_state}
 
     # ---- beat 2 ----------------------------------------------------------
     def sense(self) -> dict:
         from .observers import OBSERVERS
         counts, failures = {}, 0
+        if not control.permits("sense"):
+            self.stress = 0.0
+            self.store.event("sense", f"skipped — control plane is {control.state()}")
+            self.store.commit()
+            return {}
         for cls in OBSERVERS:
             try:
                 counts[cls.name] = cls(self.store).sense()
@@ -87,6 +102,55 @@ class Organism:
         return counts
 
     # ---- beat 3 ----------------------------------------------------------
+    def perceive(self, since: float, goal: list[str] | None = None) -> dict:
+        """The opportunity scan. Runs over everything sensed, costs no model call.
+
+        This is the difference between an organism that answers the question and
+        one that also says "and by the way". It does not ask itself "is there
+        anything else here?" — that question is too vague to act on. It compares
+        what it just saw against what it already knows and cares about, and lets
+        activation decide.
+
+        The expensive path is reserved for what crosses threshold, which is why
+        this can afford to look at everything: the cheap filter runs over five
+        hundred items so the model only sees five.
+        """
+        rows = self.store.q(
+            "SELECT source, locus, name, payload FROM observations WHERE seen_at >= ?",
+            (since,))
+        items, meta_by = [], {}
+        for r in rows:
+            meta = json.loads(r["payload"])
+            meta_by[r["locus"]] = meta
+            text = " ".join(str(x) for x in [
+                r["name"] or "", r["locus"].replace("/", " ").replace(".", " "),
+                meta.get("description", ""), " ".join(meta.get("topics", []) or [])])
+            cs = salience_concepts(text)
+            value = meta.get("forks")
+            items.append((r["locus"], text,
+                          self.field.category_of(cs, prefix=r["source"]),
+                          float(value) if isinstance(value, (int, float)) else None))
+
+        appraisals = self.field.scan(items, goal=goal)
+        opportunities, remembered = [], 0
+        for a in appraisals:
+            if a["verdict"] in (REMEMBER, INVESTIGATE, INTERRUPT):
+                self.scaffold.remember(
+                    self.field.category_of(a["concepts"]), a["concepts"],
+                    {"locus": a["subject"],
+                     "value": meta_by.get(a["subject"], {}).get("forks"),
+                     "score": a["score"]})
+                remembered += 1
+            if a["verdict"] in (INVESTIGATE, INTERRUPT):
+                opportunities.append(a)
+
+        self.store.commit()
+        opportunities.sort(key=lambda a: -a["score"])
+        return {"scanned": len(items), "remembered": remembered,
+                "opportunities": opportunities[:10],
+                "interests": len(self.field.interests())}
+
+    # ---- beat 4 ----------------------------------------------------------
     def diagnose(self) -> list[dict]:
         return epidemiology.outbreak_table(self.store)
 
@@ -127,6 +191,10 @@ class Organism:
         many directions, which is the only evidence available that a capability
         is real rather than a spike."""
         admitted, refused, waiting = 0, 0, 0
+
+        if not control.permits("acquire"):
+            return {"admitted": 0, "refused": 0, "below_quorum": len(wants),
+                    "halted_by": control.state()}
 
         # A host with no signing key can sense, measure and record, but cannot
         # mint. That is the intended posture for the public scheduled runner:
@@ -185,6 +253,12 @@ class Organism:
         """Almost everything should stay dormant. If this number climbs, the
         organism is becoming expensive and something is wrong upstream."""
         lytic = 0
+        if not control.permits("express"):
+            for pid in self.prophages:
+                self.store.set_state(pid, LYSOGENIC)
+            self.store.commit()
+            return {"lytic": 0, "lysogenic": len(self.prophages), "cost_units": 0,
+                    "halted_by": control.state()}
         for pid, ph in self.prophages.items():
             demand = self.medium.concentration(f"use:{pid}")
             state = ph.decide(demand=demand, stress=getattr(self, "stress", 0.0))
@@ -198,6 +272,22 @@ class Organism:
                 "cost_units": lytic}
 
     # ---- beat 7 ----------------------------------------------------------
+    def sleep(self) -> dict:
+        """Not "switched off" — offline consolidation, with no route to the world.
+
+        Sleep is permitted under SLEEP state and forbidden under FREEZE/KILL,
+        which is the whole distinction: the organism may dream, it may not act.
+        Connections made here were not requested by anyone, and could not have
+        been made online, because they require replaying the day against itself.
+        """
+        if not control.permits("consolidate"):
+            return {"halted_by": control.state()}
+        out = self.scaffold.consolidate()
+        out.update(self.scaffold.summary())
+        out["learning_ratio"] = self.scaffold.learning_ratio()["ratio"]
+        return out
+
+    # ---- beat 8 ----------------------------------------------------------
     def identify(self) -> dict:
         swarm = Swarm(self.name)
         for row in self.store.plasmids():
@@ -220,12 +310,13 @@ class Organism:
             return 0.0
         return sum((r["v"] - 1) / max(1, r["n"] - 1) for r in rows) / len(rows)
 
-    # ---- beat 8 ----------------------------------------------------------
-    def heartbeat(self) -> dict:
+    # ---- the loop --------------------------------------------------------
+    def heartbeat(self, goal: list[str] | None = None) -> dict:
         t0 = time.time()
         report = {"at": t0, "organism": self.name}
         report["wake"] = self.wake()
         report["sense"] = self.sense()
+        report["perceive"] = self.perceive(since=t0, goal=goal)
         table = self.diagnose()
         report["watching"] = len(table)
         report["fittable"] = sum(1 for r in table if r["phase"] != "no-history")
@@ -240,11 +331,14 @@ class Organism:
         report["wants"] = len(wants)
         report["acquire"] = self.acquire(wants)
         report["express"] = self.express()
+        report["sleep"] = self.sleep()
         report["identity"] = self.identify()
+        report["attention"] = self.field.precision()
         report["seconds"] = round(time.time() - t0, 2)
 
         self.store.event("tick", "heartbeat complete", detail={
-            k: report[k] for k in ("sense", "watching", "wants", "acquire", "express")})
+            k: report[k] for k in ("sense", "watching", "wants", "acquire",
+                                   "express", "sleep")})
         self.store.commit()
         self._write_state(report)
         return report
@@ -286,6 +380,24 @@ class Organism:
             *[f"| `{o['locus']}` | {o['R0'] or '—'} | {o['lifetime_r'] or '—'} | "
               f"{o['signal'] or '—'} | {o['phase']} | {o['fit_r2'] or '—'} |"
               for o in r["outbreaks"]],
+            "",
+            "## brain",
+            f"- control plane: **{r['wake']['control']}**",
+            f"- standing interests (priming): {r['perceive']['interests']}",
+            f"- observations scanned: {r['perceive']['scanned']} · "
+            f"crossed threshold: {r['perceive']['remembered']}",
+            f"- live episodes: {r['sleep'].get('live_episodes', '—')} · "
+            f"patterns {r['sleep'].get('patterns', '—')} · "
+            f"abstractions {r['sleep'].get('abstractions', '—')} · "
+            f"skills {r['sleep'].get('skills', '—')}",
+            f"- forgotten this beat: {r['sleep'].get('forgotten', '—')} · "
+            f"hypotheses raised: {r['sleep'].get('hypotheses', '—')}",
+            f"- learning-to-learning ratio: {r['sleep'].get('learning_ratio', '—')}",
+            "",
+            "## noticed without being asked",
+            "",
+            *([f"- `{o['subject']}` ({o['score']}) — {o['reason']}"
+               for o in r["perceive"]["opportunities"]] or ["- nothing crossed threshold"]),
             "",
             "## immune system",
             f"- admitted this beat: {r['acquire']['admitted']}",

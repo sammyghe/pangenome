@@ -120,6 +120,67 @@ def cmd_simulate(a) -> int:
     return 0
 
 
+def cmd_experiment(a) -> int:
+    from .experiment import run
+    run()
+    return 0
+
+
+def cmd_interest(a) -> int:
+    """Priming. This is what makes two organisms see the same page differently."""
+    from .salience import AttentionField
+    s = Store()
+    f = AttentionField(s)
+    if a.concept:
+        f.prime(a.concept, a.weight, a.why or "set by owner")
+        print(f"primed: {a.concept} @ {a.weight}")
+    rows = s.q("SELECT concept, weight, why FROM interests ORDER BY weight DESC")
+    print(f"\nstanding interests — {len(rows)}\n")
+    print(_table([dict(r) for r in rows],
+                 [("concept", "concept"), ("weight", "weight"), ("why", "why")]))
+    return 0
+
+
+def cmd_mind(a) -> int:
+    from .salience import AttentionField
+    from .scaffold import Scaffold
+    s = Store()
+    sc = Scaffold(s, AttentionField(s))
+    print(f"\nscaffold: {json.dumps(sc.summary())}")
+    print(f"learning: {json.dumps(sc.learning_ratio())}")
+    print(f"attention precision: {json.dumps(AttentionField(s).precision())}\n")
+    for tier in ("skill", "abstraction", "pattern"):
+        rows = s.q("SELECT statement, support FROM scaffold WHERE tier=?"
+                   " ORDER BY support DESC LIMIT ?", (tier, a.limit))
+        if rows:
+            print(f"{tier}s")
+            for r in rows:
+                print(f"  [{r['support']:>4}] {r['statement']}")
+            print()
+    hyp = s.q("SELECT reason FROM events WHERE kind='hypothesis'"
+              " ORDER BY at DESC LIMIT ?", (a.limit,))
+    if hyp:
+        print("hypotheses raised during sleep (candidates, not conclusions)")
+        for h in hyp:
+            print(f"  - {h['reason']}")
+    return 0
+
+
+def cmd_control(a) -> int:
+    from . import control
+    if a.state:
+        r = control.set_state(a.state, a.why or "set by owner")
+        print(f"control plane: {r['prior']} -> {r['state']}")
+        if r["state"] in (control.FREEZE, control.KILL):
+            print("  the organism will refuse to run. It does not get a vote.")
+        return 0
+    s = control.state()
+    print(f"control plane: {s}")
+    for k, v in control.PERMITS[s].items():
+        print(f"  {k:<12} {'permitted' if v else 'blocked'}")
+    return 0
+
+
 def main(argv=None) -> int:
     p = argparse.ArgumentParser("pangenome", description=__doc__,
                                 formatter_class=argparse.RawDescriptionHelpFormatter)
@@ -150,6 +211,26 @@ def main(argv=None) -> int:
     s.add_argument("--rounds", type=int, default=12)
     s.add_argument("--hostile", type=float, default=0.25)
     s.set_defaults(fn=cmd_simulate)
+
+    sub.add_parser("experiment",
+                   help="same shop, same task, three different owners"
+                   ).set_defaults(fn=cmd_experiment)
+
+    i = sub.add_parser("interest", help="prime a standing interest (the owner model)")
+    i.add_argument("concept", nargs="?")
+    i.add_argument("weight", nargs="?", type=float, default=1.0)
+    i.add_argument("--why")
+    i.set_defaults(fn=cmd_interest)
+
+    m = sub.add_parser("mind", help="scaffold, learning ratio, hypotheses")
+    m.add_argument("--limit", type=int, default=8)
+    m.set_defaults(fn=cmd_mind)
+
+    c = sub.add_parser("control", help="owner authority: RUN / SLEEP / FREEZE / KILL")
+    c.add_argument("state", nargs="?", choices=["RUN", "SLEEP", "FREEZE", "KILL",
+                                                "run", "sleep", "freeze", "kill"])
+    c.add_argument("--why")
+    c.set_defaults(fn=cmd_control)
 
     a = p.parse_args(argv)
     try:

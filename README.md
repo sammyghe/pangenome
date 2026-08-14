@@ -6,9 +6,13 @@ The core genome does not move. The accessory genome does.
 
 ```
 python -m pangenome germinate --steward "your name"
-python -m pangenome beat        # sense the live ecosystem, decide, integrate
-python -m pangenome watch       # the outbreak table
-python -m pangenome simulate    # a population in a soup, no network
+python -m pangenome beat         # sense, notice, decide, integrate, sleep
+python -m pangenome watch        # the outbreak table
+python -m pangenome mind         # scaffold, learning ratio, hypotheses
+python -m pangenome interest sunglasses 1.0 --why "I run a sunglasses shop"
+python -m pangenome experiment   # same shop, same task, three owners
+python -m pangenome simulate     # a population in a soup, no network
+python -m pangenome control KILL # owner authority. The organism gets no vote.
 ```
 
 Zero dependencies. Python 3.11+ and the standard library. That is a design
@@ -45,12 +49,14 @@ One loop, eight beats, then it dies until the next heartbeat.
 
 | beat | organ | what happens |
 |---|---|---|
-| WAKE | `chromosome` | load root identity; check the constitution's hash |
+| WAKE | `control` + `chromosome` | owner's control plane, **before any reasoning**; then identity |
 | SENSE | `observers/` | pull public registries — read-only, allowlisted |
+| PERCEIVE | `salience` | what crossed the attention threshold, and what nobody asked about |
 | DIAGNOSE | `epidemiology` | fit growth curves; which capabilities are spreading |
 | DESIRE | `quorum` | emit an autoinducer per want. No decision taken |
 | ACQUIRE | `pilus` + `crispr` | screen, quarantine, integrate — **dormant** |
 | EXPRESS | `lysogeny` | CI/Cro per prophage; almost everything stays asleep |
+| SLEEP | `scaffold` | replay, promote, associate, forget — offline, no route out |
 | IDENTIFY | `quasispecies` | recompute the consensus genome; report diversity |
 | RECORD | `store` | append-only; write `genome/STATE.md`; exit |
 
@@ -161,6 +167,124 @@ Two hard constraints come with that and they are the useful part:
 - **Consensus is thin.** A consensus sequence is a minimal and often
   insufficient description of the population, so the organism reports swarm
   *diversity* next to it and treats low diversity as fragility, not health.
+
+### salience — what it *notices*, as opposed to what it sees
+
+Two people walk down the same street. The car dealer sees cars, the clothes
+designer sees clothes. The photons are identical.
+
+Every agent architecture today is perfectly literal: ask for deodorant prices and
+it returns deodorant prices, in a shop selling sunglasses 30% under the wholesale
+price its owner pays. A person would have said something. So this sits between
+perception and reasoning, and three genuinely different things make something
+salient:
+
+- **ACTIVATION** — it connects to what I already know and care about. Spreading
+  activation over an associative graph, with standing owner interests as *tonic*
+  pre-activation (this is priming) and the current goal as *phasic* on top.
+- **NOVELTY** — I have hardly seen this before.
+- **SURPRISE** — I have seen this constantly, and *this* instance is
+  off-distribution.
+
+Surprise is the one that earns its place. To an optician, sunglasses are the
+**least novel thing on the page** — novelty alone throws the underpriced pair
+away. And surprise needs the right reference class: `$11` is only cheap relative
+to *sunglasses*, so the baseline is the organism's strongest standing interest
+present in the item. Two organisms judge the same item against different
+distributions.
+
+Verdicts are assigned **competitively across a scene**, not against a constant —
+both an absolute floor and a margin in standard deviations above everything else
+in view. This is the divisive-normalisation shape from the Reynolds–Heeger model
+of attention, and it fixes what no fixed threshold can: a page where everything
+is mildly relevant should produce no interruption, and a page with one standout
+should produce one even at a modest absolute score. Tuning a constant gets one of
+those right and the other wrong.
+
+The filter itself develops. Concepts that led to useful discoveries have their
+base weight raised, so perception specialises past whatever the owner first
+declared — and `precision()` tracks useful-versus-total unsolicited discoveries,
+because an organism that interrupts constantly gets switched off.
+
+**The experiment.** `python -m pangenome experiment` — one shop, thirty items,
+one instruction given identically to three organisms: *report the deodorant
+prices*. They differ only in what they already know.
+
+```
+GENERALIST   task answer: 3 deodorants   noticed: nothing above threshold
+OPTICIAN     task answer: 3 deodorants   noticed: sunglasses-designer-clearance  0.931  <- surprise
+                                                  polarised-clip-on              0.920  <- surprise
+                                                  sunglasses-aviator-uv400       0.685
+TAILOR       task answer: 3 deodorants   noticed: cotton-shirt-oxford            0.681
+                                                  wool-blend-coat                0.669
+                                                  linen-trousers                 0.658
+
+overlap optician/tailor : 0 items
+task answer identical   : True
+```
+
+Zero overlap. The optician's top two hits are the surprise channel — the
+underpriced items. The tailor reaches `cotton-towel-set` and
+`swim-shorts-quickdry`, which nobody primed, via the associative graph. And the
+deodorant answer is byte-identical across all three: an attention system that
+degrades the actual task is a worse system, not a better one. That assertion is
+a test.
+
+### scaffold — knowledge that survives its own evidence
+
+A ten-terabyte store of everything that ever happened is not intelligence:
+
+```
+episode -> pattern -> abstraction -> skill
+
+day 1    "Supplier X delivered late."
+day 20   "Supplier X often delivers late."
+day 50   "Suppliers in this category have high variance."
+day 100  "Require a delivery buffer for this supplier class."
+```
+
+The hundred conversations are not the asset. The last line is, and it is forty
+bytes. So episodes decay on an Ebbinghaus curve with rehearsal extending
+strength — but only *consumed* episodes die. Structure first, then amnesia.
+
+Two rules stop this becoming a warehouse with a promotion ceremony attached, and
+both were written after the first version produced 302 "skills" in one beat:
+
+- **Recurrence is counted in distinct days.** Three hundred observations in one
+  heartbeat are one scene. (The same rule the epidemiology already needed.)
+- **An abstraction must be discriminative.** A concept present in nearly every
+  pattern generalises nothing — it is that organism's stopword.
+
+`SLEEP` is not "switched off". It is offline consolidation with no route to the
+world: rehearse, promote, **associate**, forget. The associate step is Swanson's
+ABC model — A-B strong, B-C strong, A-C never observed together — the method that
+found the fish-oil/Raynaud link by noticing two literatures shared a middle term
+and had never cited each other. It is where "three unrelated things I saw today
+are actually related" comes from, and it only works if something replays the day
+against itself. Hypotheses are stored as candidates, never as findings.
+
+The metric is **learning-to-learning**: structure formed per unit of experience.
+Not "how much did it learn" but "how much better did it get at converting
+experience into capability" — the one number separating a developing organism
+from an accumulating database.
+
+### control — the plane the organism does not vote on
+
+Everything else here is the organism deciding things. This is the one place it
+does not. A "please stop" inside a prompt is a request to a reasoning system, and
+a reasoning system can talk itself out of a request.
+
+```
+RUN      normal
+SLEEP    no sensing, no action. Consolidation permitted — it may dream, not act.
+FREEZE   nothing runs. State preserved, untouched.
+KILL     execution refused. State preserved for forensics; a halt, not a delete.
+```
+
+Read as the first statement of `wake()`, before any organ initialises. There is
+no code path by which the organism restores its own `RUN` — a test asserts no
+module outside the CLI writes that file. An unreadable control file resolves to
+`FREEZE`: a damaged stop signal must never read as permission.
 
 ### epidemiology — the sense organ, and the only part that pays on day one
 
@@ -275,6 +399,32 @@ packet here carries a *known* motif. This measures whether the gate holds under
 horizontal spread, not whether the restriction set is complete. It is not.
 
 ---
+
+## Why not just fine-tune a domain model?
+
+The most common objection, and it mistakes two orthogonal axes for one. Fine-tuning
+moves knowledge **into weights**. This accumulates state **around** weights.
+
+- A fine-tune encodes a *corpus* — buyable, copyable, roughly the same for every
+  hospital. The organism encodes *what happened*: which pathway worked, what
+  failed, what the price actually was. That data does not exist until it runs.
+- Weights are welded to a base model. A better base ships and the specialisation
+  is retrained from scratch — it has a depreciation schedule. Scaffolding, skills
+  and attention survive a brain swap.
+- **Fine-tuning makes a model better at answering. It does not make it better at
+  noticing.** No amount of medical fine-tuning produces the sunglasses observation
+  above; salience is a runtime property over live state.
+- Weights cannot be audited, diffed, or have one fact deleted. The genome is
+  append-only and inspectable.
+
+Where fine-tuning genuinely wins and this does not compete: latency, domain
+tokenisation, and tacit perception — raw ECG traces, pathology slides. That is
+real pattern recognition and it belongs in weights.
+
+So it is **both**, and this matters *more* for small models, not less: scaffolding
+substitutes for raw capability, which is what lets a 7B model on-premises beat a
+frontier model with no state on a bounded domain. The organism is what makes the
+brain a replaceable part.
 
 ## Status
 

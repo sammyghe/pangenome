@@ -20,6 +20,53 @@ constraint, not an accident — see *Metabolism*.
 
 ---
 
+## Read this before anything else
+
+**There is no LLM inside the organism.** Every organ — salience, scaffold,
+lysogeny, quorum, epidemiology, CRISPR — is deterministic Python over SQLite.
+`grep -rE "openai|anthropic|gemini|ollama" pangenome/` returns the study harness
+and nothing else.
+
+That is an architectural position, not an omission: this is the *system around* a
+model, and the model is meant to be a replaceable part. But it means the word
+"organism" here describes a body, a memory, an immune system and an attention —
+**not a thinking thing. Nothing in this repository reasons.**
+
+**Is it live?** Yes: the heartbeat workflow is active on a daily cron, and the
+organism has committed its own genome twice as author `pangenome`. Caveat worth
+stating — the repo was created *after* today's cron time, so the first *scheduled*
+beat is tomorrow. Until then "runs daily" is a configuration, not an observation.
+
+**What's real and what's a fixture?** The 1,884 observations, the concept graph
+and the outbreak table are live public data. The shop, the optician and the
+tailor, and the hostile-packet soup are **hand-written fixtures** that test the
+mechanism, not the world. The full breakdown, every test, every measured number,
+and a correction to one of this README's own claims are in
+**[RESULTS.md](RESULTS.md)**.
+
+### Try it in thirty seconds
+
+```bash
+git clone https://github.com/sammyghe/pangenome && cd pangenome
+python -m unittest discover -s tests    # 63 tests, ~3s, no network, no deps
+python -m pangenome experiment          # the attention result, deterministic
+python -m pangenome study --skip-model  # precision/recall + token reduction
+```
+
+Then, to run your own organism:
+
+```bash
+python -m pangenome germinate --steward "your name"
+python -m pangenome interest sunglasses 1.0 --why "I run a sunglasses shop"
+python -m pangenome beat                # senses live registries, ~15s
+cat genome/STATE.md                     # what it noticed without being asked
+```
+
+It will correctly tell you it knows nothing for the first three days. That is
+Constitution §10, not a bug.
+
+---
+
 ## The one-sentence claim
 
 Every self-evolving agent system published so far evolves **vertically** — an
@@ -412,8 +459,11 @@ moves knowledge **into weights**. This accumulates state **around** weights.
   is retrained from scratch — it has a depreciation schedule. Scaffolding, skills
   and attention survive a brain swap.
 - **Fine-tuning makes a model better at answering. It does not make it better at
-  noticing.** No amount of medical fine-tuning produces the sunglasses observation
-  above; salience is a runtime property over live state.
+  noticing.** Salience is a runtime property over live state, not a weight
+  property. *(An earlier version of this README said no amount of prompting
+  could produce the sunglasses observation either. That was too strong and the
+  study disproved it — prompting finds it, unreliably, at 2.6× the tokens. See
+  [RESULTS.md §5d](RESULTS.md).)*
 - Weights cannot be audited, diffed, or have one fact deleted. The genome is
   append-only and inspectable.
 
@@ -425,6 +475,30 @@ So it is **both**, and this matters *more* for small models, not less: scaffoldi
 substitutes for raw capability, which is what lets a 7B model on-premises beat a
 frontier model with no state on a bounded domain. The organism is what makes the
 brain a replaceable part.
+
+## Where this sits in the literature, and where it is thin
+
+The direction is corroborated by strong independent work. NVIDIA's
+[*Small Language Models are the Future of Agentic AI*](https://arxiv.org/abs/2506.02153)
+argues SLMs should be the **default** inside agents at 10–30× lower cost per
+token; [*Can Small Agents Collaborate to Beat a Single LLM?*](https://arxiv.org/html/2601.11327v2)
+reports small systems beating substantially larger single agents on GAIA, GPQA
+and HLE; and the memory line (AgeMem, LightMem, the
+[memory survey](https://arxiv.org/html/2603.07670v1)) is converging on
+scaffolding as its own field.
+
+**Where this is genuinely ahead:** that literature is overwhelmingly about what
+to *store and retrieve*. Nobody in it is doing knowledge-driven **attention** —
+deciding what to look at *before* retrieval, per owner. The salience layer sits
+upstream of all of it.
+
+**Where it is thin, stated plainly:** nothing here is benchmarked on LoCoMo,
+GAIA or SWE-bench — the currencies of this field, of which this repo has spent
+none. There is no model in the loop, so there is no end-to-end agent to
+benchmark yet. The epidemiology moat has **one day of data**. And §5c is n=4 on
+one hand-built fixture with one small model: a pilot, not a result.
+
+The thesis is on-track. The evidence is early. Both are true.
 
 ## Status
 

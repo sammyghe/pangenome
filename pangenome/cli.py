@@ -212,6 +212,12 @@ def main(argv=None) -> int:
     s.add_argument("--hostile", type=float, default=0.25)
     s.set_defaults(fn=cmd_simulate)
 
+    st = sub.add_parser("study", help="ablation + small-model arms (the evidence)")
+    st.add_argument("--model", default="gemini-2.5-flash")
+    st.add_argument("--skip-model", action="store_true", dest="skip_model")
+    st.set_defaults(fn=lambda a: (__import__(
+        "pangenome.study", fromlist=["run"]).run(a.model, a.skip_model), 0)[1])
+
     sub.add_parser("experiment",
                    help="same shop, same task, three different owners"
                    ).set_defaults(fn=cmd_experiment)

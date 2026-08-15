@@ -316,6 +316,13 @@ hand-built fixture and sixteen API calls.
 
 Three layers, and only the first exists today.
 
+*(Update 2026-08-15: the "next" layer below now exists as
+[`partner.py`](pangenome/partner.py) — the `talk` command. First live exchanges
+worked: the organism answered from its own attention log, surfaced an unasked
+lead, and recorded the conversation as episodes. The autonomous loop remains
+model-free; the model enters only in owner-present commands, through a fallback
+chain so no single free tier's quota kills the partner. 67 tests green.)*
+
 **Now — an instrument.** A zero-dependency daemon that measures how capabilities
 spread through the live agent ecosystem, and a filter that cuts what a model has
 to read by ~97%. Useful on its own, to anyone, today.

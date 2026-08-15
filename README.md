@@ -1,8 +1,35 @@
-# pangenome
+# pangenome · MBEGU
 
-**A prokaryotic architecture for LLM agent ecosystems.**
+**Mbegu** (Swahili: *seed*) — a personal AI organism you plant and grow.
+**pangenome** is its architecture: prokaryotic biology applied to LLM agent
+ecosystems. The core genome does not move. The accessory genome does.
 
-The core genome does not move. The accessory genome does.
+## What this is, as a product
+
+Not a chatbot, not a fine-tune, not an agent framework. **A seed.** You germinate
+it once, tell it what you care about, and it lives on a free daily heartbeat —
+sensing public ecosystems, noticing what matters *to you specifically*, and
+consolidating experience into skills while it sleeps. Any LLM can be plugged in
+as its voice; the organism is everything *around* the model, and that state is
+yours, on your disk, under your kill switch.
+
+```bash
+python -m pangenome germinate --steward "you"
+python -m pangenome interest water-purification 1.0 --why "my business"
+python -m pangenome beat                       # it senses and notices — free, daily
+python -m pangenome talk "what did you see today that matters to me?"
+```
+
+`talk` needs one free key ([aistudio.google.com](https://aistudio.google.com));
+everything else runs with **no key, no server, no dependencies, no cost**. If a
+model's quota dies mid-conversation it falls through a chain to the next one —
+the organism outlives any given brain.
+
+Three honest sentences about maturity: the body, senses, memory and immune
+system are built and tested (63 tests). The conversation layer is days old. It
+grows *fast* in knowledge (43,000+ concept links in two days) and *slowly on
+purpose* in beliefs — nothing becomes a "skill" without recurring across
+three distinct days, so it cannot be stampeded by one afternoon.
 
 ```
 python -m pangenome germinate --steward "your name"
@@ -22,15 +49,18 @@ constraint, not an accident — see *Metabolism*.
 
 ## Read this before anything else
 
-**There is no LLM inside the organism.** Every organ — salience, scaffold,
-lysogeny, quorum, epidemiology, CRISPR — is deterministic Python over SQLite.
-`grep -rE "openai|anthropic|gemini|ollama" pangenome/` returns the study harness
-and nothing else.
+**The autonomous loop contains no LLM.** Every organ that runs unattended —
+salience, scaffold, lysogeny, quorum, epidemiology, CRISPR — is deterministic
+Python over SQLite. A model enters in exactly two owner-present places: the
+study harness ([`study.py`](pangenome/study.py)) and the brain socket
+([`partner.py`](pangenome/partner.py), the `talk` command). The heartbeat never
+calls a model, which is why it can run forever on a free cron and why its
+records are auditable.
 
-That is an architectural position, not an omission: this is the *system around* a
-model, and the model is meant to be a replaceable part. But it means the word
-"organism" here describes a body, a memory, an immune system and an attention —
-**not a thinking thing. Nothing in this repository reasons.**
+That is an architectural position, not an omission: this is the *system around*
+a model, and the model is a replaceable guest. The organism's body, memory,
+immune system and attention are deterministic; its *voice* is whatever brain is
+plugged in today.
 
 **Is it live?** Yes, and unattended. The scheduled beat fired on 2026-08-15 at
 05:41 UTC with nobody involved, sensed 330 live loci, and committed its own
@@ -476,6 +506,27 @@ So it is **both**, and this matters *more* for small models, not less: scaffoldi
 substitutes for raw capability, which is what lets a 7B model on-premises beat a
 frontier model with no state on a bounded domain. The organism is what makes the
 brain a replaceable part.
+
+## Where this sits among 2026 products (YC scan, Aug 2026)
+
+The recent YC batches confirm the category is real — and that everyone is
+building a different slice of it:
+
+| YC company | Their slice | What Mbegu does differently |
+|---|---|---|
+| Mosaic (Ocean) | shared memory across coding-agent sessions | memory is *per-owner*, not per-team; includes attention, not just recall |
+| AI Passport | portable memory layer across AI apps | same instinct (state outlives the model) — but theirs stores preferences; Mbegu accumulates *noticing* |
+| Oki Home | private local AI that "grows with you" | closest neighbour; Mbegu adds the deterministic body (immune system, sleep, control plane) and is open source |
+| Clice | assistants that learn communication style | style is one trait; Mbegu's interest graph reshapes *perception* |
+| Epicenter | local-first apps sharing one memory | infrastructure play; Mbegu is an organism, not a substrate |
+
+What was stolen from this scan and is now in the repo: the **portability
+framing** (your organism's state must survive any model change — AI Passport's
+core bet, already our thesis, now stated as the product's first promise) and the
+**fallback brain chain** (a partner that dies with one model's free quota is not
+a partner). What was deliberately *not* stolen: cloud-hosted memory. Every one of
+those companies holds your state on their servers. Mbegu's genome is a SQLite
+file in your own repo — that is the moat *you* own against all five.
 
 ## Where this sits in the literature, and where it is thin
 

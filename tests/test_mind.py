@@ -283,5 +283,56 @@ class TestControlPlane(unittest.TestCase):
                          f"control file written outside the CLI: {offenders}")
 
 
+class TestPartner(unittest.TestCase):
+    """The brain socket, minus any network. talk() itself is not tested here
+    because it writes to the real genome and calls a live endpoint — the parts
+    that can be wrong offline are the briefing and the suggestion filter."""
+
+    def test_briefing_on_a_young_organism_says_so(self):
+        from pangenome.partner import briefing
+        s = Store(":memory:")
+        f = AttentionField(s)
+        b = briefing(s, f, Scaffold(s, f), "hello")
+        self.assertIn("little state", b)
+
+    def test_briefing_includes_interests_and_noticed(self):
+        from pangenome.partner import briefing
+        s = Store(":memory:")
+        f = AttentionField(s)
+        f.prime("water", 1.0, "business")
+        s.db.execute("INSERT INTO attention_log(at,subject,score,verdict,reason)"
+                     " VALUES (?,?,?,?,?)",
+                     (time.time(), "some/repo", 0.8, "investigate", "test"))
+        s.commit()
+        b = briefing(s, f, Scaffold(s, f), "anything")
+        self.assertIn("water", b)
+        self.assertIn("some/repo", b)
+
+    def test_suggestions_require_grounding_in_the_wild(self):
+        """'could' and 'help' recur in every conversation; only concepts the
+        organism has also seen in the observation stream may be suggested."""
+        from pangenome.partner import _suggest_interests
+        import json as j
+        s = Store(":memory:")
+        f = AttentionField(s)
+        for _ in range(4):
+            s.db.execute(
+                "INSERT INTO episodes(at,signature,concepts,detail) VALUES (?,?,?,?)",
+                (time.time(), "owner:conversation",
+                 j.dumps(["kampala", "could"]), "{}"))
+        for _ in range(3):
+            f.learn(["kampala", "water"])       # kampala exists in the wild
+        s.commit()
+        got = _suggest_interests(s)
+        self.assertIn("kampala", got)
+        self.assertNotIn("could", got)
+
+    def test_fallback_chain_is_ordered_and_deduplicated_intent(self):
+        from pangenome.partner import BrainSocket, FALLBACK_CHAIN
+        sock = BrainSocket("my-model")
+        self.assertEqual(sock.chain[0], "my-model")
+        self.assertEqual(sock.chain[1:], FALLBACK_CHAIN)
+
+
 if __name__ == "__main__":
     unittest.main()

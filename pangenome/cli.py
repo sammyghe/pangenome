@@ -120,6 +120,20 @@ def cmd_simulate(a) -> int:
     return 0
 
 
+def cmd_talk(a) -> int:
+    from .partner import talk
+    r = talk(" ".join(a.message), model=a.model)
+    if r["reply"]:
+        print(f"\n{r['reply'].strip()}\n")
+        if r.get("suggestions"):
+            print(f"  (it keeps hearing about: {', '.join(r['suggestions'])} — "
+                  f"prime any of these with `pangenome interest <concept> 1.0`)")
+    else:
+        print(f"\n  {r['note']}\n")
+    print(f"  learned {len(r['learned'])} concepts from this exchange")
+    return 0
+
+
 def cmd_experiment(a) -> int:
     from .experiment import run
     run()
@@ -211,6 +225,11 @@ def main(argv=None) -> int:
     s.add_argument("--rounds", type=int, default=12)
     s.add_argument("--hostile", type=float, default=0.25)
     s.set_defaults(fn=cmd_simulate)
+
+    t = sub.add_parser("talk", help="talk to the organism (owner-present; needs a free GEMINI_API_KEY for replies)")
+    t.add_argument("message", nargs="+")
+    t.add_argument("--model", default=None)
+    t.set_defaults(fn=cmd_talk)
 
     st = sub.add_parser("study", help="ablation + small-model arms (the evidence)")
     st.add_argument("--model", default="gemini-2.5-flash")

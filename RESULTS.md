@@ -5,7 +5,7 @@ between **live data** and **synthetic fixtures**. Where a result contradicts a
 claim made elsewhere in this repository, the claim is corrected here rather than
 defended.
 
-Last updated: 2026-08-14.
+Last updated: 2026-08-15.
 
 ---
 
@@ -39,33 +39,45 @@ than that would be a lie, and §7 says what it would take to close the gap.
 
 ## 1. Is it running?
 
-Yes, with one honest caveat.
+Yes — and as of 2026-08-15 that is an observation rather than a configuration.
 
 - **Repo:** [github.com/sammyghe/pangenome](https://github.com/sammyghe/pangenome) — public, MIT, zero dependencies.
 - **Heartbeat workflow:** `active`. Cron `17 5 * * *` (05:17 UTC daily).
-- **Runs so far:** 2 manual (`workflow_dispatch`), both `success`. The organism
-  has committed itself twice, as author `pangenome`.
-- **Caveat:** the repo was created at 08:47 UTC on 2026-08-14, *after* 05:17, so
-  **no scheduled run has fired yet.** The first automatic beat is 2026-08-15
-  05:17 UTC. Until then "it runs daily" is a configuration, not an observation.
-- **Second caveat:** GitHub disables scheduled workflows in repositories with
-  60 days of no commit activity. Since the organism commits on every beat, it
-  keeps itself alive — but if it ever stops for 60 days it will not restart
-  itself. That is a real single point of failure and it is not yet mitigated.
 
-Current genome:
+| beat | trigger | result |
+|---|---|---|
+| 2026-08-14 08:53 UTC | manual | success |
+| 2026-08-14 14:14 UTC | manual | success |
+| **2026-08-15 05:41 UTC** | **schedule** | **success — unattended** |
+
+The third beat ran with nobody involved, sensed 330 live loci, scanned them
+through the attention field, and committed `heartbeat: 2026-08-15` as author
+`pangenome`. GitHub dispatched it ~24 minutes after the nominal cron time, which
+is normal queue delay and worth knowing: cron here means "some time after", not
+"at".
+
+**The one real unmitigated risk:** GitHub disables scheduled workflows in repos
+with 60 days of no commit activity. The organism commits on every beat, so it
+keeps itself alive — but if it ever stops for 60 days it will not restart
+itself. Nothing currently guards against that.
+
+Genome after three beats:
 
 ```
-observations   1884      concepts       2027
-events           63      edges         43149
-episodes        284      interests        10
-scaffold          0      attention_log   364
+observations   2214      concepts       2027
+distinct days     2      edges         43194
+episodes        378      interests        10
+scaffold          0      attention_log   548
 plasmids          0      spacers           0
+loci with 2+ days of history: 314
 ```
 
-`scaffold 0` and `plasmids 0` are **correct, not broken**. Both require
-recurrence across ≥3 distinct days (Constitution §10), and the organism is one
-day old. This is the system refusing to infer from a single day.
+`scaffold 0` and `plasmids 0` are **correct, not broken.** Both require
+recurrence across ≥3 distinct days (Constitution §10) and there are 2. The 314
+loci already carrying two days of history cross that line on the next beat —
+**2026-08-16 is the first morning this organism can form a pattern or fit an
+R₀.** That is the system refusing to infer from too little, and it is the
+cleanest demonstration available that §10 is enforced rather than described.
 
 ---
 

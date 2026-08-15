@@ -32,10 +32,11 @@ model, and the model is meant to be a replaceable part. But it means the word
 "organism" here describes a body, a memory, an immune system and an attention —
 **not a thinking thing. Nothing in this repository reasons.**
 
-**Is it live?** Yes: the heartbeat workflow is active on a daily cron, and the
-organism has committed its own genome twice as author `pangenome`. Caveat worth
-stating — the repo was created *after* today's cron time, so the first *scheduled*
-beat is tomorrow. Until then "runs daily" is a configuration, not an observation.
+**Is it live?** Yes, and unattended. The scheduled beat fired on 2026-08-15 at
+05:41 UTC with nobody involved, sensed 330 live loci, and committed its own
+genome as author `pangenome`. Three beats so far, 2,214 real observations, two
+distinct days of history. The one unmitigated risk: GitHub disables cron after
+60 days of repo inactivity, so a long enough silence is permanent.
 
 **What's real and what's a fixture?** The 1,884 observations, the concept graph
 and the outbreak table are live public data. The shop, the optician and the

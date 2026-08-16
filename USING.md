@@ -118,6 +118,7 @@ in-process (`simulate`), not between repos. That is the honest current limit.
 | `genome` | acquired capability packets and their states |
 | `control` | RUN / SLEEP / FREEZE / KILL — owner authority |
 | `experiment` / `study` / `simulate` | the reproducible evidence |
+| `study --full` | the upgraded study: two domains (hand-built shop + frozen real corpus), two model families, n=20 per arm |
 
 ## What it will never do, by construction
 

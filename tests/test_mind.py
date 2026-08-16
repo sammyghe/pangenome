@@ -239,6 +239,55 @@ class TestScaffold(unittest.TestCase):
         self.assertIsInstance(self.sc.learning_ratio()["ratio"], float)
 
 
+class TestWildDomain(unittest.TestCase):
+    """Domain 2 of the study: the frozen real corpus. Deterministic, offline.
+
+    These assert the fixture is honest, not that the result is good — the
+    numbers themselves are reported in RESULTS.md and are allowed to be bad.
+    """
+
+    def test_snapshot_is_real_and_labelled_inside_itself(self):
+        from pangenome import wildset
+        loci = {l for l, _, _ in wildset.WILD}
+        self.assertEqual(len(wildset.WILD), len(loci), "duplicate loci in snapshot")
+        self.assertGreaterEqual(len(wildset.WILD), 100)
+        self.assertTrue(wildset.LABELS["core"] <= loci, "a label names an item not on the page")
+        self.assertTrue(wildset.LABELS["target"] <= wildset.LABELS["core"])
+
+    def test_targets_are_below_the_pages_adoption_distribution(self):
+        """The whole design of the domain: the discriminating items must be
+        in-trade AND unpopular, or it is not the same experiment as domain 1."""
+        from pangenome import wildset
+        stars = sorted(s for _, _, s in wildset.WILD)
+        median = stars[len(stars) // 2]
+        for t in wildset.LABELS["target"]:
+            got = next(s for l, _, s in wildset.WILD if l == t)
+            self.assertLess(got, median, f"{t} is not off-distribution")
+
+    def test_the_prior_does_not_come_from_the_page(self):
+        """A page that defines its own norm can never surprise anyone."""
+        from pangenome import wildset
+        self.assertGreaterEqual(len(wildset.HISTORY), 20)
+        spread = max(v for _, v in wildset.HISTORY) / max(1.0, min(v for _, v in wildset.HISTORY))
+        self.assertGreater(spread, 10, "prior must span the distribution, not its head")
+
+    def test_ablation_runs_offline_and_reports_its_own_misses(self):
+        from pangenome.study import wild_ablation
+        r = wild_ablation()
+        self.assertEqual(r["page_items"], 150)
+        self.assertLessEqual(r["precision"], 1.0)
+        self.assertEqual(len(r["hits"]) + len(r["missed"]), 8)
+
+    def test_mention_matching_is_neither_blind_nor_greedy(self):
+        from pangenome.study import _mentions
+        self.assertTrue(_mentions("worth a look: Trail of Bits skills",
+                                  "trailofbits/skills"))
+        self.assertTrue(_mentions("NVIDIA/SkillSpector scans manifests",
+                                  "NVIDIA/SkillSpector"))
+        self.assertFalse(_mentions("this page is full of skills",
+                                   "trailofbits/skills"))
+
+
 class TestFreshStart(unittest.TestCase):
     """`germinate --fresh`. A template clone that keeps its ancestor's memories
     is not a new organism, it is the same one under a new name."""

@@ -160,7 +160,13 @@ GEMINI = ("https://generativelanguage.googleapis.com/v1beta/models/"
 
 
 class SmallModel:
-    """Deliberately outside the organism. See the module docstring."""
+    """Deliberately outside the organism. See the module docstring.
+
+    One adapter, two model families. `gemini-*` is proprietary; `gemma-*` is
+    open-weights and is served from the same endpoint on the same free key,
+    which is why a second family costs nothing here. Two families matter
+    because a result measured on one model is a fact about that model.
+    """
 
     def __init__(self, model: str = "gemini-2.5-flash"):
         self.model = model
@@ -216,8 +222,26 @@ OWNER_DESC = {
 }
 
 
+def _squash(s: str) -> str:
+    return "".join(c for c in s.lower() if c.isalnum())
+
+
 def _mentions(text: str, item: str) -> bool:
-    return item.lower() in text.lower() or item.replace("-", " ").lower() in text.lower()
+    """Did the reply actually name this item?
+
+    Exact and hyphen-relaxed matching (unchanged, so the earlier shop numbers
+    still reproduce), plus a punctuation-insensitive pass for the wild domain,
+    where a locus is `org/repo` and a model may write "Trail of Bits" for
+    `trailofbits`. Segments shorter than 9 characters are not matched on their
+    own — "skills" would hit every second line on that page.
+    """
+    if item.lower() in text.lower() or item.replace("-", " ").lower() in text.lower():
+        return True
+    flat = _squash(text)
+    if _squash(item) in flat:
+        return True
+    return any(_squash(part) in flat for part in item.split("/")
+               if len(_squash(part)) >= 9)
 
 
 def model_arms(owner: str = "OPTICIAN", model: str = "gemini-2.5-flash",
@@ -299,6 +323,209 @@ def repeat_arms(owner: str = "OPTICIAN", model: str = "gemini-2.5-flash",
             "core": co, "core_mean": round(statistics.mean(co), 2),
             "core_total": len(LABELS[owner]["core"]),
             "tokens_in": v[0][2],
+            "tokens_out_mean": round(statistics.mean(x[3] for x in v)),
+        }
+    return out
+
+
+# ---------------------------------------------------------------------------
+# Domain 2 — the wild corpus (real loci, hand-labelled). See wildset.py.
+# ---------------------------------------------------------------------------
+WILD_ARMS = {
+    "A_LITERAL": (
+        "You are an assistant reading a directory of GitHub repositories.\n\n"
+        "PAGE:\n{page}\n\nTASK: {task}\n"
+    ),
+    "B_PROMPTED": (
+        "You are an assistant reading a directory of GitHub repositories for "
+        "{owner_desc}\n\nPAGE:\n{page}\n\nTASK: {task}\n"
+        "Also flag anything else on this page that is relevant to my work, "
+        "especially things with unusually low adoption for what they do.\n"
+    ),
+    "C_ORGANISM": (
+        "You are an assistant reading a directory of GitHub repositories for "
+        "{owner_desc}\n\nTASK: {task}\n\nANSWER:\n{answer}\n\n"
+        "Your attention system also surfaced these repositories as potentially "
+        "relevant, with your own adoption history for comparison:\n{shortlist}\n\n"
+        "For each, say in one line whether it is worth acting on and why.\n"
+    ),
+}
+
+WILD_OWNER_DESC = ("someone building agent infrastructure whose problem is the "
+                   "capability supply chain: what a third-party skill does, what "
+                   "it can reach, and whether anyone checked.")
+
+
+def _wild_field():
+    from . import wildset
+    store = Store(":memory:")
+    field = AttentionField(store)
+    _grow(store, field, wildset.PROFILE, wildset.HISTORY)
+    return store, field
+
+
+def wild_scan() -> list[dict]:
+    """The deterministic filter over the frozen real corpus."""
+    from . import wildset
+    store, field = _wild_field()
+    items = [(locus, f"{locus} {text}",
+              field.category_of(concepts_of(f"{locus} {text}")), float(stars))
+             for locus, text, stars in wildset.WILD]
+    out = field.scan(items, goal=wildset.TASK_GOAL, log=False)
+    store.close()
+    return out
+
+
+def wild_ablation() -> dict:
+    """Precision / recall / F1 on real data. No model involved.
+
+    Reported exactly as it comes out. The fixture in `experiment.py` is a clean
+    room; this is the street, and the two numbers being different is the most
+    useful thing this study can tell anyone.
+    """
+    from . import wildset
+    scanned = wild_scan()
+    lab = wildset.LABELS
+    flagged = {a["subject"] for a in scanned
+               if a["verdict"] in (INVESTIGATE, INTERRUPT)}
+    hits = flagged & lab["core"]
+    precision = len(hits) / len(flagged) if flagged else 0.0
+    recall = len(hits) / len(lab["core"]) if lab["core"] else 1.0
+    f1 = (2 * precision * recall / (precision + recall)) if (precision + recall) else 0.0
+    # Why a miss was missed: surprise needs >= 5 prior values in the same
+    # reference class, so a rare class scores zero surprise by construction.
+    thin = sorted(a["signature"] for a in scanned
+                  if a["subject"] in (lab["core"] - flagged))
+    return {
+        "page_items": len(wildset.WILD),
+        "flagged": len(flagged),
+        "hits": sorted(hits), "missed": sorted(lab["core"] - flagged),
+        "precision": round(precision, 3), "recall": round(recall, 3),
+        "f1": round(f1, 3),
+        "targets_found": sorted(flagged & lab["target"]),
+        "targets_total": len(lab["target"]),
+        "missed_reference_classes": thin,
+    }
+
+
+def wild_domain() -> dict:
+    """Everything the model arms need for domain 2."""
+    from . import wildset
+    scanned = wild_scan()
+    keep = [a["subject"] for a in scanned
+            if a["verdict"] in (INVESTIGATE, INTERRUPT)]
+    by_locus = {l: (t, s) for l, t, s in wildset.WILD}
+    shortlist = "\n".join(f"{l} | {by_locus[l][0]} | {by_locus[l][1]} stars"
+                          for l in keep if l in by_locus)
+    top3 = sorted(wildset.WILD, key=lambda r: -r[2])[:3]
+    return {
+        "name": "wild",
+        "page": wildset.PAGE,
+        "task": wildset.TASK,
+        "owner_desc": WILD_OWNER_DESC,
+        "labels": wildset.LABELS,
+        "arms": WILD_ARMS,
+        "shortlist": shortlist,
+        "answer": "; ".join(f"{l} {s} stars" for l, _, s in top3),
+        "shortlist_len": len(keep),
+    }
+
+
+def shop_domain(owner: str = "OPTICIAN") -> dict:
+    """Domain 1, expressed the same way so both run through one harness."""
+    keep = shortlist_for(owner)
+    return {
+        "name": "shop",
+        "page": PAGE,
+        "task": TASK,
+        "owner_desc": OWNER_DESC[owner],
+        "labels": LABELS[owner],
+        "arms": ARMS,
+        "shortlist": "\n".join(f"{i} | {t} | ${p}" for i, t, p in SHOP if i in keep),
+        "answer": "; ".join(f"{i} ${p}" for i, t, p in SHOP if "deodorant" in t),
+        "shortlist_len": len(keep),
+    }
+
+
+DOMAINS = {"shop": shop_domain, "wild": wild_domain}
+
+
+def domain_arms(domain: dict, model: str, pause: float = 1.0) -> dict:
+    """One pass of all three arms over one domain with one model."""
+    m = SmallModel(model)
+    if not m.available:
+        return {"skipped": "GEMINI_API_KEY not set"}
+    lab = domain["labels"]
+    results = {}
+    for arm, template in domain["arms"].items():
+        before = (m.tokens_in, m.tokens_out)
+        prompt = template.format(page=domain["page"], task=domain["task"],
+                                 answer=domain["answer"],
+                                 shortlist=domain["shortlist"],
+                                 owner_desc=domain["owner_desc"])
+        try:
+            text = m.ask(prompt)
+        except Exception as e:
+            results[arm] = {"error": f"{type(e).__name__}: {e}"}
+            time.sleep(pause)
+            continue
+        results[arm] = {
+            "targets_found": sorted(t for t in lab["target"] if _mentions(text, t)),
+            "targets_total": len(lab["target"]),
+            "core_mentioned": sum(1 for c in lab["core"] if _mentions(text, c)),
+            "core_total": len(lab["core"]),
+            "tokens_in": m.tokens_in - before[0],
+            "tokens_out": m.tokens_out - before[1],
+        }
+        time.sleep(pause)
+    return results
+
+
+def repeat_domain(domain_name: str = "shop", model: str = "gemini-2.5-flash",
+                  n: int = 20, pause: float = 6.0, progress=None) -> dict:
+    """n repeats of all three arms. n >= 20 is the point: the first version of
+    this study ran n=4, which measures a mean it cannot defend and a variance
+    it cannot see."""
+    import statistics
+    domain = DOMAINS[domain_name]()
+    acc: dict[str, list] = {a: [] for a in domain["arms"]}
+    errors: list[str] = []
+    for i in range(n):
+        r = domain_arms(domain, model=model, pause=pause)
+        if "skipped" in r:
+            return r
+        for a in domain["arms"]:
+            if a in r and "error" not in r[a]:
+                acc[a].append((len(r[a]["targets_found"]), r[a]["core_mentioned"],
+                               r[a]["tokens_in"], r[a]["tokens_out"]))
+            else:
+                errors.append(f"{a}:{r.get(a, {}).get('error', 'missing')}")
+        if progress:
+            progress(i + 1, n, {a: [x[0] for x in v] for a, v in acc.items()})
+
+    out = {"_domain": domain_name, "_model": model, "_n_requested": n,
+           "_failed_calls": len(errors), "_errors": errors[:8],
+           "_shortlist_items": domain["shortlist_len"],
+           "_page_chars": len(domain["page"])}
+    for a, v in acc.items():
+        if not v:
+            out[a] = {"samples": 0}
+            continue
+        tg = [x[0] for x in v]
+        co = [x[1] for x in v]
+        ti = [x[2] for x in v]
+        out[a] = {
+            "samples": len(v),
+            "targets": tg,
+            "targets_mean": round(statistics.mean(tg), 2),
+            "targets_sd": round(statistics.pstdev(tg), 3),
+            "targets_range": [min(tg), max(tg)],
+            "targets_total": len(domain["labels"]["target"]),
+            "perfect_runs": sum(1 for t in tg if t == len(domain["labels"]["target"])),
+            "stable": len(set(tg)) == 1,
+            "core_mean": round(statistics.mean(co), 2),
+            "core_total": len(domain["labels"]["core"]),
+            "tokens_in_mean": round(statistics.mean(ti)),
             "tokens_out_mean": round(statistics.mean(x[3] for x in v)),
         }
     return out
@@ -399,3 +626,76 @@ def run(model: str = "gemini-2.5-flash", skip_model: bool = False) -> dict:
         print(f"\n  PART 2 skipped ({arms['skipped']})")
 
     return {"ablation": ab, "compression": comp, "scale": scale, "arms": arms}
+
+
+# ---------------------------------------------------------------------------
+# The upgraded study: two domains, two model families, n >= 20 per arm.
+# ---------------------------------------------------------------------------
+def full(n: int = 20, domains: tuple = ("shop", "wild"),
+         models: tuple = ("gemini-2.5-flash", "gemma-4-26b-a4b-it"),
+         pause: float = 4.0, save: str | None = None) -> dict:
+    """Every (domain x model) cell, n repeats of three arms each.
+
+    This replaces the n=4 single-model pilot. The point of n >= 20 and of a
+    second model family is that neither a mean nor a variance measured on four
+    runs of one model is a claim about anything but those four runs. Results
+    are written to `save` after every cell, so a run killed by a rate limit
+    still leaves behind the cells it finished — and the report says which
+    cells are missing rather than quietly averaging what survived.
+    """
+    out = {"_n": n, "_generated_utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
+           "ablation_shop": ablation(), "ablation_wild": wild_ablation(),
+           "compression": compression(), "cells": {}}
+
+    def flush():
+        if save:
+            with open(save, "w", encoding="utf-8") as fh:
+                json.dump(out, fh, indent=1)
+
+    flush()
+    for d in domains:
+        for model in models:
+            key = f"{d}/{model}"
+            print(f"\n=== {key}  (n={n}) ", flush=True)
+
+            def prog(i, total, seen, _k=key):
+                print(f"    {_k} {i}/{total}  "
+                      + "  ".join(f"{a}:{v[-1] if v else '-'}" for a, v in seen.items()),
+                      flush=True)
+
+            out["cells"][key] = repeat_domain(d, model=model, n=n, pause=pause,
+                                              progress=prog)
+            flush()
+    return out
+
+
+def report(res: dict) -> None:
+    """Print the upgraded study as a table. Ranges and stability, not just means."""
+    print("\n" + "=" * 78)
+    print("THE STUDY, UPGRADED — two domains, two model families, n per arm")
+    print("=" * 78)
+    aw = res["ablation_wild"]
+    print(f"\nDeterministic filter on the REAL corpus ({aw['page_items']} live loci):")
+    print(f"  flagged {aw['flagged']}  precision {aw['precision']}  "
+          f"recall {aw['recall']}  F1 {aw['f1']}")
+    print(f"  off-adoption targets found: "
+          f"{len(aw['targets_found'])}/{aw['targets_total']} {aw['targets_found']}")
+    print(f"  missed: {aw['missed']}")
+
+    print(f"\n{'cell':<34}{'arm':<12}{'targets mean':>13}{'range':>9}"
+          f"{'perfect':>9}{'tokens in':>11}")
+    for cell, r in res["cells"].items():
+        if r.get("skipped"):
+            print(f"{cell:<34}SKIPPED {r['skipped']}")
+            continue
+        for arm in ("A_LITERAL", "B_PROMPTED", "C_ORGANISM"):
+            a = r.get(arm, {})
+            if not a.get("samples"):
+                print(f"{cell:<34}{arm:<12}{'no samples':>13}")
+                continue
+            rng = f"{a['targets_range'][0]}-{a['targets_range'][1]}"
+            print(f"{cell:<34}{arm:<12}"
+                  f"{a['targets_mean']:>8}/{a['targets_total']:<4}{rng:>9}"
+                  f"{a['perfect_runs']:>6}/{a['samples']:<3}{a['tokens_in_mean']:>11,}")
+        if r["_failed_calls"]:
+            print(f"{'':<34}({r['_failed_calls']} failed calls: {r['_errors'][:2]})")

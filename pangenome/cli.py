@@ -140,6 +140,18 @@ def cmd_talk(a) -> int:
     return 0
 
 
+def cmd_study(a) -> int:
+    from . import study
+    if not a.full:
+        study.run(a.model, a.skip_model)
+        return 0
+    res = study.full(n=a.n, pause=a.pause, save=a.save)
+    study.report(res)
+    if a.save:
+        print(f"\n  raw run written to {a.save}")
+    return 0
+
+
 def cmd_experiment(a) -> int:
     from .experiment import run
     run()
@@ -242,8 +254,12 @@ def main(argv=None) -> int:
     st = sub.add_parser("study", help="ablation + small-model arms (the evidence)")
     st.add_argument("--model", default="gemini-2.5-flash")
     st.add_argument("--skip-model", action="store_true", dest="skip_model")
-    st.set_defaults(fn=lambda a: (__import__(
-        "pangenome.study", fromlist=["run"]).run(a.model, a.skip_model), 0)[1])
+    st.add_argument("--full", action="store_true",
+                    help="the upgraded study: both domains, both model families, n per arm")
+    st.add_argument("--n", type=int, default=20, help="repeats per arm (--full)")
+    st.add_argument("--pause", type=float, default=4.0, help="seconds between calls")
+    st.add_argument("--save", default=None, help="write the raw run to this JSON path")
+    st.set_defaults(fn=cmd_study)
 
     sub.add_parser("experiment",
                    help="same shop, same task, three different owners"

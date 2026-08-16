@@ -1,18 +1,18 @@
 # culture-01 — state
 
-heartbeat: 2026-08-15 05:42:04Z  (6.52s)
+heartbeat: 2026-08-16 05:44:22Z  (8.16s)
 
 ## body
 - capabilities in genome: 0
 - expressed (costing): 0
 - dormant (free): 0
 - swarm diversity: 0.0 nats — STABLE
-- observed mutation rate: 0.0742 (error threshold 0.3333)
+- observed mutation rate: 0.0911 (error threshold 0.3333)
 
 ## senses
 - mcp_registry: 141 loci
-- github_skills: 189 loci
-- watching 330 loci with enough history to fit
+- github_skills: 188 loci
+- watching 332 loci with enough history to fit
 
 - 0 of them have enough distinct days to fit a rate
 
@@ -22,36 +22,33 @@ heartbeat: 2026-08-15 05:42:04Z  (6.52s)
 
 | locus | R0 | lifetime r | signal | phase | fit r2 |
 |---|---:|---:|---:|---|---:|
-| `DietrichGebert/ponytail` | — | 0.17976 | 102834.0 | no-history | — |
-| `internet-court/internet-court-skill` | — | 0.12672 | 1925.0 | no-history | — |
-| `alibaba/open-code-review` | — | 0.11138 | 20510.0 | no-history | — |
-| `fivetaku/fablize` | — | 0.10963 | 895.0 | no-history | — |
-| `nexu-io/open-design` | — | 0.10424 | 86474.0 | no-history | — |
-| `microsoft/SkillOpt` | — | 0.09784 | 16029.0 | no-history | — |
-| `Dong90/oh-my-taiyiforge` | — | 0.09621 | 938.0 | no-history | — |
-| `nexu-io/html-anything` | — | 0.09416 | 8300.0 | no-history | — |
-| `ultraworkers/claw-code` | — | 0.089 | 195046.0 | no-history | — |
-| `Graphify-Labs/graphify` | — | 0.08666 | 106431.0 | no-history | — |
+| `DietrichGebert/ponytail` | — | 0.1771 | 103485.0 | no-history | — |
+| `internet-court/internet-court-skill` | — | 0.12667 | 2180.0 | no-history | — |
+| `alibaba/open-code-review` | — | 0.11017 | 20553.0 | no-history | — |
+| `fivetaku/fablize` | — | 0.10789 | 895.0 | no-history | — |
+| `nexu-io/open-design` | — | 0.10335 | 87063.0 | no-history | — |
+| `microsoft/SkillOpt` | — | 0.09687 | 16051.0 | no-history | — |
+| `Dong90/oh-my-taiyiforge` | — | 0.09406 | 885.0 | no-history | — |
+| `nexu-io/html-anything` | — | 0.0932 | 8308.0 | no-history | — |
+| `ultraworkers/claw-code` | — | 0.08835 | 195054.0 | no-history | — |
+| `Graphify-Labs/graphify` | — | 0.08604 | 106790.0 | no-history | — |
 
 ## brain
 - control plane: **RUN**
 - standing interests (priming): 10
-- observations scanned: 330 · crossed threshold: 94
-- live episodes: 378 · patterns 0 · abstractions 0 · skills 0
+- observations scanned: 329 · crossed threshold: 81
+- live episodes: 4 · patterns 5 · abstractions 0 · skills 0
 - forgotten this beat: 0 · hypotheses raised: 20
-- learning-to-learning ratio: 0.0
+- learning-to-learning ratio: 0.0108
 
 ## noticed without being asked
 
-- `affaan-m/ECC` (0.5063) — connects to standing interests
-- `Q00/ouroboros` (0.4885) — connects to standing interests
-- `ruvnet/ruflo` (0.4845) — connects to standing interests
-- `NVIDIA/SkillSpector` (0.4829) — connects to standing interests
-- `0xNyk/awesome-hermes-agent` (0.4776) — connects to standing interests
-- `firerpa/lamda` (0.4762) — connects to standing interests
-- `ai.agentplaybooks/agentplaybooks` (0.4735) — connects to standing interests
-- `internet-court/internet-court-skill` (0.4505) — connects to standing interests
-- `Graphify-Labs/graphify` (0.4504) — connects to standing interests
+- `affaan-m/ECC` (0.5011) — connects to standing interests
+- `ruvnet/ruflo` (0.4793) — connects to standing interests
+- `NVIDIA/SkillSpector` (0.4777) — connects to standing interests
+- `0xNyk/awesome-hermes-agent` (0.4723) — connects to standing interests
+- `firerpa/lamda` (0.471) — connects to standing interests
+- `ai.agentplaybooks/agentplaybooks` (0.4683) — connects to standing interests
 
 ## immune system
 - admitted this beat: 0

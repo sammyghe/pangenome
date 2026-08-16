@@ -5,7 +5,7 @@ between **live data** and **synthetic fixtures**. Where a result contradicts a
 claim made elsewhere in this repository, the claim is corrected here rather than
 defended.
 
-Last updated: 2026-08-15.
+Last updated: 2026-08-16.
 
 ---
 
@@ -56,10 +56,16 @@ through the attention field, and committed `heartbeat: 2026-08-15` as author
 is normal queue delay and worth knowing: cron here means "some time after", not
 "at".
 
-**The one real unmitigated risk:** GitHub disables scheduled workflows in repos
-with 60 days of no commit activity. The organism commits on every beat, so it
-keeps itself alive — but if it ever stops for 60 days it will not restart
-itself. Nothing currently guards against that.
+**The one real death mode, now partly guarded (2026-08-16):** GitHub disables
+scheduled workflows in repos with 60 days of no commit activity. The organism
+commits on every beat, so it keeps itself alive — but if it ever stops for 60
+days it will not restart itself, and it cannot notice its own silence from the
+inside. There is now a second clock: `.github/workflows/spore.yml`, monthly,
+which runs no organism code and does nothing but write a date into
+`genome/SPORE.md` and commit. It is deliberately dumber than the heartbeat so it
+cannot fail for the same reasons (Constitution §12). Honest limit: it has not
+yet fired on its own schedule — it is a mechanism in place, not a measured
+result, and it will be listed as measured only after a real monthly run.
 
 Genome after three beats:
 
@@ -81,7 +87,7 @@ cleanest demonstration available that §10 is enforced rather than described.
 
 ---
 
-## 2. Test suite — 63 tests, all passing
+## 2. Test suite — 74 tests, all passing
 
 `python -m unittest discover -s tests -v`. Green on Python 3.11 / 3.12 / 3.13 in
 CI. Runtime ~3s.
@@ -90,16 +96,18 @@ CI. Runtime ~3s.
 |---|---|---|
 | `TestCrypto` | 5 | RFC 8032 known-answer vectors, cross-checked byte-for-byte against `pyca/cryptography`. Not round-trip self-consistency — a wrong implementation round-trips with itself perfectly. |
 | `TestMembrane` | 4 | No POST, no request bodies, no non-HTTPS, no non-allowlisted hosts. The safety claim, as code. |
-| `TestImmunity` | 8 | Restriction sites cut; swapped payloads break the manifest binding; **an untrusted origin is refused without being blacklisted** (anti-autoimmunity). |
+| `TestImmunity` | 11 | Restriction sites cut; swapped payloads break the manifest binding; **an untrusted origin is refused without being blacklisted** (anti-autoimmunity). |
 | `TestLysogeny` | 4 | Dormant costs zero; high MOI integrates; stress induces; the CI/Cro switch is genuinely bistable (hysteresis). |
 | `TestQuorum` | 4 | Below quorum → no response; signals decay; census counts emitters not emissions. |
 | `TestEpidemiology` | 4 | Recovers a known growth rate to 6dp; `R0 = 1 + r·Tg`; logistic detects saturation. |
 | `TestQuasispecies` | 3 | Consensus ≠ the fittest member; monoculture flagged BRITTLE; error catastrophe detected. |
 | `TestSoup` | 3 | Honest capabilities spread; **zero hostile packets admitted**; deterministic under seed. |
 | `TestSalienceExperiment` | 5 | The headline hypothesis. See §3. |
-| `TestAttention` | 7 | Priming changes salience; activation spreads to undeclared concepts; a flat scene produces no interruption; **the same item is judged by its company**. |
+| `TestAttention` | 8 | Priming changes salience; activation spreads to undeclared concepts; a flat scene produces no interruption; **the same item is judged by its company**. |
 | `TestScaffold` | 9 | Promotion requires distinct days; **300 observations in one moment produce zero patterns**; raw experience dies only after consumption; Swanson ABC finds unobserved links. |
 | `TestControlPlane` | 7 | FREEZE/KILL halt before any organ initialises; corrupt file fails closed; **no module outside the CLI writes the control file**. |
+| `TestFreshStart` | 3 | `germinate --fresh` empties every acquired-state table; the table list covers the whole schema; **`clear_all` is unreachable from the organism's own loop**. |
+| `TestPartner` | 4 | Briefings are grounded in what was actually observed; the model fallback chain is ordered and de-duplicated. |
 
 ---
 
@@ -246,7 +254,8 @@ Three, and two of them are the same mistake wearing different clothes.
    single moment as recurrence — precisely the same error — and promoted every
    shared concept, which is enumeration, not generalisation.
 3. **Fixed salience thresholds found nothing.** Fixed by making verdicts
-   competitive across a scene (divisive normalisation) rather than absolute.
+   competitive across a scene (scene-relative z-score margin) rather than
+   absolute.
 
 (1) and (2) produced **Constitution §10: recurrence is counted in distinct days,
 not in moments.** Everything that infers from frequency now obeys it, which is
@@ -288,12 +297,16 @@ it, and is the direction the field is moving toward or away from this."
   ([arXiv:2604.07798](https://arxiv.org/html/2604.07798v3)) is the nearest
   neighbour to §5.
 
-**Where this repo is genuinely ahead:** nobody in that literature is doing
-knowledge-driven *attention* — deciding what to look at before retrieval, on a
-per-owner basis. Memory research is overwhelmingly about what to **store and
-retrieve**. The salience layer is upstream of all of it, and the three-channel
-split with surprise judged against an owner-specific reference class is, as far
-as the searches found, not in the memory literature at all.
+**Where this repo is ahead, restated more carefully (2026-08-16):** memory
+research is overwhelmingly about what to **store and retrieve**, and the
+salience layer sits upstream of it — deciding what to *look at* before retrieval
+happens. But "nobody is personalising memory" was too strong.
+[AdaMem](https://arxiv.org/abs/2606.21144) personalises an agent's memory
+*write* policy per user, which is adjacent to this and was missed by the earlier
+searches. The surviving distinction is narrower and still real: AdaMem
+personalises what is **kept**, this personalises what is **perceived**, and the
+three-channel split with surprise judged against an owner-specific reference
+class is not in the memory literature found so far.
 
 **Where this repo is behind, honestly:**
 
@@ -301,7 +314,7 @@ as the searches found, not in the memory literature at all.
   are the currencies of this field and this repo has spent none of them.
 - No model in the loop means no end-to-end agent to benchmark yet.
 - The epidemiology layer — argued as the moat because longitudinal spread data
-  cannot be back-filled — has **one day of data**. Its value is entirely in the
+  cannot be back-filled — has **days, not months, of data**. Its value is entirely in the
   future and entirely dependent on the cron surviving.
 - n=4 on one fixture with one small model is a pilot, not a result.
 
@@ -351,7 +364,7 @@ and keeps all of it when the model changes.**
 
 ```bash
 git clone https://github.com/sammyghe/pangenome && cd pangenome
-python -m unittest discover -s tests -v     # 63 tests, ~3s, no network
+python -m unittest discover -s tests -v     # 74 tests, ~3s, no network
 python -m pangenome experiment              # §3, deterministic
 python -m pangenome simulate                # §4, deterministic, seeded
 python -m pangenome study --skip-model      # §5a/5b, no API key needed
@@ -361,3 +374,69 @@ GEMINI_API_KEY=... python -m pangenome study   # §5c, real model calls
 Everything except §5c is deterministic and offline. §5c used the
 `GEMINI_API_KEY` already present in the steward's environment; ~16 calls,
 well inside the free tier.
+
+---
+
+## 10. Update — 2026-08-16: a three-discipline review, and seven fidelity fixes
+
+The repository was read against three disciplines it borrows from — microbiology
+and phage biology, epidemiology and statistics, and the agent-memory literature
+— specifically hunting for places where a mechanism is *named* for biology but
+does not implement the mathematics. Seven were found. All seven are fixed in
+code, each with a test:
+
+1. **Quasispecies error threshold** was a tuned constant. It is now the Eigen
+   relation `ln(σ)/L` with superiority `σ = 2.0`, so "error catastrophe" means
+   what Eigen means by it.
+2. **Attribution.** The quasispecies module credited "Erwin"; the work is
+   Domingo's. Corrected.
+3. **`logistic_fit` accepted gappy series.** A saturation curve fitted through
+   holes is a curve fitted to absence. It now refuses a series whose real
+   timestamps are more than 25% unevenly spaced.
+4. **The scaffold's day-bucket gate could be cheated** by two observations
+   straddling UTC midnight — two "distinct days" ninety seconds apart. Promotion
+   now requires N distinct day-buckets *and* a wall-clock span of at least
+   (N−1)·day·0.9. Constitution §10 is enforced by the clock, not by the calendar.
+5. **CRISPR spacers were exact-digest only** — defeated by a one-byte fork,
+   which is precisely the forked-and-republished threat the module's own
+   docstring names. Spacers now also store a 32-hash bottom-k sketch of the
+   payload's 4-word shingles, and a payload is recognised at Jaccard ≥ 0.6. A
+   rename-and-reword still gets cut; an unrelated packet scores zero.
+6. **Salience claimed Reynolds–Heeger divisive normalisation** and implemented a
+   subtractive z-score margin. The words were wrong, not the code, so the words
+   changed: "scene-relative z-score normalisation, in the spirit and not the
+   mathematics of Reynolds–Heeger." Separately, the reference class for surprise
+   is now derived by the organism (`category_of`) when a caller supplies no
+   signature — a mechanism rather than a convention.
+7. **Lysogeny had a hidden cliff.** The lytic drive stepped at MOI 1.0 in a
+   circuit whose entire claim is that it has no hidden thresholds. It is now
+   continuous: `0.6 / (1 + MOI²)`. The bistability, hysteresis and high-MOI
+   tests still pass unchanged.
+
+Also corrected in prose, not code: the README described quarantine as
+"exercised against a harness". It is not. `Quarantine.trial` is static
+shape-checking — declared exec versus actual exec, declared network reach versus
+actual, size, emptiness — and it runs **none** of the packet's code. Real
+sandboxed execution needs process-level isolation and is **future work**, listed
+here so it is not quietly implied elsewhere. The gap is a missing capability,
+not an open door: nothing acquired executes with host authority at all.
+
+**Where the three headline claims now stand:**
+
+- **(a) Attention before retrieval, personalised per owner** — now
+  *contested-adjacent*. [AdaMem](https://arxiv.org/abs/2606.21144) personalises
+  what an agent keeps; this personalises what it looks at. Genuinely adjacent
+  work that earlier searches missed. The narrower claim survives; the "nobody is
+  doing this" framing does not, and has been removed from the README, RESULTS
+  and RESEARCH.
+- **(b) Horizontal, non-lineage capability transfer with an immune gate** —
+  unchanged, and strengthened by fix 5.
+- **(c) Longitudinal epidemiology of capability spread** — still unclaimed by
+  anyone, including this repo. Days of data, not months. Nothing to report until
+  there is a series worth fitting.
+
+**The study is still a pilot.** §5c is n=4, one model family, one hand-built
+fixture. Before any external outreach it needs n ≥ 20 per arm, a second model
+family, and a second task domain with hand-labelled ground truth. If the effect
+shrinks under that, the shrink gets published here — this register is the
+project's only real credibility, and it is worth more than the result.

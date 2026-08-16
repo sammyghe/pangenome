@@ -149,6 +149,33 @@ crossing between hosts that were never designed together and share no ancestry �
 which is precisely where the verification problem appears, and GEA does not have
 to solve it because inside one system there are no strangers.
 
+### The memory line — the nearest neighbours to the salience layer
+This is the field that has to be engaged honestly, because it is adjacent and it
+is moving fast.
+
+- **AdaMem: Learning What to Remember for Personalized Long-Horizon LLM Agents** —
+  Chen, Wang, Tu, Bo. [arXiv 2606.21144](https://arxiv.org/abs/2606.21144).
+  Learns a *personalised memory-write policy*: what is worth keeping for this
+  particular user, refined from feedback, explicitly to cut memory bloat.
+- **Eywa: Provenance-Grounded Long-Term Memory for AI Agents** — Joshi.
+  [arXiv 2605.30771](https://arxiv.org/abs/2605.30771). Separates source
+  evidence, extracted facts and retrieval so memory is auditable across models —
+  the same instinct as this repo's append-only genome, applied to recall.
+- **LightMem: Lightweight and Efficient Memory-Augmented Generation** —
+  [arXiv 2510.18866](https://arxiv.org/abs/2510.18866), ICLR 2026. And, in the
+  spirit of this file, its reproduction: *Reproducing LightMem: Naive RAG Is
+  Just as Good for Memory Management*
+  ([arXiv 2607.29104](https://arxiv.org/abs/2607.29104)). A field where the
+  headline results are already failing to reproduce is a field to make narrow,
+  checkable claims in.
+
+**Divergence, stated carefully.** AdaMem personalises what an agent **keeps**.
+The salience layer personalises what an agent **looks at**, before retrieval
+happens at all — perception rather than storage, upstream of the write policy
+rather than inside it. That is adjacent, not identical, and the README says so
+in the same words. An earlier draft of both files claimed nobody was
+personalising memory at all, which was wrong and is corrected here.
+
 ### Decentralised coordination
 AgentNet (DAG-routed, RAG-based, no predefined workflow), DecentLLMs
 (Byzantine-robust voting), SwarmBench ([arXiv 2505.04364](https://arxiv.org/pdf/2505.04364)) —
@@ -203,12 +230,27 @@ ecosystem is already a Tierra soup running horizontal transfer at scale, with
 real economic selection pressure instead of simulated CPU cycles, that nobody is
 instrumenting.
 
-## 4. What is not verified
+## 4. What is verified, and what is not
+
+**Verified 2026-08-16, by reading the sources directly:**
+
+- The **Artificial Life in the Wild** workshop is real: ALIFE 2026, Thu 20 Aug
+  2026, Waterloo, Canada — [alife-in-the-wild.github.io](https://alife-in-the-wild.github.io/).
+  Its subject is ALIFE systems deployed in real environments rather than in
+  simulation, which is the exact shape of this repo. Previously listed here as
+  unconfirmed; it is confirmed.
+- **Spore in the Wild** is real: *A Case Study of Spore.fun as an
+  Open-Environment Evolution Experiment with Sovereign AI Agents on TEE-Secured
+  Blockchains*, Botao Amber Hu and Helena Rong,
+  [arXiv 2506.04236](https://arxiv.org/abs/2506.04236), accepted by ALIFE 2025
+  (ISAL / MIT Press proceedings). Previously listed here as possibly
+  confabulated; it is not.
+- AdaMem, Eywa and LightMem (and LightMem's reproduction study) — all four
+  checked against arXiv metadata; see the memory line above.
+
+**Still not verified:**
 
 - Claimed R₀ figures for capability spread: none exist yet anywhere, including
   here. This repo starts collecting; it does not start knowing.
-- ALIFE 2026 conference details referenced in an earlier session (Waterloo,
-  20 August; a "Spore in the Wild" case study) were **not** confirmed. Treat as
-  unverified until read directly.
 - The Agensi marketplace revenue-split figure cited in an earlier session was not
   re-verified here and is not relied on by anything in the code.

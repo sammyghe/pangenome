@@ -1,6 +1,6 @@
-# pangenome · MBEGU
+# AHADU · አሐዱ
 
-**Mbegu** (Swahili: *seed*) — a personal AI organism you plant and grow.
+**Ahadu** (Amharic/Ge'ez: *the first*) — a personal AI organism: the first one that is yours.
 **pangenome** is its architecture: prokaryotic biology applied to LLM agent
 ecosystems. The core genome does not move. The accessory genome does.
 
@@ -26,7 +26,7 @@ model's quota dies mid-conversation it falls through a chain to the next one —
 the organism outlives any given brain.
 
 Three honest sentences about maturity: the body, senses, memory and immune
-system are built and tested (63 tests). The conversation layer is days old. It
+system are built and tested (74 tests). The conversation layer is days old. It
 grows *fast* in knowledge (43,000+ concept links in two days) and *slowly on
 purpose* in beliefs — nothing becomes a "skill" without recurring across
 three distinct days, so it cannot be stampeded by one afternoon.
@@ -44,6 +44,29 @@ python -m pangenome control KILL # owner authority. The organism gets no vote.
 
 Zero dependencies. Python 3.11+ and the standard library. That is a design
 constraint, not an accident — see *Metabolism*.
+
+## Personal AGI, made concrete
+
+At YC Startup School 2026, Garry Tan argued the next thing worth building is
+personal: agents running on **your own infrastructure**, **compounding your
+knowledge over time**, with **skill files as personal assets** — owning your
+cognition rather than renting it. Every clause of that describes a mechanism
+that already exists here, so it is worth mapping them one to one:
+
+| The argument | The mechanism in this repo |
+|---|---|
+| Agents on your own infrastructure | A free GitHub Actions cron and a SQLite genome in *your* repository. No server, no vendor, no account. |
+| Knowledge that compounds over time | `scaffold`: episode → pattern → abstraction → skill, promoted only across distinct days. |
+| Skill files as personal assets | `scaffold` rows at tier `skill`, in your repo, in a file you can read, diff and delete. |
+| Owning it rather than renting it | `control.py`. SLEEP / FREEZE / KILL are read before any organ initialises, and no code path lets the organism write its own RUN. |
+| Not renting your cognition | The autonomous loop contains no model at all. The model is a guest with a socket, and it is swappable mid-sentence. |
+
+This repo is **one concrete, inspectable instance** of that pattern — built
+independently, arrived at from prokaryotic biology rather than from product
+strategy, pointing the same direction. It is deliberately *not* claiming to be
+AGI, personal or otherwise. What is demonstrated is narrower and more useful: a
+personal organism whose state outlives any particular model, and which you can
+audit line by line.
 
 ---
 
@@ -65,8 +88,11 @@ plugged in today.
 **Is it live?** Yes, and unattended. The scheduled beat fired on 2026-08-15 at
 05:41 UTC with nobody involved, sensed 330 live loci, and committed its own
 genome as author `pangenome`. Three beats so far, 2,214 real observations, two
-distinct days of history. The one unmitigated risk: GitHub disables cron after
-60 days of repo inactivity, so a long enough silence is permanent.
+distinct days of history. The death mode that used to be unmitigated — GitHub
+disables cron after 60 days of repo inactivity, so a long enough silence is
+permanent — now has a second, dumber clock against it: a monthly `spore`
+workflow that runs no organism code and exists only to keep the repository from
+going quiet (Constitution §12).
 
 **What's real and what's a fixture?** The 1,884 observations, the concept graph
 and the outbreak table are live public data. The shop, the optician and the
@@ -167,9 +193,19 @@ ADVERTISE   {pid, manifest digest, blast radius}. No payload moves.
 REQUEST     only pids the host lacks, minus its CRISPR array.
 TRANSFER    payload crosses. Still not admitted.
 SCREEN      integrity → spacers → provenance → restriction sites → blast radius.
-QUARANTINE  exercised against a harness with no host authority.
+QUARANTINE  static shape-check only — no code from the packet is run. See below.
 INTEGRATE   admitted DORMANT. Acquisition is not expression.
 ```
+
+QUARANTINE is honest about its own limits: it compares what the manifest
+*declares* against what the payload *contains* — undeclared exec, undeclared
+network reach, mislabelled kind, size — and it runs none of the packet's code.
+That catches the dominant real-world case, mislabelled and repackaged
+capabilities, and it does not catch a payload that behaves badly only when
+executed. Real execution needs process-level isolation, which is future work
+and is listed as such in [RESULTS.md](RESULTS.md). Nothing acquired executes
+with host authority in the meantime, so the gap is a missing capability, not an
+open door.
 
 ### crispr — adaptive immunity that learns
 
@@ -273,8 +309,11 @@ distributions.
 
 Verdicts are assigned **competitively across a scene**, not against a constant —
 both an absolute floor and a margin in standard deviations above everything else
-in view. This is the divisive-normalisation shape from the Reynolds–Heeger model
-of attention, and it fixes what no fixed threshold can: a page where everything
+in view. That is scene-relative z-score normalisation: in the *spirit* of the
+Reynolds–Heeger normalisation model of attention, not its mathematics
+(Reynolds–Heeger is divisive; a margin in standard deviations is subtractive).
+Naming the intent and disclaiming the equation is the rule this repo holds
+itself to. It fixes what no fixed threshold can: a page where everything
 is mildly relevant should produce no interruption, and a page with one standout
 should produce one even at a modest absolute score. Tuning a constant gets one of
 those right and the other wrong.
@@ -512,20 +551,20 @@ brain a replaceable part.
 The recent YC batches confirm the category is real — and that everyone is
 building a different slice of it:
 
-| YC company | Their slice | What Mbegu does differently |
+| YC company | Their slice | What Ahadu does differently |
 |---|---|---|
 | Mosaic (Ocean) | shared memory across coding-agent sessions | memory is *per-owner*, not per-team; includes attention, not just recall |
-| AI Passport | portable memory layer across AI apps | same instinct (state outlives the model) — but theirs stores preferences; Mbegu accumulates *noticing* |
-| Oki Home | private local AI that "grows with you" | closest neighbour; Mbegu adds the deterministic body (immune system, sleep, control plane) and is open source |
-| Clice | assistants that learn communication style | style is one trait; Mbegu's interest graph reshapes *perception* |
-| Epicenter | local-first apps sharing one memory | infrastructure play; Mbegu is an organism, not a substrate |
+| AI Passport | portable memory layer across AI apps | same instinct (state outlives the model) — but theirs stores preferences; Ahadu accumulates *noticing* |
+| Oki Home | private local AI that "grows with you" | closest neighbour; Ahadu adds the deterministic body (immune system, sleep, control plane) and is open source |
+| Clice | assistants that learn communication style | style is one trait; Ahadu's interest graph reshapes *perception* |
+| Epicenter | local-first apps sharing one memory | infrastructure play; Ahadu is an organism, not a substrate |
 
 What was stolen from this scan and is now in the repo: the **portability
 framing** (your organism's state must survive any model change — AI Passport's
 core bet, already our thesis, now stated as the product's first promise) and the
 **fallback brain chain** (a partner that dies with one model's free quota is not
 a partner). What was deliberately *not* stolen: cloud-hosted memory. Every one of
-those companies holds your state on their servers. Mbegu's genome is a SQLite
+those companies holds your state on their servers. Ahadu's genome is a SQLite
 file in your own repo — that is the moat *you* own against all five.
 
 ## Where this sits in the literature, and where it is thin
@@ -539,15 +578,20 @@ and HLE; and the memory line (AgeMem, LightMem, the
 [memory survey](https://arxiv.org/html/2603.07670v1)) is converging on
 scaffolding as its own field.
 
-**Where this is genuinely ahead:** that literature is overwhelmingly about what
-to *store and retrieve*. Nobody in it is doing knowledge-driven **attention** —
-deciding what to look at *before* retrieval, per owner. The salience layer sits
-upstream of all of it.
+**Where this is ahead, stated carefully:** that literature is overwhelmingly
+about what to *store and retrieve*. The nearest neighbour is
+[**AdaMem**](https://arxiv.org/abs/2606.21144), which personalises an agent's
+memory *write* policy — what is worth keeping, per user. That is genuinely
+adjacent, and it is named here rather than left for a reader to find first. The
+difference is where the personalisation sits: AdaMem personalises what an agent
+**keeps**; the salience layer personalises what an agent **looks at**, before
+retrieval happens at all. Perception, not storage. Adjacent, not identical —
+and an earlier draft of this section claimed "nobody", which was too strong.
 
 **Where it is thin, stated plainly:** nothing here is benchmarked on LoCoMo,
 GAIA or SWE-bench — the currencies of this field, of which this repo has spent
 none. There is no model in the loop, so there is no end-to-end agent to
-benchmark yet. The epidemiology moat has **one day of data**. And §5c is n=4 on
+benchmark yet. The epidemiology moat has **days, not months, of data**. And §5c is n=4 on
 one hand-built fixture with one small model: a pilot, not a result.
 
 The thesis is on-track. The evidence is early. Both are true.

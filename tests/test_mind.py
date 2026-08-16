@@ -14,7 +14,7 @@ from pangenome.experiment import run as run_experiment
 from pangenome.salience import (AttentionField, INVESTIGATE, INTERRUPT, IGNORE,
                                 REMEMBER, concepts_of)
 from pangenome.scaffold import Scaffold
-from pangenome.store import Store
+from pangenome.store import ACQUIRED_TABLES, Store
 
 
 def field_with(interests: dict, history: list = ()) -> tuple[Store, AttentionField]:
@@ -128,6 +128,20 @@ class TestAttention(unittest.TestCase):
                             value=40.0)
         self.assertGreater(cheap["surprise"], normal["surprise"])
 
+    def test_missing_signature_gets_a_reference_class_from_the_organism(self):
+        """Reference-class surprise must be a mechanism, not a caller
+        convention: a scene handed no signatures still gets judged against the
+        right baseline, chosen by the organism's own standing interests."""
+        s, f = field_with({"sunglasses": 1.0},
+                          history=[("sunglasses lens", v) for v in
+                                   (30, 34, 38, 42, 46, 50)])
+        out = {r["subject"]: r for r in f.scan(
+            [("cheap", "sunglasses lens", None, 8.0),
+             ("normal", "sunglasses lens", None, 40.0)], log=False)}
+
+        self.assertEqual(out["cheap"]["signature"], "market:sunglasses")
+        self.assertGreater(out["cheap"]["surprise"], out["normal"]["surprise"])
+
     def test_reinforcement_moves_the_filter(self):
         s, f = field_with({"lens": 1.0})
         f.learn(["lens", "coating"])
@@ -223,6 +237,65 @@ class TestScaffold(unittest.TestCase):
         self._over_days("s", ["a"])
         self.sc.consolidate()
         self.assertIsInstance(self.sc.learning_ratio()["ratio"], float)
+
+
+class TestFreshStart(unittest.TestCase):
+    """`germinate --fresh`. A template clone that keeps its ancestor's memories
+    is not a new organism, it is the same one under a new name."""
+
+    ROWS = {
+        "observations": ("INSERT INTO observations(seen_at,source,locus,payload)"
+                         " VALUES (1,'s','l','{}')"),
+        "events": "INSERT INTO events(at,kind,reason) VALUES (1,'tick','x')",
+        "episodes": ("INSERT INTO episodes(at,signature,concepts,detail)"
+                     " VALUES (1,'s','[]','{}')"),
+        "scaffold": ("INSERT INTO scaffold(at,tier,signature,statement,support,concepts)"
+                     " VALUES (1,'pattern','s','st',1,'[]')"),
+        "concepts": ("INSERT INTO concepts(name,first_seen,last_seen)"
+                     " VALUES ('c',1,1)"),
+        "edges": "INSERT INTO edges(a,b,last_seen) VALUES ('a','b',1)",
+        "interests": ("INSERT INTO interests(concept,weight,why,set_at)"
+                      " VALUES ('c',1.0,'w',1)"),
+        "autoinducers": ("INSERT INTO autoinducers(at,species,emitter,amount)"
+                         " VALUES (1,'sp','e',1.0)"),
+        "attention_log": ("INSERT INTO attention_log(at,subject,score,verdict,reason)"
+                          " VALUES (1,'s',1.0,'notice','r')"),
+        "plasmids": ("INSERT INTO plasmids(pid,acquired_at,manifest,state)"
+                     " VALUES ('p',1,'{}','lysogenic')"),
+        "spacers": ("INSERT INTO spacers(at,digest,harm,severity)"
+                    " VALUES (1,'d','h',1.0)"),
+        "spacer_shingles": "INSERT INTO spacer_shingles(digest,shard) VALUES ('d','s')",
+    }
+
+    def test_the_table_list_covers_the_whole_schema(self):
+        s = Store(":memory:")
+        live = {r["name"] for r in s.q(
+            "SELECT name FROM sqlite_master WHERE type='table'"
+            " AND name NOT LIKE 'sqlite_%'")}
+        self.assertEqual(live, set(ACQUIRED_TABLES))
+
+    def test_clear_all_empties_every_table(self):
+        s = Store(":memory:")
+        for sql in self.ROWS.values():
+            s.db.execute(sql)
+        s.commit()
+        for t in ACQUIRED_TABLES:
+            self.assertGreater(s.q(f"SELECT COUNT(*) n FROM {t}")[0]["n"], 0, t)
+
+        s.clear_all()
+        for t in ACQUIRED_TABLES:
+            self.assertEqual(s.q(f"SELECT COUNT(*) n FROM {t}")[0]["n"], 0, t)
+
+    def test_the_organism_cannot_reach_it(self):
+        """Constitution: shedding memory is the owner's act, never the
+        organism's. `clear_all` may only be called from the CLI."""
+        import subprocess
+        src = subprocess.run(
+            ["git", "grep", "-n", "clear_all", "--", "pangenome"],
+            capture_output=True, text=True).stdout
+        callers = {ln.split(":")[0] for ln in src.splitlines()
+                   if ln and "def clear_all" not in ln and "ACQUIRED_TABLES" not in ln}
+        self.assertTrue(callers <= {"pangenome/cli.py", "pangenome/store.py"}, callers)
 
 
 class TestControlPlane(unittest.TestCase):

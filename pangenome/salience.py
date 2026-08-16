@@ -54,8 +54,15 @@ INTERRUPT = "interrupt"     # worth breaking the current task for
 # to a constant. So a verdict needs BOTH an absolute floor and a relative margin:
 # the thing must matter, and it must stand out from everything else in view.
 #
-# This is the divisive-normalisation shape from the Reynolds–Heeger model of
-# visual attention, and it fixes the failure mode a fixed threshold cannot:
+# This is scene-relative z-score normalisation — in the spirit, not the
+# mathematics, of the Reynolds–Heeger normalisation model of visual attention.
+# Reynolds–Heeger is *divisive* (a unit's response is divided by the pooled
+# activity of its neighbours); the margin below is *subtractive* (a score in
+# standard deviations above the scene mean). Same intent — a response defined
+# against its context rather than a constant — different arithmetic, and the
+# module says so rather than borrowing the equation's authority.
+#
+# It fixes the failure mode a fixed threshold cannot:
 # a page where everything is mildly relevant should produce no interruption at
 # all, and a page where one item towers over the rest should produce one even if
 # its absolute score is modest. Tuning a constant can only ever get one of those
@@ -230,6 +237,7 @@ class AttentionField:
 
         score = min(1.0, 0.55 * act + 0.15 * nov + 0.30 * sur + learned)
         return {"subject": subject, "score": round(score, 4), "verdict": IGNORE,
+                "signature": signature,
                 "reason": self._explain(act, nov, sur, learned), "concepts": cs,
                 "activation": round(act, 4), "novelty": round(nov, 4),
                 "surprise": round(sur, 4)}
@@ -242,9 +250,16 @@ class AttentionField:
         field is computed once — it is a property of the organism at this
         moment, not of each item — and verdicts are assigned only after every
         item has been scored, because standing out is a relation, not a property.
+
+        A missing signature is not an error: the reference class is derived
+        here by `category_of`, so judging a value against the right baseline is
+        a mechanism of the organism rather than a convention the caller has to
+        remember.
         """
         field = self.activation(goal)
-        out = [self.appraise(s, t, goal=goal, signature=sig, value=v, field=field)
+        out = [self.appraise(s, t, goal=goal,
+                             signature=sig or self.category_of(concepts_of(t)),
+                             value=v, field=field)
                for s, t, sig, v in items]
         if not out:
             return out

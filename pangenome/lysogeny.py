@@ -89,7 +89,11 @@ class Prophage:
         moi = max(0.0, demand)
         # High MOI pushes CI up (lysogeny); stress cleaves CI (induction).
         seed_ci = self.ci + 0.4 * moi
-        seed_cro = self.cro + (0.6 if moi < 1.0 else 0.0)
+        # Continuous, not a step at MOI 1.0: a bistable circuit whose whole
+        # claim is "no hidden cliffs" must not contain one. Lorentzian decay —
+        # full 0.6 of lytic drive at MOI 0, half of it by MOI 1, negligible
+        # once the host is saturated.
+        seed_cro = self.cro + 0.6 / (1.0 + moi * moi)
         self.ci, self.cro = self.switch.settle(seed_ci, seed_cro, stress)
 
         self.state = LYTIC if self.cro > self.ci else LYSOGENIC

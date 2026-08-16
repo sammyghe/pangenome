@@ -143,10 +143,16 @@ class Scaffold:
         return sorted(c for _, c in scored[:CHARACTERISTIC_CONCEPTS])
 
     def _promote_patterns(self) -> int:
+        # Distinct calendar buckets alone are gameable: three UTC-midnight
+        # straddles fit inside ~25 real hours. So the gate is double — N
+        # distinct day-buckets AND a wall-clock span of at least N-1 real days
+        # (with a small tolerance for cron jitter). "Three distinct days" must
+        # mean three days lived, not three date-lines crossed.
         rows = self.store.q(
             "SELECT signature, COUNT(DISTINCT CAST(at/86400 AS INTEGER)) d,"
-            " COUNT(*) n FROM episodes WHERE consumed=0"
-            " GROUP BY signature HAVING d >= ?", (PATTERN_DAYS,))
+            " COUNT(*) n, MIN(at) t0, MAX(at) t1 FROM episodes WHERE consumed=0"
+            " GROUP BY signature HAVING d >= ? AND (t1 - t0) >= ?",
+            (PATTERN_DAYS, (PATTERN_DAYS - 1) * DAY * 0.9))
         made = 0
         for r in rows:
             sig = r["signature"]

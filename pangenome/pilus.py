@@ -15,9 +15,10 @@ integrates between agents that were never designed together.
     REQUEST     recipient asks only for pids it lacks, minus its CRISPR array.
     TRANSFER    payload crosses. Still not admitted.
     SCREEN      integrity -> spacers -> provenance -> restriction sites -> radius.
-    QUARANTINE  the packet is exercised against a harness that cannot reach the
-                host. Nothing arriving from outside executes with host authority.
-                Ever. There is no flag for it.
+    QUARANTINE  the packet's declared shape is checked against its actual
+                content. No code from the packet is run — not sandboxed, not
+                run at all. Nothing arriving from outside executes with host
+                authority. Ever. There is no flag for it.
     INTEGRATE   admitted DORMANT (lysogenic), not active. Acquisition is not
                 expression. This is what keeps acquisition cheap enough to be
                 aggressive about.

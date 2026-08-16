@@ -135,15 +135,22 @@ def logistic_fit(series: list[tuple[float, float]]) -> dict | None:
 
     gives  K = (2*u2 - u1 - u3) / (u2^2 - u1*u3).
 
-    Equal spacing is not optional — it is what makes the sequence geometric —
-    so indices are chosen as 0, m, 2m rather than first/middle/last. If the
-    curve has not begun to bend, the denominator goes to zero or K falls below
-    the observed maximum, and None is returned rather than a fabricated ceiling.
+    Equal spacing is not optional — it is what makes the sequence geometric.
+    Indices 0, m, 2m give equal spacing in *index*; on a gappy series that is
+    not equal spacing in *time*, and a fit run anyway fabricates a ceiling. So
+    the actual timestamps are checked: if the two gaps differ by more than 25%,
+    there is no valid three-point estimate and None is returned — the same
+    honest-null this function already produces when the curve has not bent.
     """
     pts = [(t, v) for t, v in series if v and v > 0]
     if len(pts) < 7:
         return None
     m = (len(pts) - 1) // 2
+    t1, t2, t3 = pts[0][0], pts[m][0], pts[2 * m][0]
+    gap_a, gap_b = t2 - t1, t3 - t2
+    mean_gap = (gap_a + gap_b) / 2
+    if mean_gap <= 0 or abs(gap_a - gap_b) > 0.25 * mean_gap:
+        return None                     # gappy series: no equal-spaced triple
     y1, y2, y3 = pts[0][1], pts[m][1], pts[2 * m][1]
     u1, u2, u3 = 1.0 / y1, 1.0 / y2, 1.0 / y3
     denom = u2 * u2 - u1 * u3

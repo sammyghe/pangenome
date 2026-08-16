@@ -60,6 +60,13 @@ CREATE TABLE IF NOT EXISTS spacers (          -- the CRISPR array
     severity   REAL NOT NULL
 );
 
+CREATE TABLE IF NOT EXISTS spacer_shingles (  -- fuzzy half of the CRISPR array
+    digest     TEXT NOT NULL,             -- FK to spacers.digest
+    shard      TEXT NOT NULL,             -- one shingle hash of the payload
+    PRIMARY KEY (digest, shard)
+);
+CREATE INDEX IF NOT EXISTS shingle_shard ON spacer_shingles(shard);
+
 CREATE TABLE IF NOT EXISTS autoinducers (     -- the quorum medium
     id         INTEGER PRIMARY KEY AUTOINCREMENT,
     at         REAL NOT NULL,
@@ -130,6 +137,16 @@ CREATE TABLE IF NOT EXISTS attention_log (  -- for measuring opportunity precisi
     useful     INTEGER                      -- NULL until the owner judges it
 );
 """
+
+# Every table that holds acquired state — i.e. everything an inherited clone
+# must be able to shed. A new table added to SCHEMA and forgotten here is a
+# clone that quietly keeps its ancestor's memories, so a test asserts this
+# tuple covers the schema exactly.
+ACQUIRED_TABLES = (
+    "observations", "events", "episodes", "scaffold", "concepts",
+    "edges", "interests", "autoinducers", "attention_log",
+    "plasmids", "spacers", "spacer_shingles",
+)
 
 
 class Store:
@@ -224,3 +241,46 @@ class Store:
 
     def has_spacer(self, digest: str) -> bool:
         return bool(self.q("SELECT 1 FROM spacers WHERE digest=?", (digest,)))
+
+    def add_spacer_shingles(self, digest: str, shards: set[str]) -> None:
+        for s in shards:
+            self.db.execute(
+                "INSERT OR IGNORE INTO spacer_shingles(digest, shard) VALUES (?,?)",
+                (digest, s))
+
+    def best_spacer_similarity(self, shards: set[str]) -> float:
+        """Highest Jaccard similarity between the given shingle sketch and any
+        stored spacer's sketch. 0.0 when nothing overlaps.
+
+        Both sides are bottom-k sketches (the k smallest hashes of a payload's
+        shingles), so the estimator is the bottom-k one: take the k smallest
+        hashes of the two sketches combined and ask what fraction of them are
+        in both. Comparing the truncated sets directly would be biased low,
+        because each side's tail was cut off independently."""
+        if not shards:
+            return 0.0
+        marks = ",".join("?" * len(shards))
+        cands = self.q(
+            f"SELECT DISTINCT digest FROM spacer_shingles WHERE shard IN ({marks})",
+            tuple(shards))
+        best = 0.0
+        for r in cands:
+            stored = {x["shard"] for x in self.q(
+                "SELECT shard FROM spacer_shingles WHERE digest=?", (r["digest"],))}
+            if not stored:
+                continue
+            k = min(len(stored), len(shards))
+            window = sorted(stored | shards)[:k]
+            hits = sum(1 for s in window if s in stored and s in shards)
+            best = max(best, hits / len(window))
+        return best
+
+    def clear_all(self) -> None:
+        """Wipe every acquired-state table. Used by `germinate --fresh` so a
+        template clone can shed the ancestor's memories in one step. The
+        chromosome files on disk are NOT touched here — identity is
+        re-created by germinate itself, and this method must never be
+        reachable from the organism's own loop."""
+        for t in ACQUIRED_TABLES:
+            self.db.execute(f"DELETE FROM {t}")
+        self.commit()

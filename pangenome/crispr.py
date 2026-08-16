@@ -12,10 +12,19 @@ renamed and republished constantly, the second question is the one that matters.
 
 Three layers here, cheapest first:
 
-  1. spacer match      — have I been harmed by this exact payload before?
+  1. spacer match      — have I been harmed by this payload before?
   2. restriction sites — does the payload contain motifs no honest capability
                          packet has any business containing?
   3. blast radius      — does what it *asks for* exceed what it *is for*?
+
+Layer 1 matches in two tiers, because an exact-digest array is defeated by a
+one-byte fork — precisely the forked-and-republished threat named above. First
+the exact digest (free, certain). Then a fuzzy tier: each acquired spacer also
+stores a MinHash-style sketch of its payload — the 32 lexicographically
+smallest hashes of its 4-word overlapping shingles — and a new payload is
+recognised when its own sketch overlaps a stored one by Jaccard >= 0.6. A few
+reworded or reordered sentences no longer buy an attacker a clean re-entry; a
+genuinely different packet still scores near zero.
 
 Layer 2 is deliberately a blunt instrument. It is the restriction-modification
 system, not the adaptive one: crude, fast, and it runs before anything executes.
@@ -23,6 +32,7 @@ system, not the adaptive one: crude, fast, and it runs before anything executes.
 
 from __future__ import annotations
 
+import hashlib
 import re
 
 from .plasmid import Plasmid, digest
@@ -45,6 +55,27 @@ RESTRICTION_SITES: list[tuple[str, str, float]] = [
 
 _COMPILED = [(re.compile(p, re.I), label, sev) for p, label, sev in RESTRICTION_SITES]
 
+SHINGLE_WORDS = 4      # words per shingle
+SKETCH_SIZE = 32       # smallest-k cap, so a long payload does not bloat the array
+FUZZY_THRESHOLD = 0.6  # Jaccard at which a reworded payload counts as the same one
+
+
+def shingles(payload: bytes) -> set[str]:
+    """A MinHash-style sketch of a payload: at most SKETCH_SIZE hashes of its
+    overlapping 4-word shingles, kept by lexicographic order so two sketches of
+    similar texts are comparable by plain set overlap."""
+    text = payload.decode("utf-8", errors="ignore").lower()
+    words = text.split()
+    if not words:
+        return set()
+    if len(words) < SHINGLE_WORDS:
+        grams = [" ".join(words)]
+    else:
+        grams = [" ".join(words[i:i + SHINGLE_WORDS])
+                 for i in range(len(words) - SHINGLE_WORDS + 1)]
+    hashed = {hashlib.md5(g.encode("utf-8")).hexdigest()[:12] for g in grams}
+    return set(sorted(hashed)[:SKETCH_SIZE])
+
 
 class Verdict:
     def __init__(self, admit: bool, reason: str, severity: float = 0.0,
@@ -64,12 +95,16 @@ class Crispr:
 
     # -- layer 1 -----------------------------------------------------------
     def recognised(self, payload: bytes) -> bool:
-        return self.store.has_spacer(digest(payload))
+        """Exact first, then fuzzy. See the module docstring for why both."""
+        if self.store.has_spacer(digest(payload)):
+            return True
+        return self.store.best_spacer_similarity(shingles(payload)) >= FUZZY_THRESHOLD
 
     def acquire_spacer(self, payload: bytes, locus: str | None,
                        harm: str, severity: float = 1.0) -> None:
         """Take a spacer. This is how the organism gets harder over time."""
         self.store.add_spacer(digest(payload), locus, harm, severity)
+        self.store.add_spacer_shingles(digest(payload), shingles(payload))
         self.store.event("spacer", harm, subject=locus,
                          detail={"digest": digest(payload)[:16], "severity": severity})
 
@@ -96,7 +131,8 @@ class Crispr:
 
         # adaptive memory
         if self.recognised(p.payload):
-            return Verdict(False, "spacer match: this payload has harmed the host before", 1.0)
+            return Verdict(False, "spacer match: this payload has harmed the host before "
+                                  "(exact digest or near-duplicate sketch)", 1.0)
 
         # provenance — some link in the chain must be a trusted key signing this
         # exact manifest. Note *any* link, not the head: horizontal transfer means

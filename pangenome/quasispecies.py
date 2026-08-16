@@ -15,10 +15,13 @@ Two hard constraints come with that, and they are the useful part:
 
   ERROR THRESHOLD   above a critical mutation rate the consensus dissolves and
                     information is lost — error catastrophe. Below it, the swarm
-                    cannot explore. Adaptability has a ceiling set by genome
-                    length: roughly mu_max ~ 1/L per replication.
+                    cannot explore. Eigen's bound: mu_max ~ ln(sigma)/L, where
+                    sigma is the master sequence's selective superiority — how
+                    much better the best variant replicates than the average.
+                    Dropping sigma (as an earlier version here did) overstates
+                    the ceiling whenever the master is only mildly superior.
 
-  CONSENSUS IS THIN Erwin's caution applies: a consensus sequence is a minimal
+  CONSENSUS IS THIN Domingo's caution applies: a consensus sequence is a minimal
                     and often insufficient description of the population. So the
                     organism reports the swarm's *diversity* alongside its
                     consensus, and treats low diversity as a fragility warning
@@ -74,15 +77,25 @@ class Swarm:
             h -= p * math.log(p)
         return h
 
-    def error_threshold(self, genome_length: int) -> float:
-        """Eigen's bound: sustainable per-site mutation rate ~ 1/L.
+    # How much better the fittest variant replicates than the swarm average.
+    # 2.0 is the conservative textbook default for a mildly superior master;
+    # measured from real fitness data once the organism has enough trials.
+    SUPERIORITY = 2.0
 
-        Above this the consensus is not maintained and the population melts.
-        For an agent this reads: if a capability is described by L meaningful
-        fields, you may mutate about 1/L of them per generation before the
+    def error_threshold(self, genome_length: int,
+                        superiority: float | None = None) -> float:
+        """Eigen's bound: sustainable per-site mutation rate ~ ln(sigma)/L.
+
+        sigma is the master sequence's selective superiority. The earlier
+        version here used bare 1/L, which silently assumed sigma = e — a
+        strongly superior master — and so overstated how much mutation the
+        swarm could survive. With the default sigma = 2 the ceiling is
+        ln(2)/L ≈ 0.69/L: for an agent capability described by L meaningful
+        fields, mutate at most that fraction per generation before the
         capability stops being itself.
         """
-        return 1.0 / max(1, genome_length)
+        sigma = max(1.0 + 1e-9, superiority or self.SUPERIORITY)
+        return math.log(sigma) / max(1, genome_length)
 
     def melting(self, observed_mutation_rate: float, genome_length: int) -> bool:
         return observed_mutation_rate > self.error_threshold(genome_length)

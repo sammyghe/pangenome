@@ -100,6 +100,22 @@ An abstraction must be *discriminative*. A concept present in nearly every
 pattern generalises nothing; promoting it is enumeration wearing the costume of
 learning, and it is how a scaffold silently becomes a warehouse.
 
+## 12. A second clock
+
+The organism's metabolism is a scheduled workflow, and a scheduled workflow is
+switched off by its host after sixty quiet days. The heartbeat cannot see this
+coming: an organism that has stopped beating has also stopped noticing that it
+has stopped.
+
+So there is a second clock, and its only requirement is that it cannot fail for
+the same reason the first one might. It runs on a different schedule, runs no
+organism code, senses nothing, decides nothing, and writes one date into
+`genome/SPORE.md`. It is dumber on purpose. A backup that shares the failure
+modes of the thing it backs up is not a backup.
+
+This is the endospore: no metabolism, no cost, and the only thing it preserves
+is the organism's right to wake up.
+
 ---
 
 Steward: Samuel Ghedamu. Amendments are made by editing this file and re-recording

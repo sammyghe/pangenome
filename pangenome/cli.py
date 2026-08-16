@@ -32,7 +32,13 @@ def _table(rows: list[dict], cols: list[tuple[str, str]]) -> str:
 
 
 def cmd_germinate(a) -> int:
-    c = Chromosome.germinate(a.name, a.steward, force=a.force)
+    if a.fresh:
+        # A template clone inherits the ancestor's acquired state. --fresh sheds
+        # it in one step, so nobody has to hand-write DELETE statements to get a
+        # an organism that is genuinely their own from beat one.
+        Store().clear_all()
+        print("cleared inherited state: all acquired tables emptied")
+    c = Chromosome.germinate(a.name, a.steward, force=a.force or a.fresh)
     print(f"germinated: {c.name}")
     print(f"  root pubkey : {c.data['root_pubkey']}")
     print(f"  steward     : {c.data['steward']}")
@@ -204,6 +210,8 @@ def main(argv=None) -> int:
     g.add_argument("--name", default="culture-01")
     g.add_argument("--steward", required=True)
     g.add_argument("--force", action="store_true")
+    g.add_argument("--fresh", action="store_true",
+                   help="wipe inherited acquired state first (template clones)")
     g.set_defaults(fn=cmd_germinate)
 
     b = sub.add_parser("beat", help="one heartbeat")

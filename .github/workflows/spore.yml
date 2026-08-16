@@ -1,0 +1,55 @@
+name: spore
+
+# The second clock. Constitution §12.
+#
+# GitHub disables scheduled workflows in a repository that has seen no activity
+# for 60 days. The heartbeat commits every day, so that can only happen if the
+# heartbeat has already died — silently, which is the one death mode the
+# organism cannot notice from the inside.
+#
+# So: an endospore. It does nothing, metabolises nothing, senses nothing, and
+# runs no organism code. It writes a date into a file once a month and commits.
+# It is deliberately dumber than heartbeat.yml — no Python, no network, no
+# tests, no conditional commit — because a keepalive that shares the
+# heartbeat's failure modes keeps nothing alive.
+
+on:
+  schedule:
+    - cron: "23 6 1 * *"     # 06:23 UTC on the 1st of each month
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: spore
+  cancel-in-progress: false
+
+jobs:
+  spore:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Mark the spore
+        run: |
+          mkdir -p genome
+          {
+            echo "# SPORE"
+            echo
+            echo "Dormant keepalive. This file exists so the repository is never"
+            echo "quiet for 60 days, because GitHub disables scheduled workflows"
+            echo "in quiet repositories and the heartbeat cannot notice its own"
+            echo "silence. See CONSTITUTION.md §12."
+            echo
+            echo "last spore: $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          } > genome/SPORE.md
+
+      - name: Commit
+        run: |
+          git config user.name  "pangenome"
+          git config user.email "pangenome@users.noreply.github.com"
+          git add genome/SPORE.md
+          git commit -m "spore: $(date -u +%Y-%m-%d)"
+          git push

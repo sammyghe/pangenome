@@ -1,0 +1,256 @@
+{
+  "provenance": "LIVE \u2014 measured from genome/culture.db by pangenome.dashboard",
+  "generated_at": 1786982144.471856,
+  "generated_at_utc": "2026-08-17 15:55:44Z",
+  "last_beat_utc": "2026-08-17 05:51:13Z",
+  "identity": {
+    "name": "culture-01",
+    "steward": "Samuel Ghedamu",
+    "root_pubkey": "713bb2c2652e8d22\u2026",
+    "dependencies": 0
+  },
+  "live": {
+    "observations": 2873,
+    "concepts": 2108,
+    "edges": 45223,
+    "episodes": 539,
+    "scaffold": 5,
+    "plasmids": 0,
+    "spacers": 0,
+    "interests": 10,
+    "attention_log": 917,
+    "distinct_days": 4
+  },
+  "noticed_unprompted": [
+    {
+      "subject": "Vincentwei1021/video-shotcraft",
+      "score": 0.457,
+      "verdict": "investigate",
+      "reason": "connects to standing interests; largely unseen before"
+    },
+    {
+      "subject": "0xNyk/awesome-hermes-agent",
+      "score": 0.469,
+      "verdict": "investigate",
+      "reason": "connects to standing interests"
+    },
+    {
+      "subject": "NVIDIA/SkillSpector",
+      "score": 0.474,
+      "verdict": "investigate",
+      "reason": "connects to standing interests"
+    },
+    {
+      "subject": "firerpa/lamda",
+      "score": 0.467,
+      "verdict": "investigate",
+      "reason": "connects to standing interests"
+    },
+    {
+      "subject": "ruvnet/ruflo",
+      "score": 0.476,
+      "verdict": "investigate",
+      "reason": "connects to standing interests"
+    },
+    {
+      "subject": "affaan-m/ECC",
+      "score": 0.497,
+      "verdict": "investigate",
+      "reason": "connects to standing interests"
+    },
+    {
+      "subject": "ai.agentplaybooks/agentplaybooks",
+      "score": 0.465,
+      "verdict": "investigate",
+      "reason": "connects to standing interests"
+    },
+    {
+      "subject": "0xNyk/awesome-hermes-agent",
+      "score": 0.472,
+      "verdict": "investigate",
+      "reason": "connects to standing interests"
+    }
+  ],
+  "scaffold": [
+    {
+      "tier": "pattern",
+      "statement": "market:agent recurs (208 occurrences observed)",
+      "support": 208
+    },
+    {
+      "tier": "pattern",
+      "statement": "market:mcp recurs (165 occurrences observed)",
+      "support": 165
+    },
+    {
+      "tier": "pattern",
+      "statement": "market:skill recurs (52 occurrences observed)",
+      "support": 52
+    },
+    {
+      "tier": "pattern",
+      "statement": "market:memory recurs (23 occurrences observed)",
+      "support": 23
+    },
+    {
+      "tier": "pattern",
+      "statement": "market:security recurs (11 occurrences observed)",
+      "support": 11
+    }
+  ],
+  "interests": [
+    {
+      "concept": "agent",
+      "weight": 1.0,
+      "why": "the organism's own niche: agent ecosystems"
+    },
+    {
+      "concept": "skill",
+      "weight": 1.0,
+      "why": "the organism's own niche: agent ecosystems"
+    },
+    {
+      "concept": "memory",
+      "weight": 0.9,
+      "why": "the organism's own niche: agent ecosystems"
+    },
+    {
+      "concept": "mcp",
+      "weight": 0.9,
+      "why": "the organism's own niche: agent ecosystems"
+    },
+    {
+      "concept": "evolution",
+      "weight": 0.8,
+      "why": "the organism's own niche: agent ecosystems"
+    },
+    {
+      "concept": "security",
+      "weight": 0.8,
+      "why": "the organism's own niche: agent ecosystems"
+    },
+    {
+      "concept": "sandbox",
+      "weight": 0.7,
+      "why": "the organism's own niche: agent ecosystems"
+    },
+    {
+      "concept": "provenance",
+      "weight": 0.7,
+      "why": "the organism's own niche: agent ecosystems"
+    },
+    {
+      "concept": "swarm",
+      "weight": 0.6,
+      "why": "the organism's own niche: agent ecosystems"
+    },
+    {
+      "concept": "epidemiology",
+      "weight": 0.6,
+      "why": "the organism's own niche: agent ecosystems"
+    }
+  ],
+  "spacers": [],
+  "outbreaks": [
+    {
+      "locus": "internet-court/internet-court-skill",
+      "source": "github_skills",
+      "R0": 2.254,
+      "lifetime_r": 0.12868,
+      "distinct_days": 4,
+      "signal": 2958.0,
+      "phase": "outbreak"
+    },
+    {
+      "locus": "citrolabs/ego-lite",
+      "source": "github_skills",
+      "R0": 1.309,
+      "lifetime_r": 0.07584,
+      "distinct_days": 4,
+      "signal": 11360.0,
+      "phase": "outbreak"
+    },
+    {
+      "locus": "tt-a1i/archify",
+      "source": "github_skills",
+      "R0": 1.233,
+      "lifetime_r": 0.07645,
+      "distinct_days": 4,
+      "signal": 13536.0,
+      "phase": "outbreak"
+    },
+    {
+      "locus": "titanwings/colleague-skill",
+      "source": "github_skills",
+      "R0": 1.122,
+      "lifetime_r": 0.0715,
+      "distinct_days": 4,
+      "signal": 22950.0,
+      "phase": "outbreak"
+    },
+    {
+      "locus": "fcakyon/claude-codex-settings",
+      "source": "github_skills",
+      "R0": 1.071,
+      "lifetime_r": 0.01726,
+      "distinct_days": 4,
+      "signal": 1074.0,
+      "phase": "outbreak"
+    },
+    {
+      "locus": "microsoft/power-platform-skills",
+      "source": "github_skills",
+      "R0": 1.052,
+      "lifetime_r": 0.03158,
+      "distinct_days": 3,
+      "signal": 710.0,
+      "phase": "outbreak"
+    },
+    {
+      "locus": "nexu-io/open-design",
+      "source": "github_skills",
+      "R0": 1.051,
+      "lifetime_r": 0.10211,
+      "distinct_days": 4,
+      "signal": 87795.0,
+      "phase": "outbreak"
+    },
+    {
+      "locus": "DietrichGebert/ponytail",
+      "source": "github_skills",
+      "R0": 1.043,
+      "lifetime_r": 0.17342,
+      "distinct_days": 4,
+      "signal": 104246.0,
+      "phase": "outbreak"
+    }
+  ],
+  "plasmid_states": [],
+  "study": {
+    "provenance": "MEASURED \u2014 RESULTS.md \u00a75, reproducible via `pangenome study`",
+    "token_reduction_live_corpus": 0.972,
+    "arms": [
+      {
+        "arm": "A \u00b7 literal",
+        "tokens_in": 626,
+        "targets_mean": 0.0,
+        "targets_total": 2,
+        "stable": true
+      },
+      {
+        "arm": "B \u00b7 prompted",
+        "tokens_in": 652,
+        "targets_mean": 0.75,
+        "targets_total": 2,
+        "stable": false
+      },
+      {
+        "arm": "C \u00b7 organism",
+        "tokens_in": 248,
+        "targets_mean": 2.0,
+        "targets_total": 2,
+        "stable": true
+      }
+    ]
+  }
+}

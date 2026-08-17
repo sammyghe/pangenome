@@ -67,6 +67,10 @@
     </nav>
 
     <!-- Content Workspace -->
+    <div id="data-provenance" class="provenance-banner is-sample">
+      Checking for a genome snapshot…
+    </div>
+
     <main class="content-area">
       <!-- TAB 1: OVERVIEW & TOPOLOGY -->
       <section id="tab-overview" class="tab-pane active">
@@ -168,7 +172,13 @@
                 </div>
               </div>
 
-              <h3>Scene Item Appraisal (Top Items in View)</h3>
+              <h3>Scene Item Appraisal (Top Items in View)
+                <span class="src-badge src-fixture" title="Hand-built test fixture from pangenome/experiment.py — not live data">FIXTURE</span>
+              </h3>
+              <p class="fixture-note">The shop below is the hand-built fixture in
+                <code>experiment.py</code>. It exists to test the mechanism under a
+                case constructed for it — not to show what the organism found in the
+                wild. Reproduce with <code>python -m pangenome experiment</code>.</p>
               <div class="table-responsive">
                 <table class="data-table" id="salience-table">
                   <thead>

@@ -347,6 +347,16 @@ class Organism:
         GENOME_DIR.mkdir(parents=True, exist_ok=True)
         (GENOME_DIR / "last_heartbeat.json").write_text(
             json.dumps(r, indent=2, default=str) + "\n")
+
+        # The organism refreshes its own dashboard as part of the beat, so the
+        # explorer never shows a number the genome cannot account for. Failure
+        # here must never cost a heartbeat — the dashboard is a read-out, not
+        # an organ.
+        try:
+            from .dashboard import export
+            export(self.store, self.chromosome)
+        except Exception as e:
+            self.store.event("tick", f"dashboard export failed: {type(e).__name__}: {e}")
         ident = r["identity"]
         lines = [
             f"# {self.name} — state",

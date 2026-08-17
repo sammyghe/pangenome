@@ -12,3 +12,6 @@ venv/
 # NOTE: genome/culture.db is deliberately NOT ignored. The append-only observation
 # series is the organism's memory and the only asset here that cannot be
 # reconstructed after the fact. It is committed on every heartbeat.
+
+# local dev tooling
+.claude/

@@ -8,7 +8,119 @@ document.addEventListener('DOMContentLoaded', () => {
   initMemoryScaffold();
   initControlPlane();
   initChatSocket();
+  hydrateFromGenome();
 });
+
+// --------------------------------------------------------------------------
+// Live data
+//
+// Everything numeric on this page must be traceable to genome/culture.db.
+// `data.json` is written by pangenome/dashboard.py on every heartbeat, so the
+// page shows the organism's real state or it shows nothing and says so. The
+// markup's built-in figures are only a skeleton for when the file is absent
+// (e.g. a fresh template clone that has not beaten yet) — in that case the
+// banner reads SAMPLE, never LIVE.
+// --------------------------------------------------------------------------
+async function hydrateFromGenome() {
+  let d = null;
+  try {
+    const res = await fetch('data.json', { cache: 'no-store' });
+    if (res.ok) d = await res.json();
+  } catch (e) { /* served without data.json */ }
+
+  const banner = document.getElementById('data-provenance');
+  if (!d) {
+    if (banner) {
+      banner.textContent =
+        'SAMPLE DATA — no genome snapshot found. Run `python -m pangenome beat` to populate this page from your own organism.';
+      banner.className = 'provenance-banner is-sample';
+    }
+    return;
+  }
+
+  const fmt = n => (n === null || n === undefined) ? '—' : n.toLocaleString();
+  const set = (id, val) => {
+    const el = document.getElementById(id);
+    if (el && val !== undefined && val !== null) el.textContent = val;
+  };
+
+  set('m-observations', fmt(d.live.observations));
+  set('m-concepts', fmt(d.live.concepts));
+  set('m-edges', fmt(d.live.edges));
+  set('m-episodes', fmt(d.live.episodes));
+  set('stat-loci-count', fmt(d.live.observations));
+  set('m-id', d.identity.name);
+  set('m-steward', d.identity.steward);
+  if (d.identity.root_pubkey) set('m-pubkey', 'ed25519:' + d.identity.root_pubkey);
+  if (d.study) {
+    set('stat-token-savings',
+        (d.study.token_reduction_live_corpus * 100).toFixed(1) + '%');
+  }
+
+  renderOutbreaks(d.outbreaks);
+  renderScaffold(d.scaffold, d.live);
+  renderNoticed(d.noticed_unprompted);
+
+  if (banner) {
+    const beat = d.last_beat_utc || d.generated_at_utc;
+    banner.innerHTML =
+      `<strong>LIVE</strong> — measured from <code>genome/culture.db</code>. ` +
+      `Last beat ${beat}. ${fmt(d.live.observations)} observations across ` +
+      `${d.live.distinct_days} distinct days.`;
+    banner.className = 'provenance-banner is-live';
+  }
+}
+
+function renderOutbreaks(rows) {
+  const el = document.getElementById('outbreak-table');
+  if (!el || !rows) return;
+  if (!rows.length) {
+    el.innerHTML = '<p class="empty-note">No locus has enough distinct days of ' +
+      'history to fit a rate yet. Constitution §10 — this is the gate working, ' +
+      'not a gap.</p>';
+    return;
+  }
+  const cell = v => (v === null || v === undefined) ? '—' : v;
+  el.innerHTML =
+    '<table class="data-table"><thead><tr>' +
+    '<th>Locus</th><th>Source</th><th>R₀ (fitted)</th>' +
+    '<th>Lifetime r</th><th>Days</th><th>Phase</th></tr></thead><tbody>' +
+    rows.map(r =>
+      `<tr><td class="mono">${esc(r.locus)}</td><td>${esc(cell(r.source))}</td>` +
+      `<td>${cell(r.R0)}</td><td>${cell(r.lifetime_r)}</td>` +
+      `<td>${cell(r.distinct_days)}</td>` +
+      `<td><span class="phase-badge phase-${esc(String(cell(r.phase)))}">${esc(cell(r.phase))}</span></td></tr>`
+    ).join('') + '</tbody></table>';
+}
+
+function renderScaffold(rows, live) {
+  const el = document.getElementById('skills-list');
+  if (!el || !rows) return;
+  if (!rows.length) {
+    el.innerHTML = '<p class="empty-note">No patterns formed yet — promotion ' +
+      'requires recurrence across 3 distinct days AND a real wall-clock span. ' +
+      `Currently ${live ? live.distinct_days : 0} days of history.</p>`;
+    return;
+  }
+  el.innerHTML = rows.map(r =>
+    `<div class="skill-row"><span class="tier-badge tier-${esc(r.tier)}">${esc(r.tier)}</span>` +
+    `<span class="skill-text">${esc(r.statement)}</span>` +
+    `<span class="skill-support">${r.support}</span></div>`
+  ).join('');
+}
+
+function renderNoticed(rows) {
+  const el = document.getElementById('sim-noticed-result');
+  if (!el || !rows || !rows.length) return;
+  const top = rows[0];
+  el.textContent = `${top.subject} (${top.score}) — ${top.reason}`;
+}
+
+function esc(str) {
+  return String(str).replace(/[&<>"']/g, m => ({
+    '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;'
+  }[m]));
+}
 
 // --------------------------------------------------------------------------
 // Navigation & Tab Switching

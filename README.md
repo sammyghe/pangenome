@@ -34,7 +34,7 @@ three distinct days, so it cannot be stampeded by one afternoon.
 ```
 python -m pangenome germinate --steward "your name"
 python -m pangenome beat         # sense, notice, decide, integrate, sleep
-python -m pangenome explorer     # interactive visual web showcase & radar
+python -m pangenome explorer     # visual dashboard, fed by your own genome
 python -m pangenome watch        # the outbreak table
 python -m pangenome mind         # scaffold, learning ratio, hypotheses
 python -m pangenome interest sunglasses 1.0 --why "I run a sunglasses shop"

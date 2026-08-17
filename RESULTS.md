@@ -331,6 +331,21 @@ hand-built fixture and sixteen API calls.
 
 Three layers, and only the first exists today.
 
+*(Update 2026-08-17 — a correction, logged rather than quietly fixed. The
+visual explorer shipped in `3f77b7c` with hand-written figures: it displayed
+2,214 observations and 43,194 edges (the counts from 2026-08-15), invented
+loci such as `mcp/github-search`, and invented shop items such as
+`deodorant-fresh-spray`. None of it was measured; the page read no data at all.
+That is precisely the failure §0 of this document exists to prevent, and it was
+public for a day. The explorer now renders from `explorer/data.json`, written
+by `pangenome/dashboard.py` on every heartbeat straight from
+`genome/culture.db`; a banner states LIVE with the beat timestamp, or SAMPLE
+when no snapshot exists; and the shop panel is badged FIXTURE. Three tests in
+`tests/test_dashboard.py` now assert the page cannot regress to invented data.
+Writing those tests immediately caught a second defect — `export()` raised on a
+damaged store, which would have cost a heartbeat — now fixed and covered.
+Suite: 88 tests.)*
+
 *(Update 2026-08-15: the "next" layer below now exists as
 [`partner.py`](pangenome/partner.py) — the `talk` command. First live exchanges
 worked: the organism answered from its own attention log, surfaced an unasked

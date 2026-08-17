@@ -20,16 +20,31 @@ python -m pangenome beat                       # it senses and notices — free,
 python -m pangenome talk "what did you see today that matters to me?"
 ```
 
-`talk` needs one free key ([aistudio.google.com](https://aistudio.google.com));
-everything else runs with **no key, no server, no dependencies, no cost**. If a
-model's quota dies mid-conversation it falls through a chain to the next one —
-the organism outlives any given brain.
+### No API key. No account. No LLM required.
 
-Three honest sentences about maturity: the body, senses, memory and immune
-system are built and tested (74 tests). The conversation layer is days old. It
-grows *fast* in knowledge (43,000+ concept links in two days) and *slowly on
-purpose* in beliefs — nothing becomes a "skill" without recurring across
-three distinct days, so it cannot be stampeded by one afternoon.
+**Ahadu is not an LLM wrapper — it does not need a model to live.** Every organ
+runs on Python's standard library alone:
+
+| works with nothing at all | needs one free key |
+|---|---|
+| `germinate` `beat` `watch` `mind` `immune` `genome` `control` `explorer` `experiment` `study --skip-model` `simulate` | `talk` (conversation) · `study` (optional model arm) |
+
+That is the whole list. Sensing, noticing, remembering, consolidating,
+screening, the daily heartbeat and the dashboard involve **zero inference
+calls** — which is exactly why it can run free forever on a cron and why every
+record it keeps is auditable.
+
+A model is a *guest*, not an organ. `talk` gives the organism a voice using a
+free key from [aistudio.google.com](https://aistudio.google.com), and if that
+model's quota dies mid-sentence it falls through a chain to the next one. The
+organism outlives any given brain — and if no brain is present, it still senses,
+still notices, still learns from what you tell it.
+
+Maturity, honestly: body, senses, memory and immune system are built and tested
+(**88 tests**). The conversation layer is days old. It grows *fast* in knowledge
+(45,000+ concept links in four days) and *slowly on purpose* in beliefs —
+nothing becomes a pattern without recurring across three distinct days, so it
+cannot be stampeded by one afternoon.
 
 ```
 python -m pangenome germinate --steward "your name"

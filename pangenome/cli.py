@@ -213,6 +213,34 @@ def cmd_control(a) -> int:
     return 0
 
 
+def cmd_explorer(a) -> int:
+    import http.server
+    import socketserver
+    import webbrowser
+    from pathlib import Path
+
+    explorer_dir = Path(__file__).resolve().parent.parent / "explorer"
+    if not explorer_dir.exists():
+        print("error: explorer directory not found", file=sys.stderr)
+        return 1
+
+    class Handler(http.server.SimpleHTTPRequestHandler):
+        def __init__(self, *args, **kwargs):
+            super().__init__(*args, directory=str(explorer_dir), **kwargs)
+
+    port = a.port
+    print(f"\nAHADU · Pangenome Visual Explorer starting at http://localhost:{port}/")
+    print("Press Ctrl+C to stop.\n")
+    webbrowser.open(f"http://localhost:{port}/")
+
+    with socketserver.TCPServer(("", port), Handler) as httpd:
+        try:
+            httpd.serve_forever()
+        except KeyboardInterrupt:
+            print("\nExplorer stopped.")
+    return 0
+
+
 def main(argv=None) -> int:
     p = argparse.ArgumentParser("pangenome", description=__doc__,
                                 formatter_class=argparse.RawDescriptionHelpFormatter)
@@ -264,6 +292,10 @@ def main(argv=None) -> int:
     sub.add_parser("experiment",
                    help="same shop, same task, three different owners"
                    ).set_defaults(fn=cmd_experiment)
+
+    ex = sub.add_parser("explorer", help="launch the interactive visual web explorer showcase")
+    ex.add_argument("--port", type=int, default=8000, help="HTTP port (default 8000)")
+    ex.set_defaults(fn=cmd_explorer)
 
     i = sub.add_parser("interest", help="prime a standing interest (the owner model)")
     i.add_argument("concept", nargs="?")

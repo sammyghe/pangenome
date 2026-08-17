@@ -63,9 +63,11 @@ days it will not restart itself, and it cannot notice its own silence from the
 inside. There is now a second clock: `.github/workflows/spore.yml`, monthly,
 which runs no organism code and does nothing but write a date into
 `genome/SPORE.md` and commit. It is deliberately dumber than the heartbeat so it
-cannot fail for the same reasons (Constitution §12). Honest limit: it has not
-yet fired on its own schedule — it is a mechanism in place, not a measured
-result, and it will be listed as measured only after a real monthly run.
+cannot fail for the same reasons (Constitution §12). It was dispatched once by
+hand on 2026-08-16 and did what it claims: checked out, wrote the date, and
+committed `spore: 2026-08-16` as author `pangenome`. Honest limit: it has not
+yet fired on its own *schedule*, so the mechanism is verified and the clock is
+not. That gets reported as measured only after a real monthly run.
 
 Genome after three beats:
 

@@ -36,6 +36,7 @@ from __future__ import annotations
 import json
 import os
 import time
+import urllib.error
 import urllib.request
 
 from .experiment import SHOP, PROFILES, MARKET_HISTORY, TASK_GOAL, _grow
@@ -172,6 +173,7 @@ class SmallModel:
         self.model = model
         self.key = os.environ.get("GEMINI_API_KEY")
         self.calls = 0
+        self.retries = 0
         self.tokens_in = 0
         self.tokens_out = 0
 
@@ -179,14 +181,34 @@ class SmallModel:
     def available(self) -> bool:
         return bool(self.key)
 
+    # A free tier answers "not now" far more often than "no". Without backoff a
+    # 20-repeat run silently becomes a 7-repeat run, which is exactly the kind
+    # of quiet sample-size collapse this study exists to stop doing.
+    RETRIES = 5
+    BACKOFF = 20.0          # seconds, multiplied by the attempt number
+
     def ask(self, prompt: str) -> str:
         body = json.dumps({"contents": [{"parts": [{"text": prompt}]}]}).encode()
-        req = urllib.request.Request(
-            GEMINI.format(model=self.model) + f"?key={self.key}",
-            data=body, method="POST",
-            headers={"Content-Type": "application/json"})
-        with urllib.request.urlopen(req, timeout=90) as r:
-            data = json.loads(r.read())
+        last: Exception | None = None
+        for attempt in range(1, self.RETRIES + 1):
+            req = urllib.request.Request(
+                GEMINI.format(model=self.model) + f"?key={self.key}",
+                data=body, method="POST",
+                headers={"Content-Type": "application/json"})
+            try:
+                with urllib.request.urlopen(req, timeout=180) as r:
+                    data = json.loads(r.read())
+                break
+            except urllib.error.HTTPError as e:
+                last = e
+                if e.code not in (429, 500, 503):
+                    raise
+            except Exception as e:              # read timeouts, transient DNS
+                last = e
+            self.retries += 1
+            time.sleep(self.BACKOFF * attempt)
+        else:
+            raise last if last else RuntimeError("no response")
         self.calls += 1
         usage = data.get("usageMetadata", {})
         self.tokens_in += usage.get("promptTokenCount", 0)

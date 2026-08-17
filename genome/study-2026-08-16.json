@@ -1,0 +1,329 @@
+{
+ "_n": 20,
+ "_generated_utc": "2026-08-16T17:13:35Z",
+ "ablation_shop": {
+  "GENERALIST": {
+   "flagged": 0,
+   "hits": [],
+   "false_positives": [],
+   "missed": [],
+   "precision": 1.0,
+   "recall": 1.0,
+   "f1": 1.0,
+   "targets_found": [],
+   "targets_total": 0
+  },
+  "OPTICIAN": {
+   "flagged": 6,
+   "hits": [
+    "lens-cleaning-cloth",
+    "polarised-clip-on",
+    "reading-glasses-plus2",
+    "sunglasses-aviator-uv400",
+    "sunglasses-designer-clearance",
+    "sunglasses-wayfarer-polarised"
+   ],
+   "false_positives": [],
+   "missed": [
+    "microfibre-pouch"
+   ],
+   "precision": 1.0,
+   "recall": 0.857,
+   "f1": 0.923,
+   "targets_found": [
+    "polarised-clip-on",
+    "sunglasses-designer-clearance"
+   ],
+   "targets_total": 2
+  },
+  "TAILOR": {
+   "flagged": 7,
+   "hits": [
+    "cotton-shirt-oxford",
+    "denim-jacket-raw",
+    "linen-trousers",
+    "silk-scarf-printed",
+    "wool-blend-coat"
+   ],
+   "false_positives": [],
+   "missed": [],
+   "precision": 1.0,
+   "recall": 1.0,
+   "f1": 1.0,
+   "targets_found": [
+    "wool-blend-coat"
+   ],
+   "targets_total": 1
+  }
+ },
+ "ablation_wild": {
+  "page_items": 150,
+  "flagged": 30,
+  "hits": [
+   "NVIDIA/SkillSpector",
+   "osaurus-ai/osaurus",
+   "thedotmack/claude-mem",
+   "topoteretes/cognee"
+  ],
+  "missed": [
+   "DeusData/codebase-memory-mcp",
+   "agentskills/agentskills",
+   "mksglu/context-mode",
+   "trailofbits/skills"
+  ],
+  "precision": 0.133,
+  "recall": 0.5,
+  "f1": 0.211,
+  "targets_found": [
+   "NVIDIA/SkillSpector"
+  ],
+  "targets_total": 2,
+  "missed_reference_classes": [
+   "market:agent",
+   "market:mcp",
+   "market:memory",
+   "market:security"
+  ]
+ },
+ "compression": {
+  "GENERALIST": {
+   "full_chars": 2034,
+   "shortlist_chars": 204,
+   "reduction": 0.9,
+   "items_full": 30,
+   "items_shortlist": 3
+  },
+  "OPTICIAN": {
+   "full_chars": 2034,
+   "shortlist_chars": 682,
+   "reduction": 0.665,
+   "items_full": 30,
+   "items_shortlist": 9
+  },
+  "TAILOR": {
+   "full_chars": 2034,
+   "shortlist_chars": 704,
+   "reduction": 0.654,
+   "items_full": 30,
+   "items_shortlist": 10
+  }
+ },
+ "cells": {
+  "shop/gemini-2.5-flash": {
+   "_domain": "shop",
+   "_model": "gemini-2.5-flash",
+   "_n_requested": 20,
+   "_failed_calls": 39,
+   "_errors": [
+    "A_LITERAL:HTTPError: HTTP Error 429: Too Many Requests",
+    "B_PROMPTED:HTTPError: HTTP Error 429: Too Many Requests",
+    "C_ORGANISM:HTTPError: HTTP Error 429: Too Many Requests",
+    "A_LITERAL:HTTPError: HTTP Error 429: Too Many Requests",
+    "B_PROMPTED:HTTPError: HTTP Error 429: Too Many Requests",
+    "C_ORGANISM:HTTPError: HTTP Error 429: Too Many Requests",
+    "A_LITERAL:HTTPError: HTTP Error 429: Too Many Requests",
+    "B_PROMPTED:HTTPError: HTTP Error 429: Too Many Requests"
+   ],
+   "_shortlist_items": 6,
+   "_page_chars": 2034,
+   "A_LITERAL": {
+    "samples": 7,
+    "targets": [
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0
+    ],
+    "targets_mean": 0,
+    "targets_sd": 0.0,
+    "targets_range": [
+     0,
+     0
+    ],
+    "targets_total": 2,
+    "perfect_runs": 0,
+    "stable": true,
+    "core_mean": 0,
+    "core_total": 7,
+    "tokens_in_mean": 626,
+    "tokens_out_mean": 66
+   },
+   "B_PROMPTED": {
+    "samples": 7,
+    "targets": [
+     2,
+     2,
+     2,
+     2,
+     2,
+     2,
+     2
+    ],
+    "targets_mean": 2,
+    "targets_sd": 0.0,
+    "targets_range": [
+     2,
+     2
+    ],
+    "targets_total": 2,
+    "perfect_runs": 7,
+    "stable": true,
+    "core_mean": 6.86,
+    "core_total": 7,
+    "tokens_in_mean": 652,
+    "tokens_out_mean": 374
+   },
+   "C_ORGANISM": {
+    "samples": 7,
+    "targets": [
+     2,
+     2,
+     2,
+     2,
+     2,
+     2,
+     2
+    ],
+    "targets_mean": 2,
+    "targets_sd": 0.0,
+    "targets_range": [
+     2,
+     2
+    ],
+    "targets_total": 2,
+    "perfect_runs": 7,
+    "stable": true,
+    "core_mean": 6,
+    "core_total": 7,
+    "tokens_in_mean": 248,
+    "tokens_out_mean": 241
+   }
+  },
+  "shop/gemma-4-26b-a4b-it": {
+   "_domain": "shop",
+   "_model": "gemma-4-26b-a4b-it",
+   "_n_requested": 20,
+   "_failed_calls": 0,
+   "_errors": [],
+   "_shortlist_items": 6,
+   "_page_chars": 2034,
+   "A_LITERAL": {
+    "samples": 20,
+    "targets": [
+     0,
+     2,
+     2,
+     2,
+     2,
+     2,
+     2,
+     2,
+     2,
+     2,
+     2,
+     2,
+     2,
+     1,
+     2,
+     2,
+     2,
+     0,
+     0,
+     2
+    ],
+    "targets_mean": 1.65,
+    "targets_sd": 0.726,
+    "targets_range": [
+     0,
+     2
+    ],
+    "targets_total": 2,
+    "perfect_runs": 16,
+    "stable": false,
+    "core_mean": 5.8,
+    "core_total": 7,
+    "tokens_in_mean": 626,
+    "tokens_out_mean": 56
+   },
+   "B_PROMPTED": {
+    "samples": 20,
+    "targets": [
+     2,
+     2,
+     2,
+     2,
+     2,
+     2,
+     2,
+     2,
+     2,
+     2,
+     2,
+     2,
+     2,
+     2,
+     2,
+     2,
+     2,
+     2,
+     2,
+     2
+    ],
+    "targets_mean": 2,
+    "targets_sd": 0.0,
+    "targets_range": [
+     2,
+     2
+    ],
+    "targets_total": 2,
+    "perfect_runs": 20,
+    "stable": true,
+    "core_mean": 7,
+    "core_total": 7,
+    "tokens_in_mean": 652,
+    "tokens_out_mean": 281
+   },
+   "C_ORGANISM": {
+    "samples": 20,
+    "targets": [
+     2,
+     2,
+     2,
+     2,
+     2,
+     2,
+     2,
+     2,
+     2,
+     2,
+     2,
+     2,
+     2,
+     2,
+     2,
+     2,
+     2,
+     2,
+     2,
+     2
+    ],
+    "targets_mean": 2,
+    "targets_sd": 0.0,
+    "targets_range": [
+     2,
+     2
+    ],
+    "targets_total": 2,
+    "perfect_runs": 20,
+    "stable": true,
+    "core_mean": 6,
+    "core_total": 7,
+    "tokens_in_mean": 248,
+    "tokens_out_mean": 148
+   }
+  }
+ }
+}

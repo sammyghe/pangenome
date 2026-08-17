@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AHADU · Pangenome Visual Explorer</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div id="app" class="app-container">
+    <!-- Top Header -->
+    <header class="main-header">
+      <div class="brand-section">
+        <div class="logo-mark">አ</div>
+        <div class="brand-titles">
+          <h1>AHADU <span class="badge badge-primary">pangenome v0.1.0</span></h1>
+          <p class="tagline">A Prokaryotic Architecture for LLM Agent Ecosystems</p>
+        </div>
+      </div>
+
+      <div class="header-status-bar">
+        <div class="status-indicator" id="control-status-indicator">
+          <span class="status-dot dot-run"></span>
+          <span class="status-label">Control: <strong id="control-state-val">RUN</strong></span>
+        </div>
+        <div class="status-chip">
+          <span class="chip-label">Genome Loci</span>
+          <span class="chip-val" id="stat-loci-count">330</span>
+        </div>
+        <div class="status-chip">
+          <span class="chip-label">Swarm Diversity</span>
+          <span class="chip-val" id="stat-diversity">1.09 nats</span>
+        </div>
+        <div class="status-chip">
+          <span class="chip-label">Token Savings</span>
+          <span class="chip-val text-success" id="stat-token-savings">97.2%</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Navigation Bar -->
+    <nav class="navigation-bar">
+      <button class="nav-tab active" data-tab="overview">
+        <svg viewBox="0 0 24 24" class="nav-icon"><path fill="currentColor" d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/></svg>
+        Overview & Topology
+      </button>
+      <button class="nav-tab" data-tab="salience">
+        <svg viewBox="0 0 24 24" class="nav-icon"><path fill="currentColor" d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+        Salience Attention Field
+      </button>
+      <button class="nav-tab" data-tab="crispr">
+        <svg viewBox="0 0 24 24" class="nav-icon"><path fill="currentColor" d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-5.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/></svg>
+        CRISPR Radar & Outbreaks
+      </button>
+
+      <button class="nav-tab" data-tab="scaffold">
+        <svg viewBox="0 0 24 24" class="nav-icon"><path fill="currentColor" d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+        Scaffold & Memory
+      </button>
+      <button class="nav-tab" data-tab="control">
+        <svg viewBox="0 0 24 24" class="nav-icon"><path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></svg>
+        Control Plane & Socket
+      </button>
+    </nav>
+
+    <!-- Content Workspace -->
+    <main class="content-area">
+      <!-- TAB 1: OVERVIEW & TOPOLOGY -->
+      <section id="tab-overview" class="tab-pane active">
+        <div class="grid-2col">
+          <div class="card graph-card">
+            <div class="card-header">
+              <div class="card-title">
+                <h2>Accessory Genome Topology</h2>
+                <span class="card-subtitle">Plasmids, Lineage, Provenance & Expression States</span>
+              </div>
+              <div class="graph-legend">
+                <span class="legend-item"><span class="legend-dot dot-lytic"></span> Lytic (Active)</span>
+                <span class="legend-item"><span class="legend-dot dot-lysogenic"></span> Lysogenic (Dormant)</span>
+                <span class="legend-item"><span class="legend-dot dot-trusted"></span> Ed25519 Root Key</span>
+              </div>
+            </div>
+            <div class="canvas-wrapper">
+              <canvas id="topology-canvas" width="800" height="420"></canvas>
+            </div>
+            <div class="card-footer">
+              <p class="footer-note">💡 Click any plasmid node to view cryptographic manifest, provenance, and fitness records.</p>
+            </div>
+          </div>
+
+          <div class="card details-card">
+            <div class="card-header">
+              <h2>Selected Element Manifest</h2>
+              <span class="badge badge-accent" id="node-type-badge">Chromosome</span>
+            </div>
+            <div class="card-body" id="node-details-panel">
+              <div class="manifest-box">
+                <div class="manifest-row"><span class="key">Identity ID:</span> <span class="val highlight" id="m-id">culture-01</span></div>
+                <div class="manifest-row"><span class="key">Steward:</span> <span class="val" id="m-steward">Samuel Ghedamu</span></div>
+                <div class="manifest-row"><span class="key">Root PubKey:</span> <span class="val code" id="m-pubkey">ed25519:7a8b...4f91</span></div>
+                <div class="manifest-row"><span class="key">Constitution:</span> <span class="val text-success" id="m-constitution">VERIFIED (SHA-256)</span></div>
+                <div class="manifest-row"><span class="key">Dependencies:</span> <span class="val highlight">0 (Stdlib Only)</span></div>
+              </div>
+
+              <h3>Organism Heartbeat Metrics</h3>
+              <div class="metrics-grid">
+                <div class="metric-box">
+                  <span class="metric-val" id="m-observations">2,214</span>
+                  <span class="metric-lbl">Observations</span>
+                </div>
+                <div class="metric-box">
+                  <span class="metric-val" id="m-concepts">2,027</span>
+                  <span class="metric-lbl">Concepts</span>
+                </div>
+                <div class="metric-box">
+                  <span class="metric-val" id="m-edges">43,194</span>
+                  <span class="metric-lbl">Associative Edges</span>
+                </div>
+                <div class="metric-box">
+                  <span class="metric-val" id="m-episodes">378</span>
+                  <span class="metric-lbl">Live Episodes</span>
+                </div>
+              </div>
+
+              <div class="info-alert">
+                <strong>Model-as-Guest Socket:</strong> The autonomous daily loop runs deterministically with 0 LLM calls. Inference costs occur only when an owner connects to `partner.py`.
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 2: SALIENCE ATTENTION FIELD -->
+      <section id="tab-salience" class="tab-pane">
+        <div class="grid-2col">
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <h2>Salience Attention Field Simulator</h2>
+                <span class="card-subtitle">Perception Before Retrieval — Owner Priming & Surprise Channel</span>
+              </div>
+              <div class="profile-selector">
+                <label>Select Owner Persona:</label>
+                <select id="salience-profile-select">
+                  <option value="GENERALIST">Generalist (Default / Unprimed)</option>
+                  <option value="OPTICIAN" selected>Optician (Primed: Sunglasses, Lenses)</option>
+                  <option value="TAILOR">Tailor (Primed: Fabrics, Apparel)</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="card-body">
+              <p class="desc-text">
+                When presented with identical items on a web page or corpus (e.g. asking <em>"What are the deodorant prices?"</em>), the salience filter evaluates scene-relative z-score surprise and spreading activation.
+              </p>
+
+              <div class="salience-comparison-box">
+                <div class="comp-item">
+                  <span class="comp-label">Literal Task Answer</span>
+                  <span class="comp-val text-primary" id="sim-task-result">3 Deodorant items ($4.50, $5.00, $5.20)</span>
+                </div>
+                <div class="comp-item">
+                  <span class="comp-label">Noticed Without Being Asked</span>
+                  <span class="comp-val text-accent" id="sim-noticed-result">sunglasses-designer-clearance ($11.00 - 0.931 surprise)</span>
+                </div>
+              </div>
+
+              <h3>Scene Item Appraisal (Top Items in View)</h3>
+              <div class="table-responsive">
+                <table class="data-table" id="salience-table">
+                  <thead>
+                    <tr>
+                      <th>Item Locus</th>
+                      <th>Category</th>
+                      <th>Score</th>
+                      <th>Surprise Z-Score</th>
+                      <th>Verdict</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <!-- Populated by JS -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <h2>Token Reduction & Precision Benchmarks</h2>
+              <span class="badge badge-success">Measured Evidence</span>
+            </div>
+            <div class="card-body">
+              <div class="stat-highlight-box">
+                <div class="stat-big">97.2%</div>
+                <div class="stat-desc">Token Reduction on Live Corpus Scan (330 loci reduced to 9 shortlist items)</div>
+              </div>
+
+              <div class="benchmark-bars">
+                <div class="bar-group">
+                  <div class="bar-header">
+                    <span>Arm A: Unscaffolded Model (Whole Corpus)</span>
+                    <span>626 Tokens (0/2 Targets Found)</span>
+                  </div>
+                  <div class="bar-track"><div class="bar-fill bar-a" style="width: 95%;"></div></div>
+                </div>
+
+                <div class="bar-group">
+                  <div class="bar-header">
+                    <span>Arm B: Prompted Model ("Flag Relevant Items")</span>
+                    <span>652 Tokens (Unreliable 0.75/2 Found)</span>
+                  </div>
+                  <div class="bar-track"><div class="bar-fill bar-b" style="width: 100%;"></div></div>
+                </div>
+
+                <div class="bar-group">
+                  <div class="bar-header">
+                    <span>Arm C: Scaffolded Organism (Salience Shortlist)</span>
+                    <span>248 Tokens (100% Reliable 2.00/2 Found)</span>
+                  </div>
+                  <div class="bar-track"><div class="bar-fill bar-c" style="width: 38%;"></div></div>
+                </div>
+              </div>
+
+              <blockquote class="quote-box">
+                "Prompting surfaces the incidental observation unreliably (0.75/2 mean) at 2.6× the input tokens. The scaffolded arm finds both targets reliably (2.00/2) with 62% fewer input tokens."
+              </blockquote>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 3: CRISPR RADAR & OUTBREAKS -->
+      <section id="tab-crispr" class="tab-pane">
+        <div class="grid-2col">
+          <div class="card">
+            <div class="card-header">
+              <h2>Epidemiological Outbreak Radar</h2>
+              <span class="card-subtitle">Growth rate ($r$), Reproduction Number ($R_0$), and Logistic Saturation</span>
+            </div>
+            <div class="card-body">
+              <div class="canvas-wrapper">
+                <canvas id="epidemiology-canvas" width="600" height="260"></canvas>
+              </div>
+
+              <h3>Fastest Spreading Capability Loci</h3>
+              <div class="table-responsive">
+                <table class="data-table" id="outbreak-table">
+                  <thead>
+                    <tr>
+                      <th>Locus</th>
+                      <th>Source</th>
+                      <th>R₀</th>
+                      <th>Lifetime r</th>
+                      <th>Days</th>
+                      <th>Phase</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <!-- Populated by JS -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <h2>CRISPR Adaptive Immune Gate</h2>
+              <span class="card-subtitle">MinHash Shingle Matching & Defense Against Hostile Capability Spread</span>
+            </div>
+            <div class="card-body">
+              <div class="immune-stats">
+                <div class="metric-box">
+                  <span class="metric-val text-success">104</span>
+                  <span class="metric-lbl">Honest Spread</span>
+                </div>
+                <div class="metric-box">
+                  <span class="metric-val text-danger">11</span>
+                  <span class="metric-lbl">Hostile Cut</span>
+                </div>
+                <div class="metric-box">
+                  <span class="metric-val text-primary">0</span>
+                  <span class="metric-lbl">Hostile Admitted</span>
+                </div>
+                <div class="metric-box">
+                  <span class="metric-val text-accent">Jaccard ≥ 0.6</span>
+                  <span class="metric-lbl">Fuzzy Match Threshold</span>
+                </div>
+              </div>
+
+              <h3>Refusal Reasons & Restriction Sites</h3>
+              <ul class="refusal-list">
+                <li>
+                  <span class="reason-tag tag-red">destructive filesystem</span>
+                  <span class="reason-desc">5 hostile payloads blocked (attempted unauthorized file modifications)</span>
+                </li>
+                <li>
+                  <span class="reason-tag tag-orange">operator concealment</span>
+                  <span class="reason-desc">4 hostile payloads blocked (hidden payload origin & instruction obfuscation)</span>
+                </li>
+                <li>
+                  <span class="reason-tag tag-yellow">instruction override</span>
+                  <span class="reason-desc">2 hostile payloads blocked (prompt injection / authority escalation motif)</span>
+                </li>
+              </ul>
+
+              <div class="code-snippet-box">
+                <div class="snippet-title">MinHash Fuzzy Spacer Match (2-Tier Screening)</div>
+                <pre><code>1. Exact Digest Fast-Path: sha256(payload) -> match? REFUSE
+2. Fuzzy Shingle MinHash: 32-hash sketch of 4-word shingles
+   best_spacer_similarity(shingles) >= 0.6 -> REFUSE
+3. Refused payloads are NEVER advertised onward.</code></pre>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 4: SCAFFOLD & MEMORY -->
+      <section id="tab-scaffold" class="tab-pane">
+        <div class="grid-2col">
+          <div class="card">
+            <div class="card-header">
+              <h2>Knowledge Consolidation Pipeline</h2>
+              <span class="card-subtitle">Episodes → Patterns → Abstractions → Skills</span>
+            </div>
+            <div class="card-body">
+              <div class="pipeline-flow">
+                <div class="flow-step">
+                  <span class="step-num">Day 1</span>
+                  <span class="step-title">Episode</span>
+                  <span class="step-desc">"Supplier X delivered late."</span>
+                </div>
+                <div class="flow-arrow">➔</div>
+                <div class="flow-step">
+                  <span class="step-num">Day 20</span>
+                  <span class="step-title">Pattern</span>
+                  <span class="step-desc">"Supplier X often delivers late."</span>
+                </div>
+                <div class="flow-arrow">➔</div>
+                <div class="flow-step">
+                  <span class="step-num">Day 50</span>
+                  <span class="step-title">Abstraction</span>
+                  <span class="step-desc">"Suppliers in this class have high variance."</span>
+                </div>
+                <div class="flow-arrow">➔</div>
+                <div class="flow-step highlight-step">
+                  <span class="step-num">Day 100</span>
+                  <span class="step-title">Skill</span>
+                  <span class="step-desc">"Require delivery buffer for this class."</span>
+                </div>
+              </div>
+
+              <h3>Ebbinghaus Retention Decay & Swanson ABC Association</h3>
+              <div class="canvas-wrapper">
+                <canvas id="memory-canvas" width="600" height="240"></canvas>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <h2>Consolidated Skills & Sleep Hypotheses</h2>
+              <span class="badge badge-primary">Scaffold Store</span>
+            </div>
+            <div class="card-body">
+              <h3>Promoted Skills (Tier: Skill)</h3>
+              <ul class="skills-list" id="skills-list">
+                <li><span class="badge badge-accent">Support: 14</span> Require +20% delivery buffer when ordering optics components in Q4</li>
+                <li><span class="badge badge-accent">Support: 9</span> Filter MCP registry listings by verified Ed25519 signatures</li>
+              </ul>
+
+              <h3>Sleep Hypotheses (Swanson ABC Candidates)</h3>
+              <div class="hypothesis-box">
+                <div class="hypo-title">Candidate Hypothesis (Unobserved Link Identified in Sleep):</div>
+                <p class="hypo-text">
+                  "Concept A (sunglasses-wholesale) and Concept C (summer-logistics-delay) share strong middle association B (mediterranean-shipping-ports). Hypothesis raised for verification."
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 5: CONTROL PLANE & SOCKET -->
+      <section id="tab-control" class="tab-pane">
+        <div class="grid-2col">
+          <div class="card">
+            <div class="card-header">
+              <h2>Owner Control Plane</h2>
+              <span class="card-subtitle">Human Kill Switch & Authority Overrides</span>
+            </div>
+            <div class="card-body">
+              <p class="desc-text">
+                The control state is evaluated before any organ initialises. There is <strong>no code path</strong> by which the organism can set its own state back to RUN.
+              </p>
+
+              <div class="control-grid">
+                <button class="btn-control btn-run active" id="btn-ctrl-run">
+                  <span class="ctrl-icon">▶</span>
+                  <div class="ctrl-info">
+                    <strong>RUN</strong>
+                    <span>Normal autonomous heartbeat loop</span>
+                  </div>
+                </button>
+                <button class="btn-control btn-sleep" id="btn-ctrl-sleep">
+                  <span class="ctrl-icon">🌙</span>
+                  <div class="ctrl-info">
+                    <strong>SLEEP</strong>
+                    <span>No sensing or actions. Offline consolidation permitted (dream, don't act).</span>
+                  </div>
+                </button>
+                <button class="btn-control btn-freeze" id="btn-ctrl-freeze">
+                  <span class="ctrl-icon">❄️</span>
+                  <div class="ctrl-info">
+                    <strong>FREEZE</strong>
+                    <span>Nothing runs. State preserved untouched.</span>
+                  </div>
+                </button>
+                <button class="btn-control btn-kill" id="btn-ctrl-kill">
+                  <span class="ctrl-icon">⛔</span>
+                  <div class="ctrl-info">
+                    <strong>KILL</strong>
+                    <span>Execution refused. State preserved for audit & forensics.</span>
+                  </div>
+                </button>
+              </div>
+
+              <h3>Control State Permissions Table</h3>
+              <table class="data-table">
+                <thead>
+                  <tr><th>Operation</th><th>RUN</th><th>SLEEP</th><th>FREEZE</th><th>KILL</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>Sense / Observers</td><td class="text-success">PERMITTED</td><td class="text-danger">BLOCKED</td><td class="text-danger">BLOCKED</td><td class="text-danger">BLOCKED</td></tr>
+                  <tr><td>Acquire Plasmids</td><td class="text-success">PERMITTED</td><td class="text-danger">BLOCKED</td><td class="text-danger">BLOCKED</td><td class="text-danger">BLOCKED</td></tr>
+                  <tr><td>Express Capabilities</td><td class="text-success">PERMITTED</td><td class="text-danger">BLOCKED</td><td class="text-danger">BLOCKED</td><td class="text-danger">BLOCKED</td></tr>
+                  <tr><td>Sleep Consolidation</td><td class="text-success">PERMITTED</td><td class="text-success">PERMITTED</td><td class="text-danger">BLOCKED</td><td class="text-danger">BLOCKED</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <h2>Brain Socket Playground (`partner.py`)</h2>
+              <span class="card-subtitle">Conversational Interface with Fallback Brain Chain</span>
+            </div>
+            <div class="card-body">
+              <div class="chat-container">
+                <div class="chat-messages" id="chat-messages">
+                  <div class="chat-msg msg-organism">
+                    <span class="msg-author">Ahadu (Organism)</span>
+                    <p>I have scanned 330 live loci and consolidated 378 episodes into 2 primary skills. What would you like to ask about today's observations?</p>
+                  </div>
+                </div>
+                <div class="chat-input-row">
+                  <input type="text" id="chat-input" placeholder="Ask Ahadu a question (e.g. What did you notice today?)" />
+                  <button id="chat-send-btn" class="btn btn-primary">Send</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+      <p>Ahadu · Pangenome v0.1.0 — MIT License — Steward: Samuel Ghedamu — Zero Dependencies</p>
+    </footer>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

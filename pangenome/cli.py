@@ -84,8 +84,19 @@ def cmd_watch(a) -> int:
     print(_table([{k: ("—" if v is None else v) for k, v in r.items()}
                   for r in rows[: a.limit]],
                  [("locus", "locus"), ("source", "source"), ("R0", "R0"),
+                  ("confidence", "confidence"), ("distinct_days", "days"),
                   ("lifetime_r", "lifetime r"), ("signal", "signal"),
-                  ("distinct_days", "days"), ("phase", "phase"), ("fit_r2", "r2")]))
+                  ("phase", "phase"), ("fit_r2", "r2")]))
+    prov = [r for r in rows[: a.limit] if r.get("confidence") == "provisional"]
+    if prov:
+        need = max(r.get("days_until_indicative", 0) for r in prov)
+        print()
+        print(f"  {len(prov)} of these are PROVISIONAL — fitted on fewer than"
+              f" 14 distinct days.")
+        print("  A star count moves more on one Hacker News appearance than on"
+              " a week of real adoption,")
+        print(f"  so these are not yet measurements. {need} more days of beats"
+              f" to reach 'indicative'.")
     return 0
 
 

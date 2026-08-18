@@ -104,15 +104,45 @@ output of `mind` was nothing at all. On day 4:
 | `market:memory` | 23 |
 | `market:security` | 11 |
 
-**First fitted R₀ values** — the epidemiology layer needs the same 3-day
-minimum before it will report a growth rate rather than `no-history`:
+**First fitted growth rates — and the correction that follows them.**
 
-| locus | R₀ | days | phase |
+The epidemiology layer began reporting rates on day 4. It should not have been
+allowed to, and the numbers below are shown here as a *record of an overclaim*,
+not as a result:
+
+| locus | R₀ as reported | days | what it is actually worth |
 |---|---|---|---|
-| `internet-court/internet-court-skill` | 2.254 | 4 | outbreak |
-| `citrolabs/ego-lite` | 1.309 | 4 | outbreak |
-| `tt-a1i/archify` | 1.233 | 4 | outbreak |
-| `titanwings/colleague-skill` | 1.122 | 4 | outbreak |
+| `internet-court/internet-court-skill` | 2.254 | 4 | nothing yet |
+| `citrolabs/ego-lite` | 1.309 | 4 | nothing yet |
+| `tt-a1i/archify` | 1.233 | 4 | nothing yet |
+
+Four daily GitHub star-count snapshots cannot support an exponential fit. One
+Hacker News front page, one newsletter mention, one bot sweep, or a single
+influential repost moves a star count more in an afternoon than a week of
+genuine adoption does — and with n=4 there is no way to separate those. The
+`2.254` is a line drawn through whatever happened that particular week.
+
+Worse, it was described in conversation as *"internet-court-skill is spreading
+twice as fast as anything else it tracks, and nobody else is measuring this."*
+Both halves overstate: the first treats a provisional artefact as a
+measurement, and the second is false as stated — GitHub Trending,
+star-history.com, ossinsight, npm trends and PyPI stats all publish adoption
+velocity for overlapping ecosystems. The defensible claim is much narrower: *no
+one else appears to be running a daily longitudinal snapshot that
+cross-references the MCP registry against GitHub, filtered to one owner's
+stated interests, from a fixed start date.* That is a real but small claim.
+
+**What changed in the code as a result** (`epidemiology.py`): every fitted rate
+now carries a `confidence` field — `provisional` under 14 distinct days,
+`indicative` under 30, `established` beyond — plus `days_until_indicative`. A
+caller that prints R₀ without printing confidence is misreporting, and the CLI
+and dashboard now print both.
+
+This is CS-1's lesson turned on a number this project generated itself rather
+than one an agent invented. The failure mode is identical: a precise-looking,
+plausible figure stated with more confidence than the data underneath it
+supports. Catching it in someone else's output took ninety seconds; catching it
+in my own took an outside reviewer.
 
 **Why this is the interesting result.** The same mechanism produced both the
 three days of silence and the day-4 output. Two earlier bugs — an R₀ of 3.4
@@ -121,8 +151,12 @@ counting repetition inside a single moment as evidence. §10 was written to
 forbid that, and the visible consequence was an organism that reported nothing
 for three days while looking, to an impatient observer, broken.
 
-It was not broken. It was waiting, and the waiting is what makes the day-4
-numbers worth anything.
+It was not broken. It was waiting — and then, on day 4, it stopped waiting one
+gate too early. §10 correctly governed *patterns* (which need recurrence, and
+208 occurrences of `market:agent` across four separate days is real recurrence).
+It did not govern *rates*, which need far more history than recurrence does.
+Two different claims, two different evidentiary bars, one threshold serving
+both. That was the design error.
 
 **Transferable lesson.** A system that cannot say "I don't know yet" will
 always say something, and what it says will be noise. The design cost of

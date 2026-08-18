@@ -88,7 +88,10 @@ def export(store, chromosome=None, path: Path | None = None) -> dict:
         {"locus": t["locus"], "source": t.get("source"),
          "R0": t.get("R0"), "lifetime_r": t.get("lifetime_r"),
          "distinct_days": t.get("distinct_days"), "signal": t.get("signal"),
-         "phase": t.get("phase")}
+         "phase": t.get("phase"),
+         # A row that travels without its confidence will be misread.
+         "confidence": t.get("confidence"),
+         "days_until_indicative": t.get("days_until_indicative")}
         for t in table
     ]
 

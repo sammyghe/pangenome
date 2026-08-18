@@ -57,6 +57,27 @@ def _linreg(xs: list[float], ys: list[float]) -> tuple[float, float, float]:
 MIN_DISTINCT_DAYS = 3
 MIN_SPAN_DAYS = 2.0
 
+# How much history a rate needs before it is worth saying out loud.
+#
+# Three days clears the arithmetic (you can fit a line through 3 points) but
+# nowhere near the statistics: a single Hacker News front page, one newsletter
+# mention, or a bot sweep moves a star count more than a week of real adoption,
+# and with n=3 there is no way to tell those apart. A fitted rate under
+# CONFIDENT_DAYS is an artefact of whatever happened that week, so it is
+# reported with confidence="provisional" and must never be quoted as a measured
+# growth rate. This is the same lesson as CS-1 in CASE-STUDIES.md, applied to a
+# number this project generated itself rather than one an agent invented.
+CONFIDENT_DAYS = 14      # below this: provisional. at/above: indicative.
+ESTABLISHED_DAYS = 30    # at/above this: enough history to argue about.
+
+
+def confidence_of(distinct_days: int) -> str:
+    if distinct_days >= ESTABLISHED_DAYS:
+        return "established"
+    if distinct_days >= CONFIDENT_DAYS:
+        return "indicative"
+    return "provisional"
+
 
 def daily(series: list[tuple[float, float]]) -> list[tuple[float, float]]:
     """Collapse to one point per calendar day, keeping the last of each.
@@ -210,6 +231,10 @@ def profile(series: list[tuple[float, float]], locus: str,
         "K": round(fit["K"], 1) if fit else None,
         "saturation": sat,
         "phase": phase_of(r, r2, sat, fittable),
+        # How much weight this row can bear. A caller that prints R0 without
+        # printing this is misreporting.
+        "confidence": confidence_of(len(pts)) if fittable else "no-history",
+        "days_until_indicative": max(0, CONFIDENT_DAYS - len(pts)),
     }
 
 

@@ -8,6 +8,7 @@ import unittest
 from pangenome import ed25519
 from pangenome.chromosome import Chromosome
 from pangenome.crispr import Crispr, shingles
+from pangenome import epidemiology
 from pangenome.epidemiology import growth_rate, profile, reproduction_number
 from pangenome.lysogeny import LYSOGENIC, LYTIC, Prophage
 from pangenome.plasmid import Plasmid, canonical, digest
@@ -302,3 +303,45 @@ class TestSoup(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class TestConfidenceGating(unittest.TestCase):
+    """A rate fitted on a handful of days is an artefact, not a measurement.
+
+    This is CS-2: the project reported R0 = 2.254 from four daily star-count
+    snapshots and described it as a finding. These tests make that impossible to
+    do silently again — every fitted rate must carry how much history is under
+    it.
+    """
+
+    def _series(self, days: int):
+        import math
+        return [(i * 86400.0, 100 * math.exp(0.1 * i)) for i in range(days)]
+
+    def test_four_days_is_provisional(self):
+        p = epidemiology.profile(self._series(4), "x")
+        self.assertEqual(p["confidence"], "provisional")
+        self.assertEqual(p["days_until_indicative"], 10)
+
+    def test_fourteen_days_is_indicative(self):
+        p = epidemiology.profile(self._series(14), "x")
+        self.assertEqual(p["confidence"], "indicative")
+        self.assertEqual(p["days_until_indicative"], 0)
+
+    def test_thirty_days_is_established(self):
+        p = epidemiology.profile(self._series(30), "x")
+        self.assertEqual(p["confidence"], "established")
+
+    def test_no_history_has_no_confidence_claim(self):
+        p = epidemiology.profile(self._series(2), "x")
+        self.assertEqual(p["phase"], "no-history")
+        self.assertEqual(p["confidence"], "no-history")
+        self.assertIsNone(p["R0"])
+
+    def test_every_row_carrying_an_R0_also_carries_confidence(self):
+        """The invariant. A caller cannot get a rate without its caveat."""
+        for days in (3, 5, 14, 40):
+            p = epidemiology.profile(self._series(days), "x")
+            if p["R0"] is not None:
+                self.assertIn(p["confidence"],
+                              ("provisional", "indicative", "established"))

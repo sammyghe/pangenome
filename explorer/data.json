@@ -1,7 +1,7 @@
 {
   "provenance": "LIVE \u2014 measured from genome/culture.db by pangenome.dashboard",
-  "generated_at": 1786982144.471856,
-  "generated_at_utc": "2026-08-17 15:55:44Z",
+  "generated_at": 1787044577.5986557,
+  "generated_at_utc": "2026-08-18 09:16:17Z",
   "last_beat_utc": "2026-08-17 05:51:13Z",
   "identity": {
     "name": "culture-01",
@@ -156,73 +156,89 @@
       "locus": "internet-court/internet-court-skill",
       "source": "github_skills",
       "R0": 2.254,
-      "lifetime_r": 0.12868,
+      "lifetime_r": 0.1272,
       "distinct_days": 4,
       "signal": 2958.0,
-      "phase": "outbreak"
+      "phase": "outbreak",
+      "confidence": "provisional",
+      "days_until_indicative": 10
     },
     {
       "locus": "citrolabs/ego-lite",
       "source": "github_skills",
       "R0": 1.309,
-      "lifetime_r": 0.07584,
+      "lifetime_r": 0.0754,
       "distinct_days": 4,
       "signal": 11360.0,
-      "phase": "outbreak"
+      "phase": "outbreak",
+      "confidence": "provisional",
+      "days_until_indicative": 10
     },
     {
       "locus": "tt-a1i/archify",
       "source": "github_skills",
       "R0": 1.233,
-      "lifetime_r": 0.07645,
+      "lifetime_r": 0.07601,
       "distinct_days": 4,
       "signal": 13536.0,
-      "phase": "outbreak"
+      "phase": "outbreak",
+      "confidence": "provisional",
+      "days_until_indicative": 10
     },
     {
       "locus": "titanwings/colleague-skill",
       "source": "github_skills",
       "R0": 1.122,
-      "lifetime_r": 0.0715,
+      "lifetime_r": 0.07113,
       "distinct_days": 4,
       "signal": 22950.0,
-      "phase": "outbreak"
+      "phase": "outbreak",
+      "confidence": "provisional",
+      "days_until_indicative": 10
     },
     {
       "locus": "fcakyon/claude-codex-settings",
       "source": "github_skills",
       "R0": 1.071,
-      "lifetime_r": 0.01726,
+      "lifetime_r": 0.01723,
       "distinct_days": 4,
       "signal": 1074.0,
-      "phase": "outbreak"
+      "phase": "outbreak",
+      "confidence": "provisional",
+      "days_until_indicative": 10
     },
     {
       "locus": "microsoft/power-platform-skills",
       "source": "github_skills",
       "R0": 1.052,
-      "lifetime_r": 0.03158,
+      "lifetime_r": 0.03147,
       "distinct_days": 3,
       "signal": 710.0,
-      "phase": "outbreak"
+      "phase": "outbreak",
+      "confidence": "provisional",
+      "days_until_indicative": 11
     },
     {
       "locus": "nexu-io/open-design",
       "source": "github_skills",
       "R0": 1.051,
-      "lifetime_r": 0.10211,
+      "lifetime_r": 0.10145,
       "distinct_days": 4,
       "signal": 87795.0,
-      "phase": "outbreak"
+      "phase": "outbreak",
+      "confidence": "provisional",
+      "days_until_indicative": 10
     },
     {
       "locus": "DietrichGebert/ponytail",
       "source": "github_skills",
       "R0": 1.043,
-      "lifetime_r": 0.17342,
+      "lifetime_r": 0.17156,
       "distinct_days": 4,
       "signal": 104246.0,
-      "phase": "outbreak"
+      "phase": "outbreak",
+      "confidence": "provisional",
+      "days_until_indicative": 10
     }
   ],
   "plasmid_states": [],

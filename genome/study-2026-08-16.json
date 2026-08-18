@@ -324,6 +324,96 @@
     "tokens_in_mean": 248,
     "tokens_out_mean": 148
    }
+  },
+  "wild/gemini-2.5-flash": {
+   "_domain": "wild",
+   "_model": "gemini-2.5-flash",
+   "_n_requested": 20,
+   "_failed_calls": 42,
+   "_errors": [
+    "A_LITERAL:HTTPError: HTTP Error 429: Too Many Requests",
+    "B_PROMPTED:HTTPError: HTTP Error 429: Too Many Requests",
+    "C_ORGANISM:HTTPError: HTTP Error 429: Too Many Requests",
+    "A_LITERAL:HTTPError: HTTP Error 429: Too Many Requests",
+    "B_PROMPTED:HTTPError: HTTP Error 429: Too Many Requests",
+    "C_ORGANISM:HTTPError: HTTP Error 429: Too Many Requests",
+    "A_LITERAL:HTTPError: HTTP Error 429: Too Many Requests",
+    "B_PROMPTED:HTTPError: HTTP Error 429: Too Many Requests"
+   ],
+   "_shortlist_items": 30,
+   "_page_chars": 23086,
+   "A_LITERAL": {
+    "samples": 5,
+    "targets": [
+     0,
+     0,
+     0,
+     0,
+     0
+    ],
+    "targets_mean": 0,
+    "targets_sd": 0.0,
+    "targets_range": [
+     0,
+     0
+    ],
+    "targets_total": 2,
+    "perfect_runs": 0,
+    "stable": true,
+    "core_mean": 0,
+    "core_total": 8,
+    "tokens_in_mean": 6569,
+    "tokens_out_mean": 76
+   },
+   "B_PROMPTED": {
+    "samples": 6,
+    "targets": [
+     2,
+     2,
+     2,
+     2,
+     2,
+     1
+    ],
+    "targets_mean": 1.83,
+    "targets_sd": 0.373,
+    "targets_range": [
+     1,
+     2
+    ],
+    "targets_total": 2,
+    "perfect_runs": 5,
+    "stable": false,
+    "core_mean": 4.5,
+    "core_total": 8,
+    "tokens_in_mean": 6625,
+    "tokens_out_mean": 1850
+   },
+   "C_ORGANISM": {
+    "samples": 7,
+    "targets": [
+     1,
+     0,
+     1,
+     1,
+     1,
+     1,
+     1
+    ],
+    "targets_mean": 0.86,
+    "targets_sd": 0.35,
+    "targets_range": [
+     0,
+     1
+    ],
+    "targets_total": 2,
+    "perfect_runs": 0,
+    "stable": false,
+    "core_mean": 4.29,
+    "core_total": 8,
+    "tokens_in_mean": 1551,
+    "tokens_out_mean": 1100
+   }
   }
  }
 }

@@ -4,6 +4,47 @@
 **pangenome** is its architecture: prokaryotic biology applied to LLM agent
 ecosystems. The core genome does not move. The accessory genome does.
 
+## What it actually does, with no metaphor
+
+The rest of this README uses biology as its vocabulary, because that is where
+the designs came from. If you would rather skip that, here is the whole system
+in seven lines:
+
+1. A **scheduled job** runs once a day on GitHub Actions. It makes **no LLM
+   calls** and costs nothing.
+2. It **fetches public data** from five allowlisted hosts — the MCP registry,
+   the GitHub search API, raw.githubusercontent, PyPI, npm. Read-only, no login,
+   no scraping.
+3. It **stores a timestamped row per item** (name, version, stars, forks) into a
+   local SQLite file, appending to history.
+4. It **scores each item** against interests you typed in yourself, on three
+   signals: does it connect to what you care about, is it rare, and is it
+   off-distribution for its own category. Above a threshold, it gets flagged.
+5. Anything it sees only once is **discarded**. A fact becomes stored knowledge
+   only if it recurs across **3+ separate calendar days**, and unused entries
+   decay on a forgetting curve.
+6. It **fits a trend line** across whatever history exists, to estimate what is
+   growing fastest — and refuses to call that a measurement until there are
+   14+ days behind it.
+7. Everything is a **SQLite file committed to your own git repo**. There is no
+   server and no account.
+
+An LLM is optional and only used by the `talk` command, to let you ask questions
+about what it stored in plain language.
+
+**What it is not:** it is not an LLM wrapper, not a chatbot, not an agent
+framework, not AGI. The honest one-line description is *a personal daily digest
+of what is gaining traction in the MCP/agent-skill ecosystem, filtered to topics
+you said you care about, running for free with no server.*
+
+**The one idea worth arguing about:** most memory systems for AI decide what to
+**store and retrieve**. This decides what to **look at in the first place**, per
+owner, before anything is stored. Whether that distinction matters is the open
+question, and [RESULTS.md](RESULTS.md) is where the evidence for and against it
+lives — including the parts that went against it.
+
+---
+
 ## What this is, as a product
 
 Not a chatbot, not a fine-tune, not an agent framework. **A seed.** You germinate
@@ -41,7 +82,7 @@ organism outlives any given brain — and if no brain is present, it still sense
 still notices, still learns from what you tell it.
 
 Maturity, honestly: body, senses, memory and immune system are built and tested
-(**88 tests**). The conversation layer is days old. It grows *fast* in knowledge
+(**93 tests**). The conversation layer is days old. It grows *fast* in knowledge
 (45,000+ concept links in four days) and *slowly on purpose* in beliefs —
 nothing becomes a pattern without recurring across three distinct days, so it
 cannot be stampeded by one afternoon.

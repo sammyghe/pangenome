@@ -1,18 +1,18 @@
 # culture-01 — state
 
-heartbeat: 2026-08-18 05:45:37Z  (7.79s)
+heartbeat: 2026-08-19 05:47:03Z  (7.61s)
 
 ## body
 - capabilities in genome: 0
 - expressed (costing): 0
 - dormant (free): 0
 - swarm diversity: 0.0 nats — STABLE
-- observed mutation rate: 0.1276 (error threshold 0.231)
+- observed mutation rate: 0.141 (error threshold 0.231)
 
 ## senses
-- mcp_registry: 145 loci
-- github_skills: 188 loci
-- watching 337 loci with enough history to fit
+- mcp_registry: 146 loci
+- github_skills: 187 loci
+- watching 341 loci with enough history to fit
 
 - 328 of them have enough distinct days to fit a rate
 
@@ -22,35 +22,34 @@ heartbeat: 2026-08-18 05:45:37Z  (7.79s)
 
 | locus | R0 | lifetime r | signal | phase | fit r2 |
 |---|---:|---:|---:|---|---:|
-| `internet-court/internet-court-skill` | 2.385 | 0.13088 | 3655.0 | outbreak | 0.963 |
-| `ccch1mneyyy/dsh-TUI` | 2.18 | — | 1873.0 | outbreak | 0.974 |
-| `citrolabs/ego-lite` | 1.266 | 0.07569 | 11650.0 | outbreak | 0.957 |
-| `tt-a1i/archify` | 1.234 | 0.07635 | 13978.0 | outbreak | 0.999 |
-| `titanwings/colleague-skill` | 1.113 | 0.07129 | 23215.0 | outbreak | 0.994 |
-| `microsoft/power-platform-skills` | 1.066 | 0.03157 | 722.0 | outbreak | 0.964 |
-| `fcakyon/claude-codex-settings` | 1.061 | 0.01724 | 1077.0 | outbreak | 0.953 |
-| `harry0703/MoneyPrinterTurbo` | 1.056 | 0.01301 | 106666.0 | outbreak | 0.894 |
-| `nexu-io/open-design` | 1.053 | 0.10165 | 88496.0 | outbreak | 0.997 |
-| `DietrichGebert/ponytail` | 1.044 | 0.17202 | 104863.0 | outbreak | 0.995 |
+| `internet-court/internet-court-skill` | 2.321 | 0.13051 | 4071.0 | outbreak | 0.975 |
+| `ccch1mneyyy/dsh-TUI` | 1.943 | — | 2013.0 | outbreak | 0.945 |
+| `citrolabs/ego-lite` | 1.238 | 0.07525 | 11904.0 | outbreak | 0.953 |
+| `tt-a1i/archify` | 1.222 | 0.07593 | 14295.0 | outbreak | 0.996 |
+| `titanwings/colleague-skill` | 1.103 | 0.07085 | 23433.0 | outbreak | 0.985 |
+| `harry0703/MoneyPrinterTurbo` | 1.076 | 0.01302 | 108970.0 | outbreak | 0.896 |
+| `microsoft/power-platform-skills` | 1.074 | 0.03149 | 732.0 | outbreak | 0.97 |
+| `fcakyon/claude-codex-settings` | 1.054 | 0.01721 | 1082.0 | outbreak | 0.948 |
+| `nexu-io/open-design` | 1.051 | 0.1008 | 89020.0 | outbreak | 0.998 |
+| `DietrichGebert/ponytail` | 1.044 | 0.16959 | 105547.0 | outbreak | 0.997 |
 
 ## brain
 - control plane: **RUN**
 - standing interests (priming): 10
-- observations scanned: 333 · crossed threshold: 71
-- live episodes: 151 · patterns 5 · abstractions 0 · skills 0
-- forgotten this beat: 0 · hypotheses raised: 20
-- learning-to-learning ratio: 0.0082
+- observations scanned: 333 · crossed threshold: 65
+- live episodes: 4 · patterns 5 · abstractions 0 · skills 0
+- forgotten this beat: 81 · hypotheses raised: 20
+- learning-to-learning ratio: 0.0075
 
 ## noticed without being asked
 
-- `tt-a1i/archify` (0.5285) — connects to standing interests; largely unseen before
-- `affaan-m/ECC` (0.4948) — connects to standing interests
-- `ruvnet/ruflo` (0.473) — connects to standing interests
-- `NVIDIA/SkillSpector` (0.4713) — connects to standing interests
-- `0xNyk/awesome-hermes-agent` (0.4659) — connects to standing interests
-- `firerpa/lamda` (0.4646) — connects to standing interests
-- `ai.agentplaybooks/agentplaybooks` (0.4618) — connects to standing interests
-- `titanwings/colleague-skill` (0.4561) — connects to standing interests; largely unseen before
+- `affaan-m/ECC` (0.4926) — connects to standing interests
+- `ruvnet/ruflo` (0.4709) — connects to standing interests
+- `NVIDIA/SkillSpector` (0.4692) — connects to standing interests
+- `tt-a1i/archify` (0.4673) — connects to standing interests
+- `firerpa/lamda` (0.4624) — connects to standing interests
+- `ai.agentplaybooks/agentplaybooks` (0.4596) — connects to standing interests
+- `virgiliojr94/book-to-skill` (0.4503) — connects to standing interests; largely unseen before
 
 ## immune system
 - admitted this beat: 0

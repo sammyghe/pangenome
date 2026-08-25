@@ -1,20 +1,20 @@
 # culture-01 — state
 
-heartbeat: 2026-08-24 05:54:15Z  (6.25s)
+heartbeat: 2026-08-25 05:47:59Z  (6.9s)
 
 ## body
 - capabilities in genome: 0
 - expressed (costing): 0
 - dormant (free): 0
 - swarm diversity: 0.0 nats — STABLE
-- observed mutation rate: 0.1719 (error threshold 0.231)
+- observed mutation rate: 0.1827 (error threshold 0.231)
 
 ## senses
-- mcp_registry: 153 loci
+- mcp_registry: 154 loci
 - github_skills: 187 loci
-- watching 353 loci with enough history to fit
+- watching 354 loci with enough history to fit
 
-- 343 of them have enough distinct days to fit a rate
+- 346 of them have enough distinct days to fit a rate
 
 ## fastest-spreading right now
 
@@ -22,33 +22,34 @@ heartbeat: 2026-08-24 05:54:15Z  (6.25s)
 
 | locus | R0 | lifetime r | signal | phase | fit r2 |
 |---|---:|---:|---:|---|---:|
-| `internet-court/internet-court-skill` | 1.708 | 0.1228 | 4606.0 | outbreak | 0.843 |
-| `Vincentwei1021/video-shotcraft` | 1.174 | 0.24413 | 6181.0 | outbreak | 0.988 |
-| `citrolabs/ego-lite` | 1.169 | 0.07305 | 13036.0 | outbreak | 0.956 |
-| `cathrynlavery/diagram-design` | 1.165 | 0.07851 | 26010.0 | outbreak | 0.974 |
-| `tt-a1i/archify` | 1.152 | 0.07349 | 15201.0 | outbreak | 0.945 |
-| `virgiliojr94/book-to-skill` | 1.108 | 0.08788 | 24829.0 | outbreak | 0.972 |
-| `harry0703/MoneyPrinterTurbo` | 1.093 | 0.01301 | 115482.0 | outbreak | 0.966 |
-| `titanwings/colleague-skill` | 1.068 | 0.06855 | 23822.0 | outbreak | 0.914 |
-| `microsoft/power-platform-skills` | 1.067 | 0.03093 | 760.0 | outbreak | 0.987 |
-| `mattpocock/skills` | 1.057 | 0.06128 | 234236.0 | outbreak | 0.958 |
+| `internet-court/internet-court-skill` | 1.643 | 0.12168 | 4816.0 | outbreak | 0.83 |
+| `ccch1mneyyy/dsh-TUI` | 1.413 | 0.66847 | 2505.0 | outbreak | 0.859 |
+| `Vincentwei1021/video-shotcraft` | 1.166 | 0.2379 | 6268.0 | outbreak | 0.985 |
+| `citrolabs/ego-lite` | 1.164 | 0.07265 | 13309.0 | outbreak | 0.961 |
+| `cathrynlavery/diagram-design` | 1.152 | 0.07803 | 26416.0 | outbreak | 0.973 |
+| `tt-a1i/archify` | 1.145 | 0.0731 | 15533.0 | outbreak | 0.946 |
+| `virgiliojr94/book-to-skill` | 1.116 | 0.08729 | 25308.0 | outbreak | 0.978 |
+| `harry0703/MoneyPrinterTurbo` | 1.088 | 0.013 | 116079.0 | outbreak | 0.962 |
+| `titanwings/colleague-skill` | 1.068 | 0.06809 | 23822.0 | outbreak | 0.914 |
+| `microsoft/power-platform-skills` | 1.064 | 0.03081 | 764.0 | outbreak | 0.984 |
 
 ## brain
 - control plane: **RUN**
 - standing interests (priming): 10
-- observations scanned: 340 · crossed threshold: 57
-- live episodes: 119 · patterns 5 · abstractions 0 · skills 0
-- forgotten this beat: 76 · hypotheses raised: 20
-- learning-to-learning ratio: 0.0058
+- observations scanned: 341 · crossed threshold: 58
+- live episodes: 4 · patterns 5 · abstractions 0 · skills 0
+- forgotten this beat: 60 · hypotheses raised: 20
+- learning-to-learning ratio: 0.0049
 
 ## noticed without being asked
 
-- `titanwings/distilly` (0.5353) — connects to standing interests; largely unseen before
-- `affaan-m/ECC` (0.4863) — connects to standing interests
-- `ruvnet/ruflo` (0.4645) — connects to standing interests
-- `NVIDIA/SkillSpector` (0.463) — connects to standing interests
-- `firerpa/lamda` (0.4562) — connects to standing interests
-- `ai.agentplaybooks/agentplaybooks` (0.4531) — connects to standing interests
+- `ai.agentgates/mcp` (0.518) — connects to standing interests; largely unseen before
+- `affaan-m/ECC` (0.4855) — connects to standing interests
+- `titanwings/distilly` (0.4741) — connects to standing interests
+- `ruvnet/ruflo` (0.4637) — connects to standing interests
+- `NVIDIA/SkillSpector` (0.4622) — connects to standing interests
+- `firerpa/lamda` (0.4554) — connects to standing interests
+- `ai.agentplaybooks/agentplaybooks` (0.4523) — connects to standing interests
 
 ## immune system
 - admitted this beat: 0

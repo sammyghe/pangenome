@@ -1,20 +1,20 @@
 # culture-01 — state
 
-heartbeat: 2026-08-27 16:31:09Z  (8.38s)
+heartbeat: 2026-08-28 17:26:50Z  (14.01s)
 
 ## body
 - capabilities in genome: 0
 - expressed (costing): 0
 - dormant (free): 0
 - swarm diversity: 0.0 nats — STABLE
-- observed mutation rate: 0.188 (error threshold 0.231)
+- observed mutation rate: 0.1922 (error threshold 0.231)
 
 ## senses
-- mcp_registry: 160 loci
+- mcp_registry: 161 loci
 - github_skills: 187 loci
-- watching 362 loci with enough history to fit
+- watching 363 loci with enough history to fit
 
-- 351 of them have enough distinct days to fit a rate
+- 352 of them have enough distinct days to fit a rate
 
 ## fastest-spreading right now
 
@@ -22,35 +22,34 @@ heartbeat: 2026-08-27 16:31:09Z  (8.38s)
 
 | locus | R0 | lifetime r | signal | phase | fit r2 |
 |---|---:|---:|---:|---|---:|
-| `anthropics/claude-plugins-community` | 2.62 | 0.04841 | 2377.0 | outbreak | 0.977 |
-| `internet-court/internet-court-skill` | 1.526 | 0.1179 | 4935.0 | outbreak | 0.791 |
-| `tt-a1i/archify` | 1.209 | 0.07441 | 22142.0 | outbreak | 0.774 |
-| `citrolabs/ego-lite` | 1.156 | 0.07167 | 13952.0 | outbreak | 0.97 |
-| `virgiliojr94/book-to-skill` | 1.114 | 0.08576 | 26123.0 | outbreak | 0.989 |
-| `AgriciDaniel/claude-obsidian` | 1.098 | 0.06699 | 13819.0 | outbreak | 0.65 |
-| `harry0703/MoneyPrinterTurbo` | 1.078 | 0.01297 | 117196.0 | outbreak | 0.945 |
-| `titanwings/colleague-skill` | 1.068 | 0.06698 | 23822.0 | outbreak | 0.914 |
-| `microsoft/power-platform-skills` | 1.059 | 0.03053 | 775.0 | outbreak | 0.977 |
-| `mattpocock/skills` | 1.056 | 0.06034 | 238807.0 | outbreak | 0.978 |
+| `anthropics/claude-plugins-community` | 2.345 | 0.04846 | 2522.0 | outbreak | 0.946 |
+| `internet-court/internet-court-skill` | 1.477 | 0.11632 | 4969.0 | outbreak | 0.77 |
+| `tt-a1i/archify` | 1.272 | 0.07517 | 26528.0 | outbreak | 0.742 |
+| `citrolabs/ego-lite` | 1.152 | 0.07122 | 14149.0 | outbreak | 0.973 |
+| `AgriciDaniel/claude-obsidian` | 1.118 | 0.06674 | 14283.0 | outbreak | 0.71 |
+| `virgiliojr94/book-to-skill` | 1.114 | 0.08516 | 26603.0 | outbreak | 0.992 |
+| `harry0703/MoneyPrinterTurbo` | 1.074 | 0.01297 | 118014.0 | outbreak | 0.939 |
+| `titanwings/colleague-skill` | 1.068 | 0.06652 | 23822.0 | outbreak | 0.914 |
+| `microsoft/power-platform-skills` | 1.057 | 0.03041 | 779.0 | outbreak | 0.974 |
+| `mattpocock/skills` | 1.055 | 0.06006 | 240028.0 | outbreak | 0.98 |
 
 ## brain
 - control plane: **RUN**
 - standing interests (priming): 10
-- observations scanned: 347 · crossed threshold: 59
-- live episodes: 122 · patterns 5 · abstractions 0 · skills 0
-- forgotten this beat: 64 · hypotheses raised: 20
-- learning-to-learning ratio: 0.0049
+- observations scanned: 348 · crossed threshold: 60
+- live episodes: 4 · patterns 5 · abstractions 0 · skills 0
+- forgotten this beat: 115 · hypotheses raised: 20
+- learning-to-learning ratio: 0.0041
 
 ## noticed without being asked
 
-- `getsentry/XcodeBuildMCP` (0.5205) — connects to standing interests; largely unseen before
-- `ai.alpic.alpix/Alpix` (0.516) — connects to standing interests; largely unseen before
-- `affaan-m/ECC` (0.4841) — connects to standing interests
-- `jeremylongshore/tons-of-skills-marketplace` (0.4651) — connects to standing interests; largely unseen before
-- `ruvnet/ruflo` (0.4624) — connects to standing interests
-- `NVIDIA/SkillSpector` (0.4608) — connects to standing interests
-- `firerpa/lamda` (0.4541) — connects to standing interests
-- `ai.agentplaybooks/agentplaybooks` (0.4509) — connects to standing interests
+- `affaan-m/ECC` (0.4836) — connects to standing interests
+- `ruvnet/ruflo` (0.4619) — connects to standing interests
+- `NVIDIA/SkillSpector` (0.4603) — connects to standing interests
+- `getsentry/XcodeBuildMCP` (0.4592) — connects to standing interests
+- `ai.alpic.alpix/Alpix` (0.4547) — connects to standing interests
+- `firerpa/lamda` (0.4535) — connects to standing interests
+- `ai.agentplaybooks/agentplaybooks` (0.4504) — connects to standing interests
 
 ## immune system
 - admitted this beat: 0

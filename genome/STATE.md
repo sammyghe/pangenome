@@ -1,6 +1,6 @@
 # culture-01 — state
 
-heartbeat: 2026-08-29 11:39:54Z  (7.67s)
+heartbeat: 2026-08-30 10:29:25Z  (7.33s)
 
 ## body
 - capabilities in genome: 0
@@ -14,7 +14,7 @@ heartbeat: 2026-08-29 11:39:54Z  (7.67s)
 - github_skills: 187 loci
 - watching 364 loci with enough history to fit
 
-- 352 of them have enough distinct days to fit a rate
+- 359 of them have enough distinct days to fit a rate
 
 ## fastest-spreading right now
 
@@ -22,31 +22,31 @@ heartbeat: 2026-08-29 11:39:54Z  (7.67s)
 
 | locus | R0 | lifetime r | signal | phase | fit r2 |
 |---|---:|---:|---:|---|---:|
-| `anthropics/claude-plugins-community` | 2.19 | 0.04855 | 2656.0 | outbreak | 0.93 |
-| `internet-court/internet-court-skill` | 1.438 | 0.11517 | 4988.0 | outbreak | 0.754 |
-| `tt-a1i/archify` | 1.322 | 0.07546 | 29214.0 | outbreak | 0.761 |
-| `citrolabs/ego-lite` | 1.148 | 0.07088 | 14252.0 | outbreak | 0.973 |
-| `AgriciDaniel/claude-obsidian` | 1.129 | 0.06641 | 14326.0 | outbreak | 0.76 |
-| `virgiliojr94/book-to-skill` | 1.113 | 0.0847 | 26848.0 | outbreak | 0.994 |
-| `harry0703/MoneyPrinterTurbo` | 1.07 | 0.01296 | 118319.0 | outbreak | 0.934 |
-| `titanwings/colleague-skill` | 1.068 | 0.06619 | 23822.0 | outbreak | 0.914 |
-| `DietrichGebert/ponytail` | 1.056 | 0.14864 | 115903.0 | outbreak | 0.974 |
-| `microsoft/power-platform-skills` | 1.055 | 0.03031 | 781.0 | outbreak | 0.972 |
+| `wilwaldon/Claude-Code-Frontend-Design-Toolkit` | 1.61 | 0.03721 | 1026.0 | outbreak | 0.986 |
+| `internet-court/internet-court-skill` | 1.405 | 0.11382 | 5030.0 | outbreak | 0.739 |
+| `tt-a1i/archify` | 1.365 | 0.07574 | 32621.0 | outbreak | 0.785 |
+| `citrolabs/ego-lite` | 1.144 | 0.07043 | 14341.0 | outbreak | 0.972 |
+| `AgriciDaniel/claude-obsidian` | 1.135 | 0.06599 | 14360.0 | outbreak | 0.8 |
+| `virgiliojr94/book-to-skill` | 1.111 | 0.08413 | 27157.0 | outbreak | 0.994 |
+| `titanwings/colleague-skill` | 1.068 | 0.06578 | 23822.0 | outbreak | 0.914 |
+| `harry0703/MoneyPrinterTurbo` | 1.067 | 0.01295 | 118666.0 | outbreak | 0.928 |
+| `DietrichGebert/ponytail` | 1.057 | 0.14694 | 116712.0 | outbreak | 0.976 |
+| `microsoft/power-platform-skills` | 1.053 | 0.0302 | 784.0 | outbreak | 0.969 |
 
 ## brain
 - control plane: **RUN**
 - standing interests (priming): 10
-- observations scanned: 349 · crossed threshold: 58
-- live episodes: 62 · patterns 5 · abstractions 0 · skills 0
-- forgotten this beat: 57 · hypotheses raised: 20
+- observations scanned: 349 · crossed threshold: 57
+- live episodes: 119 · patterns 5 · abstractions 0 · skills 0
+- forgotten this beat: 0 · hypotheses raised: 20
 - learning-to-learning ratio: 0.0041
 
 ## noticed without being asked
 
-- `affaan-m/ECC` (0.4831) — connects to standing interests
-- `ruvnet/ruflo` (0.4614) — connects to standing interests
-- `NVIDIA/SkillSpector` (0.4598) — connects to standing interests
-- `firerpa/lamda` (0.453) — connects to standing interests
+- `affaan-m/ECC` (0.4826) — connects to standing interests
+- `ruvnet/ruflo` (0.4609) — connects to standing interests
+- `NVIDIA/SkillSpector` (0.4593) — connects to standing interests
+- `firerpa/lamda` (0.4526) — connects to standing interests
 
 ## immune system
 - admitted this beat: 0

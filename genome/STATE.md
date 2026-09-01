@@ -1,20 +1,20 @@
 # culture-01 — state
 
-heartbeat: 2026-08-31 11:36:35Z  (6.1s)
+heartbeat: 2026-09-01 10:07:22Z  (9.04s)
 
 ## body
 - capabilities in genome: 0
 - expressed (costing): 0
 - dormant (free): 0
 - swarm diversity: 0.0 nats — STABLE
-- observed mutation rate: 0.1926 (error threshold 0.231)
+- observed mutation rate: 0.1961 (error threshold 0.231)
 
 ## senses
-- mcp_registry: 162 loci
-- github_skills: 187 loci
-- watching 365 loci with enough history to fit
+- mcp_registry: 164 loci
+- github_skills: 186 loci
+- watching 368 loci with enough history to fit
 
-- 360 of them have enough distinct days to fit a rate
+- 361 of them have enough distinct days to fit a rate
 
 ## fastest-spreading right now
 
@@ -22,32 +22,32 @@ heartbeat: 2026-08-31 11:36:35Z  (6.1s)
 
 | locus | R0 | lifetime r | signal | phase | fit r2 |
 |---|---:|---:|---:|---|---:|
-| `anthropics/claude-plugins-community` | 1.937 | 0.04867 | 2984.0 | outbreak | 0.895 |
-| `wilwaldon/Claude-Code-Frontend-Design-Toolkit` | 1.487 | 0.03706 | 1037.0 | outbreak | 0.938 |
-| `tt-a1i/archify` | 1.403 | 0.07603 | 36753.0 | outbreak | 0.808 |
-| `internet-court/internet-court-skill` | 1.377 | 0.11256 | 5148.0 | outbreak | 0.729 |
-| `citrolabs/ego-lite` | 1.139 | 0.06994 | 14452.0 | outbreak | 0.968 |
-| `AgriciDaniel/claude-obsidian` | 1.137 | 0.06555 | 14438.0 | outbreak | 0.83 |
-| `titanwings/colleague-skill` | 1.068 | 0.06533 | 23822.0 | outbreak | 0.914 |
-| `harry0703/MoneyPrinterTurbo` | 1.064 | 0.01294 | 118970.0 | outbreak | 0.921 |
-| `DietrichGebert/ponytail` | 1.058 | 0.14515 | 117839.0 | outbreak | 0.979 |
-| `K-Dense-AI/scientific-agent-skills` | 1.056 | 0.0336 | 40325.0 | outbreak | 0.692 |
+| `tt-a1i/archify` | 1.435 | 0.07624 | 40601.0 | outbreak | 0.83 |
+| `wilwaldon/Claude-Code-Frontend-Design-Toolkit` | 1.39 | 0.0369 | 1042.0 | outbreak | 0.879 |
+| `internet-court/internet-court-skill` | 1.352 | 0.11132 | 5203.0 | outbreak | 0.72 |
+| `AgriciDaniel/claude-obsidian` | 1.137 | 0.06516 | 14505.0 | outbreak | 0.851 |
+| `citrolabs/ego-lite` | 1.134 | 0.06953 | 14569.0 | outbreak | 0.965 |
+| `titanwings/colleague-skill` | 1.068 | 0.06494 | 23822.0 | outbreak | 0.914 |
+| `K-Dense-AI/scientific-agent-skills` | 1.066 | 0.03357 | 41177.0 | outbreak | 0.714 |
+| `harry0703/MoneyPrinterTurbo` | 1.061 | 0.01293 | 119200.0 | outbreak | 0.914 |
+| `DietrichGebert/ponytail` | 1.059 | 0.14362 | 119179.0 | outbreak | 0.981 |
+| `Agents365-ai/drawio-skill` | 1.051 | 0.05005 | 8910.0 | outbreak | 0.827 |
 
 ## brain
 - control plane: **RUN**
 - standing interests (priming): 10
-- observations scanned: 349 · crossed threshold: 58
-- live episodes: 4 · patterns 5 · abstractions 0 · skills 0
-- forgotten this beat: 61 · hypotheses raised: 20
+- observations scanned: 350 · crossed threshold: 60
+- live episodes: 64 · patterns 5 · abstractions 0 · skills 0
+- forgotten this beat: 117 · hypotheses raised: 20
 - learning-to-learning ratio: 0.0036
 
 ## noticed without being asked
 
-- `Nanako0129/sepia` (0.54) — connects to standing interests; largely unseen before
-- `affaan-m/ECC` (0.4821) — connects to standing interests
-- `ruvnet/ruflo` (0.4605) — connects to standing interests
-- `NVIDIA/SkillSpector` (0.4588) — connects to standing interests
-- `firerpa/lamda` (0.4521) — connects to standing interests
+- `affaan-m/ECC` (0.4817) — connects to standing interests
+- `Nanako0129/sepia` (0.4787) — connects to standing interests
+- `ruvnet/ruflo` (0.4601) — connects to standing interests
+- `NVIDIA/SkillSpector` (0.4584) — connects to standing interests
+- `firerpa/lamda` (0.4517) — connects to standing interests
 
 ## immune system
 - admitted this beat: 0

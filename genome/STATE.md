@@ -1,18 +1,18 @@
 # culture-01 — state
 
-heartbeat: 2026-09-04 09:40:12Z  (8.87s)
+heartbeat: 2026-09-05 09:05:50Z  (7.51s)
 
 ## body
 - capabilities in genome: 0
 - expressed (costing): 0
 - dormant (free): 0
 - swarm diversity: 0.0 nats — STABLE
-- observed mutation rate: 0.2056 (error threshold 0.231)
+- observed mutation rate: 0.2055 (error threshold 0.231)
 
 ## senses
 - mcp_registry: 169 loci
 - github_skills: 186 loci
-- watching 376 loci with enough history to fit
+- watching 378 loci with enough history to fit
 
 - 371 of them have enough distinct days to fit a rate
 
@@ -22,32 +22,32 @@ heartbeat: 2026-09-04 09:40:12Z  (8.87s)
 
 | locus | R0 | lifetime r | signal | phase | fit r2 |
 |---|---:|---:|---:|---|---:|
-| `Nanako0129/sepia` | 1.995 | 1.05796 | 1939.0 | outbreak | 0.985 |
-| `tt-a1i/archify` | 1.482 | 0.07565 | 46897.0 | outbreak | 0.888 |
-| `internet-court/internet-court-skill` | 1.295 | 0.10756 | 5369.0 | outbreak | 0.7 |
-| `AgriciDaniel/claude-obsidian` | 1.13 | 0.06392 | 14615.0 | outbreak | 0.881 |
-| `citrolabs/ego-lite` | 1.122 | 0.06826 | 14995.0 | outbreak | 0.955 |
-| `K-Dense-AI/scientific-agent-skills` | 1.083 | 0.03335 | 42503.0 | outbreak | 0.804 |
-| `titanwings/colleague-skill` | 1.068 | 0.06371 | 23822.0 | outbreak | 0.914 |
-| `anbeime/skill` | 1.065 | 0.04078 | 6174.0 | outbreak | 1.0 |
-| `DietrichGebert/ponytail` | 1.064 | 0.13903 | 124132.0 | outbreak | 0.981 |
-| `Agents365-ai/drawio-skill` | 1.059 | 0.04931 | 9028.0 | outbreak | 0.881 |
+| `Nanako0129/sepia` | 1.964 | 0.94485 | 2171.0 | outbreak | 0.989 |
+| `tt-a1i/archify` | 1.487 | 0.07539 | 48622.0 | outbreak | 0.902 |
+| `internet-court/internet-court-skill` | 1.279 | 0.10631 | 5391.0 | outbreak | 0.692 |
+| `wilwaldon/Claude-Code-Frontend-Design-Toolkit` | 1.188 | 0.03625 | 1064.0 | outbreak | 0.701 |
+| `AgriciDaniel/claude-obsidian` | 1.126 | 0.06352 | 14640.0 | outbreak | 0.884 |
+| `citrolabs/ego-lite` | 1.119 | 0.06782 | 15062.0 | outbreak | 0.951 |
+| `K-Dense-AI/scientific-agent-skills` | 1.086 | 0.03327 | 42763.0 | outbreak | 0.828 |
+| `titanwings/colleague-skill` | 1.068 | 0.06332 | 23822.0 | outbreak | 0.914 |
+| `DietrichGebert/ponytail` | 1.066 | 0.13769 | 126880.0 | outbreak | 0.977 |
+| `Agents365-ai/drawio-skill` | 1.06 | 0.04907 | 9051.0 | outbreak | 0.895 |
 
 ## brain
 - control plane: **RUN**
 - standing interests (priming): 10
-- observations scanned: 355 · crossed threshold: 58
-- live episodes: 62 · patterns 5 · abstractions 0 · skills 0
+- observations scanned: 355 · crossed threshold: 57
+- live episodes: 119 · patterns 5 · abstractions 0 · skills 0
 - forgotten this beat: 57 · hypotheses raised: 20
 - learning-to-learning ratio: 0.0032
 
 ## noticed without being asked
 
-- `affaan-m/ECC` (0.4806) — connects to standing interests
-- `ruvnet/ruflo` (0.459) — connects to standing interests
-- `NVIDIA/SkillSpector` (0.4573) — connects to standing interests
-- `anbeime/skill` (0.4567) — connects to standing interests
-- `firerpa/lamda` (0.4513) — connects to standing interests
+- `nateherkai/scroll-craft` (0.5355) — connects to standing interests; largely unseen before
+- `affaan-m/ECC` (0.4802) — connects to standing interests
+- `ruvnet/ruflo` (0.4587) — connects to standing interests
+- `NVIDIA/SkillSpector` (0.457) — connects to standing interests
+- `firerpa/lamda` (0.451) — connects to standing interests
 
 ## immune system
 - admitted this beat: 0

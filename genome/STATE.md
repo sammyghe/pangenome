@@ -1,20 +1,20 @@
 # culture-01 — state
 
-heartbeat: 2026-09-11 09:42:16Z  (7.93s)
+heartbeat: 2026-09-12 09:22:35Z  (10.33s)
 
 ## body
 - capabilities in genome: 0
 - expressed (costing): 0
 - dormant (free): 0
 - swarm diversity: 0.0 nats — STABLE
-- observed mutation rate: 0.2175 (error threshold 0.231)
+- observed mutation rate: 0.2183 (error threshold 0.231)
 
 ## senses
-- mcp_registry: 177 loci
+- mcp_registry: 178 loci
 - github_skills: 185 loci
-- watching 392 loci with enough history to fit
+- watching 395 loci with enough history to fit
 
-- 382 of them have enough distinct days to fit a rate
+- 384 of them have enough distinct days to fit a rate
 
 ## fastest-spreading right now
 
@@ -22,32 +22,34 @@ heartbeat: 2026-09-11 09:42:16Z  (7.93s)
 
 | locus | R0 | lifetime r | signal | phase | fit r2 |
 |---|---:|---:|---:|---|---:|
-| `tt-a1i/archify` | 1.466 | 0.07352 | 57948.0 | outbreak | 0.94 |
-| `internet-court/internet-court-skill` | 1.205 | 0.0993 | 5565.0 | outbreak | 0.647 |
-| `cathrynlavery/diagram-design` | 1.131 | 0.07145 | 38189.0 | outbreak | 0.96 |
-| `apify/apify-mcp-server` | 1.125 | 0.01422 | 6459.0 | outbreak | 0.997 |
-| `AgriciDaniel/claude-obsidian` | 1.102 | 0.06116 | 14825.0 | outbreak | 0.861 |
-| `citrolabs/ego-lite` | 1.099 | 0.06533 | 15692.0 | outbreak | 0.93 |
-| `K-Dense-AI/scientific-agent-skills` | 1.088 | 0.03277 | 44387.0 | outbreak | 0.907 |
-| `Gentleman-Programming/gentle-ai` | 1.076 | 0.04503 | 6634.0 | outbreak | 0.982 |
-| `DietrichGebert/ponytail` | 1.073 | 0.12931 | 135277.0 | outbreak | 0.981 |
-| `titanwings/colleague-skill` | 1.068 | 0.06101 | 23822.0 | outbreak | 0.914 |
+| `tt-a1i/archify` | 1.458 | 0.07315 | 58947.0 | outbreak | 0.941 |
+| `anthropics/claude-plugins-community` | 1.347 | 0.0468 | 3828.0 | outbreak | 0.742 |
+| `trailhq/Graft` | 1.202 | 0.12544 | 7210.0 | outbreak | 0.983 |
+| `internet-court/internet-court-skill` | 1.196 | 0.09831 | 5625.0 | outbreak | 0.642 |
+| `cathrynlavery/diagram-design` | 1.134 | 0.07105 | 38621.0 | outbreak | 0.961 |
+| `apify/apify-mcp-server` | 1.125 | 0.0142 | 6459.0 | outbreak | 0.997 |
+| `AgriciDaniel/claude-obsidian` | 1.098 | 0.06079 | 14846.0 | outbreak | 0.854 |
+| `citrolabs/ego-lite` | 1.097 | 0.06493 | 15757.0 | outbreak | 0.928 |
+| `K-Dense-AI/scientific-agent-skills` | 1.087 | 0.03268 | 44526.0 | outbreak | 0.912 |
+| `DietrichGebert/ponytail` | 1.073 | 0.128 | 136130.0 | outbreak | 0.983 |
 
 ## brain
 - control plane: **RUN**
 - standing interests (priming): 10
-- observations scanned: 362 · crossed threshold: 59
-- live episodes: 125 · patterns 5 · abstractions 0 · skills 0
+- observations scanned: 363 · crossed threshold: 61
+- live episodes: 4 · patterns 5 · abstractions 0 · skills 0
 - forgotten this beat: 57 · hypotheses raised: 20
-- learning-to-learning ratio: 0.0026
+- learning-to-learning ratio: 0.0024
 
 ## noticed without being asked
 
-- `Agents365-ai/drawio-skill` (0.5302) — connects to standing interests; largely unseen before
-- `Gentleman-Programming/gentle-ai` (0.4792) — connects to standing interests
-- `affaan-m/ECC` (0.4787) — connects to standing interests
-- `ruvnet/ruflo` (0.4572) — connects to standing interests
-- `NVIDIA/SkillSpector` (0.4555) — connects to standing interests
+- `Agents365-ai/drawio-skill` (0.5298) — connects to standing interests; largely unseen before
+- `ruvnet/ruflo` (0.4947) — connects to standing interests
+- `affaan-m/ECC` (0.4785) — connects to standing interests
+- `Gentleman-Programming/gentle-ai` (0.4765) — connects to standing interests
+- `trailhq/Graft` (0.4604) — connects to standing interests
+- `NVIDIA/SkillSpector` (0.4553) — connects to standing interests
+- `zenstory-ai/oh-story-claudecode` (0.4505) — connects to standing interests; largely unseen before
 
 ## immune system
 - admitted this beat: 0

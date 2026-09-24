@@ -1,20 +1,20 @@
 # culture-01 — state
 
-heartbeat: 2026-09-23 09:59:36Z  (7.86s)
+heartbeat: 2026-09-24 10:01:51Z  (6.97s)
 
 ## body
 - capabilities in genome: 0
 - expressed (costing): 0
 - dormant (free): 0
 - swarm diversity: 0.0 nats — STABLE
-- observed mutation rate: 0.2215 (error threshold 0.231)
+- observed mutation rate: 0.2266 (error threshold 0.231)
 
 ## senses
 - mcp_registry: 194 loci
 - github_skills: 184 loci
 - watching 420 loci with enough history to fit
 
-- 406 of them have enough distinct days to fit a rate
+- 408 of them have enough distinct days to fit a rate
 
 ## fastest-spreading right now
 
@@ -22,32 +22,32 @@ heartbeat: 2026-09-23 09:59:36Z  (7.86s)
 
 | locus | R0 | lifetime r | signal | phase | fit r2 |
 |---|---:|---:|---:|---|---:|
-| `tamaratran/fast-jev-compaction` | 2.543 | — | 6443.0 | outbreak | 0.845 |
-| `cathrynlavery/diagram-design` | 1.127 | 0.06669 | 42107.0 | outbreak | 0.974 |
-| `apify/apify-mcp-server` | 1.12 | 0.01432 | 8144.0 | outbreak | 0.998 |
-| `alibaba/open-code-review` | 1.101 | 0.08258 | 39998.0 | outbreak | 0.637 |
-| `blader/humanizer` | 1.073 | 0.04372 | 51533.0 | outbreak | 0.969 |
-| `DietrichGebert/ponytail` | 1.068 | 0.11494 | 144676.0 | outbreak | 0.986 |
-| `titanwings/colleague-skill` | 1.068 | 0.05688 | 23822.0 | outbreak | 0.914 |
-| `Devin-AXIS/iPolloWork` | 1.063 | 0.02231 | 6594.0 | outbreak | 0.991 |
-| `microsoft/power-platform-skills` | 1.047 | 0.02786 | 913.0 | outbreak | 0.99 |
-| `hex/claude-council` | 1.046 | 0.02384 | 785.0 | outbreak | 0.951 |
+| `cathrynlavery/diagram-design` | 1.125 | 0.0663 | 42269.0 | outbreak | 0.972 |
+| `apify/apify-mcp-server` | 1.119 | 0.01432 | 8270.0 | outbreak | 0.997 |
+| `alibaba/open-code-review` | 1.106 | 0.08203 | 40453.0 | outbreak | 0.662 |
+| `blader/humanizer` | 1.073 | 0.04356 | 51750.0 | outbreak | 0.971 |
+| `titanwings/colleague-skill` | 1.068 | 0.05656 | 23822.0 | outbreak | 0.914 |
+| `DietrichGebert/ponytail` | 1.067 | 0.11387 | 145260.0 | outbreak | 0.985 |
+| `Devin-AXIS/iPolloWork` | 1.061 | 0.02227 | 6648.0 | outbreak | 0.993 |
+| `microsoft/power-platform-skills` | 1.046 | 0.02778 | 919.0 | outbreak | 0.991 |
+| `NVIDIA/SkillSpector` | 1.042 | 0.05234 | 18196.0 | outbreak | 0.966 |
+| `hex/claude-council` | 1.042 | 0.02376 | 785.0 | outbreak | 0.928 |
 
 ## brain
 - control plane: **RUN**
 - standing interests (priming): 10
 - observations scanned: 378 · crossed threshold: 61
-- live episodes: 124 · patterns 6 · abstractions 0 · skills 0
-- forgotten this beat: 70 · hypotheses raised: 20
+- live episodes: 5 · patterns 6 · abstractions 0 · skills 0
+- forgotten this beat: 59 · hypotheses raised: 20
 - learning-to-learning ratio: 0.0034
 
 ## noticed without being asked
 
-- `feder-cr/invisible_playwright_mcp` (0.5255) — connects to standing interests; largely unseen before
-- `Gentleman-Programming/gentle-ai` (0.4838) — connects to standing interests
-- `affaan-m/ECC` (0.4766) — connects to standing interests
-- `ruvnet/ruflo` (0.4648) — connects to standing interests
-- `NVIDIA/SkillSpector` (0.4535) — connects to standing interests
+- `feder-cr/invisible_playwright_mcp` (0.5234) — connects to standing interests; largely unseen before
+- `Gentleman-Programming/gentle-ai` (0.4801) — connects to standing interests
+- `affaan-m/ECC` (0.4764) — connects to standing interests
+- `ruvnet/ruflo` (0.464) — connects to standing interests
+- `NVIDIA/SkillSpector` (0.4533) — connects to standing interests
 
 ## immune system
 - admitted this beat: 0

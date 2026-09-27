@@ -1,20 +1,20 @@
 # culture-01 — state
 
-heartbeat: 2026-09-26 09:52:29Z  (6.7s)
+heartbeat: 2026-09-27 10:33:38Z  (9.81s)
 
 ## body
 - capabilities in genome: 0
 - expressed (costing): 0
 - dormant (free): 0
 - swarm diversity: 0.0 nats — STABLE
-- observed mutation rate: 0.2241 (error threshold 0.231)
+- observed mutation rate: 0.2216 (error threshold 0.231)
 
 ## senses
-- mcp_registry: 198 loci
+- mcp_registry: 200 loci
 - github_skills: 184 loci
-- watching 424 loci with enough history to fit
+- watching 426 loci with enough history to fit
 
-- 414 of them have enough distinct days to fit a rate
+- 415 of them have enough distinct days to fit a rate
 
 ## fastest-spreading right now
 
@@ -22,33 +22,32 @@ heartbeat: 2026-09-26 09:52:29Z  (6.7s)
 
 | locus | R0 | lifetime r | signal | phase | fit r2 |
 |---|---:|---:|---:|---|---:|
-| `apify/apify-mcp-server` | 1.118 | 0.01433 | 8543.0 | outbreak | 0.998 |
-| `alibaba/open-code-review` | 1.114 | 0.08097 | 41474.0 | outbreak | 0.705 |
-| `blader/humanizer` | 1.072 | 0.04324 | 52070.0 | outbreak | 0.973 |
-| `titanwings/colleague-skill` | 1.068 | 0.05593 | 23822.0 | outbreak | 0.914 |
-| `DietrichGebert/ponytail` | 1.066 | 0.1118 | 146183.0 | outbreak | 0.981 |
-| `microsoft/power-platform-skills` | 1.046 | 0.02761 | 932.0 | outbreak | 0.991 |
-| `NVIDIA/SkillSpector` | 1.042 | 0.05183 | 18324.0 | outbreak | 0.97 |
-| `mksglu/context-mode` | 1.037 | 0.04689 | 24076.0 | outbreak | 0.874 |
-| `zhukunpenglinyutong/jetbrains-cc-gui` | 1.036 | 0.02836 | 6618.0 | outbreak | 0.978 |
-| `hex/claude-council` | 1.036 | 0.02361 | 790.0 | outbreak | 0.896 |
+| `tamaratran/fast-jev-compaction` | 1.777 | 0.86855 | 6990.0 | outbreak | 0.695 |
+| `Nanako0129/sepia` | 1.171 | 0.2638 | 2878.0 | outbreak | 0.654 |
+| `internet-court/internet-court-skill` | 1.117 | 0.08492 | 6227.0 | outbreak | 0.6 |
+| `alibaba/open-code-review` | 1.117 | 0.08039 | 41751.0 | outbreak | 0.724 |
+| `apify/apify-mcp-server` | 1.117 | 0.01433 | 8664.0 | outbreak | 0.998 |
+| `blader/humanizer` | 1.071 | 0.04307 | 52240.0 | outbreak | 0.973 |
+| `titanwings/colleague-skill` | 1.068 | 0.05562 | 23822.0 | outbreak | 0.914 |
+| `DietrichGebert/ponytail` | 1.065 | 0.11076 | 146701.0 | outbreak | 0.98 |
+| `microsoft/power-platform-skills` | 1.046 | 0.02751 | 936.0 | outbreak | 0.991 |
+| `NVIDIA/SkillSpector` | 1.042 | 0.05157 | 18405.0 | outbreak | 0.972 |
 
 ## brain
 - control plane: **RUN**
 - standing interests (priming): 10
-- observations scanned: 382 · crossed threshold: 58
-- live episodes: 120 · patterns 6 · abstractions 0 · skills 0
-- forgotten this beat: 55 · hypotheses raised: 20
+- observations scanned: 384 · crossed threshold: 56
+- live episodes: 6 · patterns 6 · abstractions 0 · skills 0
+- forgotten this beat: 62 · hypotheses raised: 20
 - learning-to-learning ratio: 0.0034
 
 ## noticed without being asked
 
-- `ai.bamf/bamf` (0.5169) — connects to standing interests; largely unseen before
-- `affaan-m/ECC` (0.4762) — connects to standing interests
-- `Gentleman-Programming/gentle-ai` (0.4751) — connects to standing interests
-- `ruvnet/ruflo` (0.4627) — connects to standing interests
-- `feder-cr/invisible_playwright_mcp` (0.4621) — connects to standing interests
-- `NVIDIA/SkillSpector` (0.4531) — connects to standing interests
+- `affaan-m/ECC` (0.476) — connects to standing interests
+- `Gentleman-Programming/gentle-ai` (0.4734) — connects to standing interests
+- `ruvnet/ruflo` (0.4621) — connects to standing interests
+- `ai.bamf/bamf` (0.4555) — connects to standing interests
+- `NVIDIA/SkillSpector` (0.4528) — connects to standing interests
 
 ## immune system
 - admitted this beat: 0

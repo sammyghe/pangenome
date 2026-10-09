@@ -1,20 +1,20 @@
 # culture-01 — state
 
-heartbeat: 2026-10-08 12:02:27Z  (34.87s)
+heartbeat: 2026-10-09 11:54:26Z  (9.99s)
 
 ## body
 - capabilities in genome: 0
 - expressed (costing): 0
 - dormant (free): 0
 - swarm diversity: 0.0 nats — STABLE
-- observed mutation rate: 0.2095 (error threshold 0.231)
+- observed mutation rate: 0.2121 (error threshold 0.231)
 
 ## senses
-- mcp_registry: 235 loci
+- mcp_registry: 240 loci
 - github_skills: 183 loci
-- watching 473 loci with enough history to fit
+- watching 478 loci with enough history to fit
 
-- 451 of them have enough distinct days to fit a rate
+- 458 of them have enough distinct days to fit a rate
 
 ## fastest-spreading right now
 
@@ -22,30 +22,30 @@ heartbeat: 2026-10-08 12:02:27Z  (34.87s)
 
 | locus | R0 | lifetime r | signal | phase | fit r2 |
 |---|---:|---:|---:|---|---:|
-| `nykooi1/vibe-wise` | 3.405 | 0.85023 | 3059.0 | outbreak | 0.94 |
-| `ai.alphaquantlabs/propertycheck` | 1.393 | — | 2.0 | outbreak | 0.597 |
-| `tigerless-labs/autoharness` | 1.355 | 0.07597 | 9544.0 | outbreak | 0.931 |
-| `anthropics/claude-plugins-community` | 1.128 | 0.04164 | 4573.0 | outbreak | 0.646 |
-| `alibaba/open-code-review` | 1.125 | 0.07463 | 44474.0 | outbreak | 0.846 |
-| `apify/apify-mcp-server` | 1.11 | 0.01432 | 10118.0 | outbreak | 0.996 |
-| `soumatheusgomes/vibe-coding-toolkit` | 1.103 | 0.12349 | 839.0 | outbreak | 0.961 |
-| `titanwings/colleague-skill` | 1.068 | 0.05242 | 23822.0 | outbreak | 0.914 |
-| `persiyanov/herdr-reviewr` | 1.049 | 0.06489 | 851.0 | outbreak | 0.982 |
-| `pbakaus/impeccable` | 1.047 | 0.03453 | 78474.0 | outbreak | 0.958 |
+| `morluto/rea` | 4.854 | 0.05859 | 34731.0 | outbreak | 0.998 |
+| `nykooi1/vibe-wise` | 2.957 | 0.77455 | 3234.0 | outbreak | 0.888 |
+| `tigerless-labs/autoharness` | 1.416 | 0.07633 | 10754.0 | outbreak | 0.934 |
+| `ai.alphaquantlabs/propertycheck` | 1.411 | — | 2.0 | outbreak | 0.667 |
+| `tamaratran/fast-jev-compaction` | 1.235 | 0.40132 | 7544.0 | outbreak | 0.486 |
+| `alibaba/open-code-review` | 1.124 | 0.07417 | 44802.0 | outbreak | 0.852 |
+| `apify/apify-mcp-server` | 1.109 | 0.01432 | 10226.0 | outbreak | 0.996 |
+| `soumatheusgomes/vibe-coding-toolkit` | 1.099 | 0.12128 | 839.0 | outbreak | 0.973 |
+| `internet-court/internet-court-skill` | 1.09 | 0.07641 | 6517.0 | outbreak | 0.611 |
+| `titanwings/colleague-skill` | 1.068 | 0.05215 | 23822.0 | outbreak | 0.914 |
 
 ## brain
 - control plane: **RUN**
 - standing interests (priming): 10
-- observations scanned: 418 · crossed threshold: 60
-- live episodes: 123 · patterns 6 · abstractions 0 · skills 0
-- forgotten this beat: 60 · hypotheses raised: 20
+- observations scanned: 423 · crossed threshold: 61
+- live episodes: 7 · patterns 6 · abstractions 0 · skills 0
+- forgotten this beat: 59 · hypotheses raised: 20
 - learning-to-learning ratio: 0.0035
 
 ## noticed without being asked
 
-- `affaan-m/ECC` (0.4748) — connects to standing interests
-- `ruvnet/ruflo` (0.4564) — connects to standing interests
-- `NVIDIA/SkillSpector` (0.4516) — connects to standing interests
+- `affaan-m/ECC` (0.4747) — connects to standing interests
+- `ruvnet/ruflo` (0.4562) — connects to standing interests
+- `NVIDIA/SkillSpector` (0.4515) — connects to standing interests
 
 ## immune system
 - admitted this beat: 0

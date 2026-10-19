@@ -1,20 +1,20 @@
 # culture-01 — state
 
-heartbeat: 2026-10-18 09:38:20Z  (12.98s)
+heartbeat: 2026-10-19 10:47:13Z  (28.71s)
 
 ## body
 - capabilities in genome: 0
 - expressed (costing): 0
 - dormant (free): 0
 - swarm diversity: 0.0 nats — STABLE
-- observed mutation rate: 0.2044 (error threshold 0.231)
+- observed mutation rate: 0.2035 (error threshold 0.231)
 
 ## senses
-- mcp_registry: 260 loci
+- mcp_registry: 0 loci
 - github_skills: 181 loci
-- watching 513 loci with enough history to fit
+- watching 516 loci with enough history to fit
 
-- 496 of them have enough distinct days to fit a rate
+- 501 of them have enough distinct days to fit a rate
 
 ## fastest-spreading right now
 
@@ -22,29 +22,30 @@ heartbeat: 2026-10-18 09:38:20Z  (12.98s)
 
 | locus | R0 | lifetime r | signal | phase | fit r2 |
 |---|---:|---:|---:|---|---:|
-| `ai.arcreport/ask` | 2.129 | — | 2.0 | outbreak | 0.681 |
-| `ai.alphaquantlabs/propertycheck` | 1.298 | 0.05577 | 2.0 | outbreak | 0.758 |
-| `tigerless-labs/autoharness` | 1.203 | 0.07139 | 11135.0 | outbreak | 0.786 |
-| `soumatheusgomes/vibe-coding-toolkit` | 1.2 | 0.11386 | 1532.0 | outbreak | 0.618 |
-| `alibaba/open-code-review` | 1.118 | 0.07025 | 47560.0 | outbreak | 0.884 |
+| `ai.arcreport/ask` | 1.869 | — | 2.0 | outbreak | 0.615 |
+| `nykooi1/vibe-wise` | 1.488 | 0.40389 | 3768.0 | outbreak | 0.577 |
+| `ai.alphaquantlabs/propertycheck` | 1.283 | 0.05143 | 2.0 | outbreak | 0.748 |
+| `soumatheusgomes/vibe-coding-toolkit` | 1.235 | 0.11324 | 1657.0 | outbreak | 0.647 |
+| `alibaba/open-code-review` | 1.117 | 0.06978 | 47631.0 | outbreak | 0.886 |
 | `ai.audiopod/audiopod` | 1.112 | — | 2.0 | outbreak | 0.345 |
-| `apify/apify-mcp-server` | 1.107 | 0.01434 | 11782.0 | outbreak | 0.997 |
-| `titanwings/colleague-skill` | 1.068 | 0.04985 | 23822.0 | outbreak | 0.914 |
-| `trailhq/Trail-Code` | 1.066 | 0.08653 | 10347.0 | outbreak | 0.951 |
-| `pbakaus/impeccable` | 1.047 | 0.03366 | 82493.0 | outbreak | 0.985 |
+| `apify/apify-mcp-server` | 1.107 | 0.01434 | 11958.0 | outbreak | 0.997 |
+| `titanwings/colleague-skill` | 1.068 | 0.04959 | 23822.0 | outbreak | 0.914 |
+| `trailhq/Trail-Code` | 1.064 | 0.08576 | 10426.0 | outbreak | 0.969 |
+| `microsoft/power-platform-skills` | 1.045 | 0.02529 | 940.0 | outbreak | 0.992 |
 
 ## brain
 - control plane: **RUN**
 - standing interests (priming): 10
-- observations scanned: 441 · crossed threshold: 62
-- live episodes: 7 · patterns 6 · abstractions 0 · skills 0
-- forgotten this beat: 60 · hypotheses raised: 20
+- observations scanned: 332 · crossed threshold: 59
+- live episodes: 66 · patterns 6 · abstractions 0 · skills 0
+- forgotten this beat: 61 · hypotheses raised: 20
 - learning-to-learning ratio: 0.0
 
 ## noticed without being asked
 
-- `affaan-m/ECC` (0.4739) — connects to standing interests
-- `ruvnet/ruflo` (0.4544) — connects to standing interests
+- `Evil0ctal/Douyin_TikTok_Download_API` (0.5246) — connects to standing interests; largely unseen before
+- `affaan-m/ECC` (0.4738) — connects to standing interests
+- `ruvnet/ruflo` (0.4543) — connects to standing interests
 - `NVIDIA/SkillSpector` (0.4507) — connects to standing interests
 
 ## immune system

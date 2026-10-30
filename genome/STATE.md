@@ -1,20 +1,20 @@
 # culture-01 — state
 
-heartbeat: 2026-10-29 11:31:18Z  (12.46s)
+heartbeat: 2026-10-30 11:24:04Z  (9.71s)
 
 ## body
 - capabilities in genome: 0
 - expressed (costing): 0
 - dormant (free): 0
 - swarm diversity: 0.0 nats — STABLE
-- observed mutation rate: 0.1983 (error threshold 0.231)
+- observed mutation rate: 0.2 (error threshold 0.231)
 
 ## senses
 - mcp_registry: 262 loci
-- github_skills: 182 loci
-- watching 558 loci with enough history to fit
+- github_skills: 181 loci
+- watching 564 loci with enough history to fit
 
-- 542 of them have enough distinct days to fit a rate
+- 545 of them have enough distinct days to fit a rate
 
 ## fastest-spreading right now
 
@@ -22,33 +22,32 @@ heartbeat: 2026-10-29 11:31:18Z  (12.46s)
 
 | locus | R0 | lifetime r | signal | phase | fit r2 |
 |---|---:|---:|---:|---|---:|
-| `soumatheusgomes/vibe-coding-toolkit` | 1.316 | 0.10129 | 2093.0 | outbreak | 0.866 |
-| `nykooi1/vibe-wise` | 1.235 | 0.2729 | 4028.0 | outbreak | 0.479 |
-| `ai.arcreport/ask` | 1.177 | 0.04658 | 2.0 | outbreak | 0.308 |
-| `ai.alphaquantlabs/propertycheck` | 1.171 | 0.02949 | 2.0 | outbreak | 0.63 |
-| `ai.audiopod/audiopod` | 1.161 | 0.04724 | 2.0 | outbreak | 0.687 |
-| `debpalash/VoiceStudio` | 1.143 | 0.05651 | 93631.0 | outbreak | 0.995 |
-| `viettranx/3dviz-pro-max` | 1.122 | 0.13898 | 960.0 | outbreak | 0.992 |
-| `alchaincyf/huashu-design` | 1.119 | 0.0531 | 28054.0 | outbreak | 0.914 |
-| `tigerless-labs/autoharness` | 1.085 | 0.06561 | 10830.0 | outbreak | 0.469 |
-| `titanwings/colleague-skill` | 1.068 | 0.04726 | 23822.0 | outbreak | 0.914 |
+| `morluto/rea` | 1.843 | 0.0648 | 410113.0 | outbreak | 0.682 |
+| `liguobao/ds-harness-remote` | 1.341 | 0.08991 | 1000.0 | outbreak | 0.943 |
+| `soumatheusgomes/vibe-coding-toolkit` | 1.311 | 0.10017 | 2126.0 | outbreak | 0.871 |
+| `ai.alphaquantlabs/propertycheck` | 1.164 | 0.02829 | 2.0 | outbreak | 0.618 |
+| `ai.audiopod/audiopod` | 1.16 | 0.04424 | 2.0 | outbreak | 0.7 |
+| `debpalash/VoiceStudio` | 1.141 | 0.0563 | 94937.0 | outbreak | 0.996 |
+| `viettranx/3dviz-pro-max` | 1.116 | 0.13644 | 970.0 | outbreak | 0.99 |
+| `tigerless-labs/autoharness` | 1.075 | 0.065 | 10604.0 | outbreak | 0.428 |
+| `titanwings/colleague-skill` | 1.068 | 0.04704 | 23822.0 | outbreak | 0.914 |
+| `mksglu/context-mode` | 1.05 | 0.04173 | 32895.0 | outbreak | 0.941 |
 
 ## brain
 - control plane: **RUN**
 - standing interests (priming): 10
-- observations scanned: 444 · crossed threshold: 67
-- live episodes: 136 · patterns 6 · abstractions 0 · skills 0
-- forgotten this beat: 66 · hypotheses raised: 20
+- observations scanned: 443 · crossed threshold: 68
+- live episodes: 7 · patterns 6 · abstractions 0 · skills 0
+- forgotten this beat: 62 · hypotheses raised: 20
 - learning-to-learning ratio: 0.0
 
 ## noticed without being asked
 
-- `dagoSte/squadra` (0.5315) — connects to standing interests; largely unseen before
-- `xerj-org/xerj` (0.4819) — connects to standing interests
-- `affaan-m/ECC` (0.4731) — connects to standing interests
-- `ccfos/nightingale` (0.4586) — connects to standing interests
-- `hashgraph-online/awesome-ai-plugins` (0.4566) — connects to standing interests; largely unseen before
-- `ruvnet/ruflo` (0.4528) — connects to standing interests
+- `xerj-org/xerj` (0.4766) — connects to standing interests
+- `affaan-m/ECC` (0.473) — connects to standing interests
+- `dagoSte/squadra` (0.4702) — connects to standing interests
+- `farion1231/cc-switch` (0.4665) — connects to standing interests; largely unseen before
+- `ruvnet/ruflo` (0.4527) — connects to standing interests
 
 ## immune system
 - admitted this beat: 0

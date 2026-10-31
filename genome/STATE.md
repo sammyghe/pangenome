@@ -1,6 +1,6 @@
 # culture-01 — state
 
-heartbeat: 2026-10-30 11:24:04Z  (9.71s)
+heartbeat: 2026-10-31 10:55:37Z  (7.54s)
 
 ## body
 - capabilities in genome: 0
@@ -11,8 +11,8 @@ heartbeat: 2026-10-30 11:24:04Z  (9.71s)
 
 ## senses
 - mcp_registry: 262 loci
-- github_skills: 181 loci
-- watching 564 loci with enough history to fit
+- github_skills: 180 loci
+- watching 570 loci with enough history to fit
 
 - 545 of them have enough distinct days to fit a rate
 
@@ -22,32 +22,34 @@ heartbeat: 2026-10-30 11:24:04Z  (9.71s)
 
 | locus | R0 | lifetime r | signal | phase | fit r2 |
 |---|---:|---:|---:|---|---:|
-| `morluto/rea` | 1.843 | 0.0648 | 410113.0 | outbreak | 0.682 |
-| `liguobao/ds-harness-remote` | 1.341 | 0.08991 | 1000.0 | outbreak | 0.943 |
-| `soumatheusgomes/vibe-coding-toolkit` | 1.311 | 0.10017 | 2126.0 | outbreak | 0.871 |
-| `ai.alphaquantlabs/propertycheck` | 1.164 | 0.02829 | 2.0 | outbreak | 0.618 |
-| `ai.audiopod/audiopod` | 1.16 | 0.04424 | 2.0 | outbreak | 0.7 |
-| `debpalash/VoiceStudio` | 1.141 | 0.0563 | 94937.0 | outbreak | 0.996 |
-| `viettranx/3dviz-pro-max` | 1.116 | 0.13644 | 970.0 | outbreak | 0.99 |
-| `tigerless-labs/autoharness` | 1.075 | 0.065 | 10604.0 | outbreak | 0.428 |
-| `titanwings/colleague-skill` | 1.068 | 0.04704 | 23822.0 | outbreak | 0.914 |
-| `mksglu/context-mode` | 1.05 | 0.04173 | 32895.0 | outbreak | 0.941 |
+| `liguobao/ds-harness-remote` | 1.446 | 0.08995 | 1095.0 | outbreak | 0.95 |
+| `soumatheusgomes/vibe-coding-toolkit` | 1.306 | 0.09913 | 2163.0 | outbreak | 0.876 |
+| `nykooi1/vibe-wise` | 1.211 | 0.25667 | 4082.0 | outbreak | 0.469 |
+| `ai.audiopod/audiopod` | 1.159 | 0.04164 | 2.0 | outbreak | 0.711 |
+| `ai.alphaquantlabs/propertycheck` | 1.156 | 0.0272 | 2.0 | outbreak | 0.607 |
+| `debpalash/VoiceStudio` | 1.139 | 0.05609 | 96208.0 | outbreak | 0.995 |
+| `Vincentwei1021/video-shotcraft` | 1.088 | 0.09268 | 15294.0 | outbreak | 0.991 |
+| `tamaratran/fast-jev-compaction` | 1.079 | 0.20275 | 7810.0 | outbreak | 0.355 |
+| `tigerless-labs/autoharness` | 1.075 | 0.06456 | 10604.0 | outbreak | 0.428 |
+| `titanwings/colleague-skill` | 1.068 | 0.04683 | 23822.0 | outbreak | 0.914 |
 
 ## brain
 - control plane: **RUN**
 - standing interests (priming): 10
-- observations scanned: 443 · crossed threshold: 68
-- live episodes: 7 · patterns 6 · abstractions 0 · skills 0
+- observations scanned: 442 · crossed threshold: 67
+- live episodes: 74 · patterns 6 · abstractions 0 · skills 0
 - forgotten this beat: 62 · hypotheses raised: 20
 - learning-to-learning ratio: 0.0
 
 ## noticed without being asked
 
-- `xerj-org/xerj` (0.4766) — connects to standing interests
-- `affaan-m/ECC` (0.473) — connects to standing interests
-- `dagoSte/squadra` (0.4702) — connects to standing interests
-- `farion1231/cc-switch` (0.4665) — connects to standing interests; largely unseen before
-- `ruvnet/ruflo` (0.4527) — connects to standing interests
+- `mobile-next/mobile-mcp` (0.5358) — connects to standing interests; largely unseen before
+- `morluto/rea` (0.5154) — connects to standing interests; largely unseen before
+- `ai.agentplaybooks/agentplaybooks` (0.5135) — connects to standing interests; largely unseen before
+- `affaan-m/ECC` (0.4729) — connects to standing interests
+- `xerj-org/xerj` (0.4729) — connects to standing interests
+- `dagoSte/squadra` (0.4531) — connects to standing interests
+- `ruvnet/ruflo` (0.4526) — connects to standing interests
 
 ## immune system
 - admitted this beat: 0

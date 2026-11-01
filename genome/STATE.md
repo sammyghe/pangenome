@@ -1,20 +1,20 @@
 # culture-01 — state
 
-heartbeat: 2026-10-31 10:55:37Z  (7.54s)
+heartbeat: 2026-11-01 11:50:39Z  (6.38s)
 
 ## body
 - capabilities in genome: 0
 - expressed (costing): 0
 - dormant (free): 0
 - swarm diversity: 0.0 nats — STABLE
-- observed mutation rate: 0.2 (error threshold 0.231)
+- observed mutation rate: 0.1987 (error threshold 0.231)
 
 ## senses
-- mcp_registry: 262 loci
-- github_skills: 180 loci
-- watching 570 loci with enough history to fit
+- mcp_registry: 258 loci
+- github_skills: 181 loci
+- watching 573 loci with enough history to fit
 
-- 545 of them have enough distinct days to fit a rate
+- 555 of them have enough distinct days to fit a rate
 
 ## fastest-spreading right now
 
@@ -22,34 +22,34 @@ heartbeat: 2026-10-31 10:55:37Z  (7.54s)
 
 | locus | R0 | lifetime r | signal | phase | fit r2 |
 |---|---:|---:|---:|---|---:|
-| `liguobao/ds-harness-remote` | 1.446 | 0.08995 | 1095.0 | outbreak | 0.95 |
-| `soumatheusgomes/vibe-coding-toolkit` | 1.306 | 0.09913 | 2163.0 | outbreak | 0.876 |
-| `nykooi1/vibe-wise` | 1.211 | 0.25667 | 4082.0 | outbreak | 0.469 |
-| `ai.audiopod/audiopod` | 1.159 | 0.04164 | 2.0 | outbreak | 0.711 |
-| `ai.alphaquantlabs/propertycheck` | 1.156 | 0.0272 | 2.0 | outbreak | 0.607 |
-| `debpalash/VoiceStudio` | 1.139 | 0.05609 | 96208.0 | outbreak | 0.995 |
-| `Vincentwei1021/video-shotcraft` | 1.088 | 0.09268 | 15294.0 | outbreak | 0.991 |
-| `tamaratran/fast-jev-compaction` | 1.079 | 0.20275 | 7810.0 | outbreak | 0.355 |
-| `tigerless-labs/autoharness` | 1.075 | 0.06456 | 10604.0 | outbreak | 0.428 |
-| `titanwings/colleague-skill` | 1.068 | 0.04683 | 23822.0 | outbreak | 0.914 |
+| `morluto/rea` | 1.748 | 0.06424 | 416979.0 | outbreak | 0.656 |
+| `liguobao/ds-harness-remote` | 1.472 | 0.08965 | 1174.0 | outbreak | 0.975 |
+| `dagoSte/squadra` | 1.441 | 0.20562 | 1155.0 | outbreak | 0.981 |
+| `soumatheusgomes/vibe-coding-toolkit` | 1.3 | 0.09791 | 2179.0 | outbreak | 0.878 |
+| `EpicGames/unreal-engine-skills-for-claude-code-plugin` | 1.157 | 0.05144 | 1794.0 | outbreak | 0.722 |
+| `ai.audiopod/audiopod` | 1.157 | 0.03919 | 2.0 | outbreak | 0.72 |
+| `ai.alphaquantlabs/propertycheck` | 1.149 | 0.02614 | 2.0 | outbreak | 0.596 |
+| `debpalash/VoiceStudio` | 1.135 | 0.05587 | 97316.0 | outbreak | 0.994 |
+| `Vincentwei1021/video-shotcraft` | 1.089 | 0.09198 | 15646.0 | outbreak | 0.991 |
+| `tigerless-labs/autoharness` | 1.075 | 0.06409 | 10604.0 | outbreak | 0.428 |
 
 ## brain
 - control plane: **RUN**
 - standing interests (priming): 10
-- observations scanned: 442 · crossed threshold: 67
-- live episodes: 74 · patterns 6 · abstractions 0 · skills 0
-- forgotten this beat: 62 · hypotheses raised: 20
+- observations scanned: 439 · crossed threshold: 66
+- live episodes: 137 · patterns 6 · abstractions 0 · skills 0
+- forgotten this beat: 64 · hypotheses raised: 20
 - learning-to-learning ratio: 0.0
 
 ## noticed without being asked
 
-- `mobile-next/mobile-mcp` (0.5358) — connects to standing interests; largely unseen before
-- `morluto/rea` (0.5154) — connects to standing interests; largely unseen before
-- `ai.agentplaybooks/agentplaybooks` (0.5135) — connects to standing interests; largely unseen before
+- `ai.avasis.agents/avasis` (0.5194) — connects to standing interests; largely unseen before
+- `mobile-next/mobile-mcp` (0.4744) — connects to standing interests
 - `affaan-m/ECC` (0.4729) — connects to standing interests
-- `xerj-org/xerj` (0.4729) — connects to standing interests
-- `dagoSte/squadra` (0.4531) — connects to standing interests
-- `ruvnet/ruflo` (0.4526) — connects to standing interests
+- `xerj-org/xerj` (0.4701) — connects to standing interests
+- `morluto/rea` (0.4541) — connects to standing interests
+- `ruvnet/ruflo` (0.4525) — connects to standing interests
+- `ai.agentplaybooks/agentplaybooks` (0.452) — connects to standing interests
 
 ## immune system
 - admitted this beat: 0

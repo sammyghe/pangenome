@@ -1,20 +1,20 @@
 # culture-01 — state
 
-heartbeat: 2026-11-06 12:57:32Z  (7.78s)
+heartbeat: 2026-11-07 11:44:18Z  (7.69s)
 
 ## body
 - capabilities in genome: 0
 - expressed (costing): 0
 - dormant (free): 0
 - swarm diversity: 0.0 nats — STABLE
-- observed mutation rate: 0.198 (error threshold 0.231)
+- observed mutation rate: 0.1981 (error threshold 0.231)
 
 ## senses
-- mcp_registry: 237 loci
+- mcp_registry: 236 loci
 - github_skills: 178 loci
-- watching 598 loci with enough history to fit
+- watching 600 loci with enough history to fit
 
-- 571 of them have enough distinct days to fit a rate
+- 577 of them have enough distinct days to fit a rate
 
 ## fastest-spreading right now
 
@@ -22,35 +22,33 @@ heartbeat: 2026-11-06 12:57:32Z  (7.78s)
 
 | locus | R0 | lifetime r | signal | phase | fit r2 |
 |---|---:|---:|---:|---|---:|
-| `liguobao/ds-harness-remote` | 1.659 | 0.09085 | 2041.0 | outbreak | 0.978 |
-| `soumatheusgomes/vibe-coding-toolkit` | 1.268 | 0.0926 | 2292.0 | outbreak | 0.877 |
-| `nykooi1/vibe-wise` | 1.159 | 0.21686 | 4206.0 | outbreak | 0.447 |
-| `ai.audiopod/audiopod` | 1.146 | 0.03049 | 2.0 | outbreak | 0.745 |
-| `ai.alphaquantlabs/propertycheck` | 1.121 | 0.02196 | 2.0 | outbreak | 0.544 |
-| `hashgraph-online/awesome-ai-plugins` | 1.103 | 0.03229 | 963.0 | outbreak | 0.998 |
-| `Vincentwei1021/video-shotcraft` | 1.091 | 0.08872 | 17391.0 | outbreak | 0.99 |
-| `nateherkai/scroll-craft` | 1.088 | 0.11117 | 4618.0 | outbreak | 0.98 |
-| `tigerless-labs/autoharness` | 1.075 | 0.06193 | 10604.0 | outbreak | 0.428 |
-| `titanwings/colleague-skill` | 1.068 | 0.04554 | 23822.0 | outbreak | 0.914 |
+| `liguobao/ds-harness-remote` | 1.653 | 0.09031 | 2126.0 | outbreak | 0.983 |
+| `morluto/rea` | 1.545 | 0.06263 | 439394.0 | outbreak | 0.593 |
+| `soumatheusgomes/vibe-coding-toolkit` | 1.261 | 0.09159 | 2298.0 | outbreak | 0.875 |
+| `ai.audiopod/audiopod` | 1.143 | 0.02927 | 2.0 | outbreak | 0.747 |
+| `ai.alphaquantlabs/propertycheck` | 1.116 | 0.02132 | 2.0 | outbreak | 0.534 |
+| `hashgraph-online/awesome-ai-plugins` | 1.103 | 0.03215 | 963.0 | outbreak | 0.998 |
+| `Vincentwei1021/video-shotcraft` | 1.091 | 0.08805 | 17554.0 | outbreak | 0.99 |
+| `nateherkai/scroll-craft` | 1.088 | 0.10996 | 4676.0 | outbreak | 0.981 |
+| `tigerless-labs/autoharness` | 1.075 | 0.06154 | 10604.0 | outbreak | 0.428 |
+| `titanwings/colleague-skill` | 1.068 | 0.04534 | 23822.0 | outbreak | 0.914 |
 
 ## brain
 - control plane: **RUN**
 - standing interests (priming): 10
-- observations scanned: 415 · crossed threshold: 69
-- live episodes: 76 · patterns 6 · abstractions 0 · skills 0
-- forgotten this beat: 65 · hypotheses raised: 20
+- observations scanned: 414 · crossed threshold: 68
+- live episodes: 141 · patterns 6 · abstractions 0 · skills 0
+- forgotten this beat: 68 · hypotheses raised: 20
 - learning-to-learning ratio: 0.0
 
 ## noticed without being asked
 
-- `lobehub/lobehub` (0.521) — connects to standing interests; largely unseen before
-- `trailhq/Trail-Code` (0.4955) — connects to standing interests
-- `mksglu/context-mode` (0.4837) — connects to standing interests
-- `wshobson/agents` (0.4781) — connects to standing interests; largely unseen before
-- `affaan-m/ECC` (0.4726) — connects to standing interests
-- `xerj-org/xerj` (0.4627) — connects to standing interests
-- `davila7/claude-code-templates` (0.4603) — connects to standing interests; largely unseen before
-- `ruvnet/ruflo` (0.452) — connects to standing interests
+- `trailhq/Trail-Code` (0.487) — connects to standing interests
+- `mksglu/context-mode` (0.4787) — connects to standing interests
+- `affaan-m/ECC` (0.4725) — connects to standing interests
+- `xerj-org/xerj` (0.4619) — connects to standing interests
+- `lobehub/lobehub` (0.4596) — connects to standing interests
+- `ruvnet/ruflo` (0.4519) — connects to standing interests
 
 ## immune system
 - admitted this beat: 0

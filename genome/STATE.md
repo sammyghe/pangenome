@@ -1,18 +1,18 @@
 # culture-01 — state
 
-heartbeat: 2026-11-20 14:01:20Z  (9.77s)
+heartbeat: 2026-11-21 13:28:42Z  (7.22s)
 
 ## body
 - capabilities in genome: 0
 - expressed (costing): 0
 - dormant (free): 0
 - swarm diversity: 0.0 nats — STABLE
-- observed mutation rate: 0.1823 (error threshold 0.231)
+- observed mutation rate: 0.179 (error threshold 0.231)
 
 ## senses
-- mcp_registry: 238 loci
+- mcp_registry: 252 loci
 - github_skills: 180 loci
-- watching 674 loci with enough history to fit
+- watching 691 loci with enough history to fit
 
 - 633 of them have enough distinct days to fit a rate
 
@@ -22,34 +22,35 @@ heartbeat: 2026-11-20 14:01:20Z  (9.77s)
 
 | locus | R0 | lifetime r | signal | phase | fit r2 |
 |---|---:|---:|---:|---|---:|
-| `lemomo-ai/lemo-opuscar` | 1.197 | 0.17856 | 18948.0 | outbreak | 0.999 |
-| `ai.audiopod/audiopod` | 1.14 | 0.01885 | 2.0 | outbreak | 0.748 |
-| `viettranx/3dviz-pro-max` | 1.131 | 0.10175 | 1446.0 | outbreak | 0.975 |
-| `Ryze-AI-Adgent/open-seo-mcp-skills` | 1.126 | 0.11219 | 10585.0 | outbreak | 0.982 |
-| `Vincentwei1021/video-shotcraft` | 1.096 | 0.08049 | 21767.0 | outbreak | 0.99 |
-| `xerj-org/xerj` | 1.087 | 0.06872 | 19026.0 | outbreak | 0.618 |
-| `tigerless-labs/autoharness` | 1.075 | 0.05662 | 10604.0 | outbreak | 0.428 |
-| `ai.alphaquantlabs/propertycheck` | 1.073 | 0.0152 | 2.0 | outbreak | 0.432 |
-| `titanwings/colleague-skill` | 1.068 | 0.04282 | 23822.0 | outbreak | 0.914 |
-| `pbakaus/impeccable` | 1.062 | 0.03151 | 113806.0 | outbreak | 0.978 |
+| `morluto/rea` | 1.31 | 0.05898 | 472198.0 | outbreak | 0.497 |
+| `lemomo-ai/lemo-opuscar` | 1.194 | 0.17581 | 19332.0 | outbreak | 0.998 |
+| `ai.audiopod/audiopod` | 1.14 | 0.01836 | 2.0 | outbreak | 0.748 |
+| `viettranx/3dviz-pro-max` | 1.131 | 0.10047 | 1456.0 | outbreak | 0.978 |
+| `Ryze-AI-Adgent/open-seo-mcp-skills` | 1.126 | 0.11088 | 10585.0 | outbreak | 0.982 |
+| `Vincentwei1021/video-shotcraft` | 1.096 | 0.07991 | 21919.0 | outbreak | 0.991 |
+| `tigerless-labs/autoharness` | 1.075 | 0.05628 | 10604.0 | outbreak | 0.428 |
+| `ai.alphaquantlabs/propertycheck` | 1.07 | 0.01488 | 2.0 | outbreak | 0.426 |
+| `titanwings/colleague-skill` | 1.068 | 0.04264 | 23822.0 | outbreak | 0.914 |
+| `pbakaus/impeccable` | 1.061 | 0.03144 | 114304.0 | outbreak | 0.978 |
 
 ## brain
 - control plane: **RUN**
 - standing interests (priming): 10
-- observations scanned: 418 · crossed threshold: 88
-- live episodes: 7 · patterns 6 · abstractions 0 · skills 0
-- forgotten this beat: 67 · hypotheses raised: 20
+- observations scanned: 432 · crossed threshold: 102
+- live episodes: 109 · patterns 6 · abstractions 0 · skills 0
+- forgotten this beat: 63 · hypotheses raised: 20
 - learning-to-learning ratio: 0.0
 
 ## noticed without being asked
 
-- `ai.agentapigate/google-serp-web-scraping-domain-search-mcp` (0.5197) — connects to standing interests; largely unseen before
-- `ai.agentapihub/google-serp-web-scraping-domain-search-mcp` (0.5197) — connects to standing interests; largely unseen before
-- `ruvnet/ruflo` (0.4874) — connects to standing interests
-- `mksglu/context-mode` (0.4775) — connects to standing interests
-- `affaan-m/ECC` (0.4719) — connects to standing interests
-- `trailhq/Trail-Code` (0.4642) — connects to standing interests
-- `xerj-org/xerj` (0.456) — connects to standing interests
+- `ruvnet/ruflo` (0.4864) — connects to standing interests
+- `mksglu/context-mode` (0.4747) — connects to standing interests
+- `affaan-m/ECC` (0.4718) — connects to standing interests
+- `tonhowtf/omniget` (0.4686) — connects to standing interests; largely unseen before
+- `trailhq/Trail-Code` (0.4637) — connects to standing interests
+- `ai.agentapigate/google-serp-web-scraping-domain-search-mcp` (0.4583) — connects to standing interests
+- `ai.agentapihub/google-serp-web-scraping-domain-search-mcp` (0.4583) — connects to standing interests
+- `xerj-org/xerj` (0.4558) — connects to standing interests
 
 ## immune system
 - admitted this beat: 0

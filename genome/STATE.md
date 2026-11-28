@@ -1,20 +1,20 @@
 # culture-01 — state
 
-heartbeat: 2026-11-27 15:05:43Z  (9.18s)
+heartbeat: 2026-11-28 14:12:34Z  (7.39s)
 
 ## body
 - capabilities in genome: 0
 - expressed (costing): 0
 - dormant (free): 0
 - swarm diversity: 0.0 nats — STABLE
-- observed mutation rate: 0.1791 (error threshold 0.231)
+- observed mutation rate: 0.1785 (error threshold 0.231)
 
 ## senses
-- mcp_registry: 264 loci
+- mcp_registry: 263 loci
 - github_skills: 179 loci
-- watching 712 loci with enough history to fit
+- watching 713 loci with enough history to fit
 
-- 691 of them have enough distinct days to fit a rate
+- 697 of them have enough distinct days to fit a rate
 
 ## fastest-spreading right now
 
@@ -22,33 +22,33 @@ heartbeat: 2026-11-27 15:05:43Z  (9.18s)
 
 | locus | R0 | lifetime r | signal | phase | fit r2 |
 |---|---:|---:|---:|---|---:|
-| `morluto/rea` | 1.255 | 0.05748 | 480692.0 | outbreak | 0.468 |
-| `ai.a1lane/a1lane` | 1.253 | 0.09228 | 2.0 | outbreak | 0.654 |
-| `lemomo-ai/lemo-opuscar` | 1.174 | 0.16063 | 21856.0 | outbreak | 0.989 |
-| `ai.audiopod/audiopod` | 1.14 | 0.01582 | 2.0 | outbreak | 0.748 |
-| `Ryze-AI-Adgent/open-seo-mcp-skills` | 1.126 | 0.10338 | 10585.0 | outbreak | 0.982 |
-| `Vincentwei1021/video-shotcraft` | 1.097 | 0.0766 | 23054.0 | outbreak | 0.992 |
-| `tigerless-labs/autoharness` | 1.075 | 0.05428 | 10604.0 | outbreak | 0.428 |
-| `mvanhorn/last30days-skill` | 1.071 | 0.03652 | 76178.0 | outbreak | 0.996 |
-| `titanwings/colleague-skill` | 1.068 | 0.04158 | 23822.0 | outbreak | 0.914 |
-| `pbakaus/impeccable` | 1.06 | 0.03101 | 117870.0 | outbreak | 0.982 |
+| `ai.a1lane/a1lane` | 1.253 | 0.0818 | 2.0 | outbreak | 0.681 |
+| `kajisho5/ffmpeg-skill` | 1.241 | 0.10938 | 12149.0 | outbreak | 0.999 |
+| `lemomo-ai/lemo-opuscar` | 1.171 | 0.15848 | 22266.0 | outbreak | 0.989 |
+| `ai.audiopod/audiopod` | 1.14 | 0.01548 | 2.0 | outbreak | 0.748 |
+| `Ryze-AI-Adgent/open-seo-mcp-skills` | 1.126 | 0.10228 | 10585.0 | outbreak | 0.982 |
+| `Vincentwei1021/video-shotcraft` | 1.097 | 0.0761 | 23232.0 | outbreak | 0.992 |
+| `tigerless-labs/autoharness` | 1.075 | 0.05398 | 10604.0 | outbreak | 0.428 |
+| `titanwings/colleague-skill` | 1.068 | 0.04141 | 23822.0 | outbreak | 0.914 |
+| `mvanhorn/last30days-skill` | 1.066 | 0.03643 | 76642.0 | outbreak | 0.99 |
+| `pbakaus/impeccable` | 1.06 | 0.03094 | 118337.0 | outbreak | 0.982 |
 
 ## brain
 - control plane: **RUN**
 - standing interests (priming): 10
-- observations scanned: 443 · crossed threshold: 62
-- live episodes: 69 · patterns 6 · abstractions 0 · skills 0
-- forgotten this beat: 80 · hypotheses raised: 20
+- observations scanned: 442 · crossed threshold: 64
+- live episodes: 130 · patterns 6 · abstractions 0 · skills 0
+- forgotten this beat: 103 · hypotheses raised: 20
 - learning-to-learning ratio: 0.0
 
 ## noticed without being asked
 
-- `ruvnet/ruflo` (0.4824) — connects to standing interests
+- `ruvnet/ruflo` (0.4819) — connects to standing interests
 - `affaan-m/ECC` (0.4715) — connects to standing interests
-- `mksglu/context-mode` (0.4663) — connects to standing interests
-- `tt-a1i/archify` (0.4657) — connects to standing interests
-- `trailhq/Trail-Code` (0.4613) — connects to standing interests
-- `xerj-org/xerj` (0.4546) — connects to standing interests
+- `mksglu/context-mode` (0.4655) — connects to standing interests
+- `trailhq/Trail-Code` (0.461) — connects to standing interests
+- `tt-a1i/archify` (0.4571) — connects to standing interests
+- `xerj-org/xerj` (0.4544) — connects to standing interests
 
 ## immune system
 - admitted this beat: 0
